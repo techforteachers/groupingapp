@@ -13,9 +13,6 @@ export const createStudent = /* GraphQL */ `
       grade
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -31,9 +28,6 @@ export const updateStudent = /* GraphQL */ `
       grade
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -49,9 +43,6 @@ export const deleteStudent = /* GraphQL */ `
       grade
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

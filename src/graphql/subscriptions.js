@@ -10,9 +10,6 @@ export const onCreateStudent = /* GraphQL */ `
       grade
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -25,9 +22,6 @@ export const onUpdateStudent = /* GraphQL */ `
       grade
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -40,9 +34,6 @@ export const onDeleteStudent = /* GraphQL */ `
       grade
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
