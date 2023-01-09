@@ -14,7 +14,7 @@ const GroupDisplay = (props) => {
   for(let i = 0; i < props.inputData.length; i++){
     let groupNumInt = i+1;
     let groupNumString = groupNumInt.toString();
-    let header = "Grou " + groupNumString; 
+    let header = "Group " + groupNumString; 
     dataDict[header] = props.inputData[i];
   }
   let data = [dataDict];
