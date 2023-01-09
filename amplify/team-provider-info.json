@@ -26,10 +26,17 @@
     },
     "categories": {
       "api": {
-        "tftgroupingapp": {}
+        "tftgroupingapp": {},
+        "tftGenerateGroupAPI": {}
       },
       "auth": {
         "tftgroupingapp3553f84b": {}
+      },
+      "function": {
+        "tftGenerateGroupLambda": {
+          "deploymentBucketName": "amplify-tftgroupingapp-dev-215244-deployment",
+          "s3Key": "amplify-builds/tftGenerateGroupLambda-5a6874375546646a6956-build.zip"
+        }
       }
     }
   }

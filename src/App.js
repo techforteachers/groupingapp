@@ -19,8 +19,12 @@ import {
   deleteStudent as deleteStudentMutation,
 } from "./graphql/mutations";
 
+import GroupDisplay from './Display';
+import './Display.css';
+
 function App({ signOut, user }) {
   const [students, setStudents] = useState([]);
+  const [groupedStudents, setGroupedStudents] = useState([]);
 
   useEffect(() => {
     fetchStudents();
@@ -135,6 +139,26 @@ function App({ signOut, user }) {
     return arr;
   }
 
+  async function generateGroups() {
+    const user = await Auth.currentAuthenticatedUser()
+    const token = user.signInUserSession.idToken.jwtToken
+    const numGroups = document.getElementById("numGroupsInput").value
+    console.log("token: ", token)
+
+    const requestData = {
+        headers: {                 
+            Authorization: token,
+        },
+        body: {
+          numGroups: numGroups
+        }
+    }
+    const data = await API.post('tftGenerateGroupAPI', '/groups', requestData)
+    setGroupedStudents(data);
+    console.log("Hello, group generator has not been implemented!")
+    console.log(data);
+  }
+
   return (
     <View className="App">
     <Heading level={1}>Random Grouping App</Heading>
@@ -193,6 +217,28 @@ function App({ signOut, user }) {
           </Flex>
         ))}
       </View>
+      <Divider
+        orientation="horizontal" />
+      
+      <View margin="3rem 0">
+        <Flex
+        direction="row"
+        justifyContent="center"
+        alignItems="center">
+          <StepperField
+            max={5}
+            min={1}
+            step={1}
+            label="Number of Groups"
+            name="Number of Groups"
+            id="numGroupsInput"
+          />
+          <Button onClick={generateGroups}>
+            Generate Groups
+          </Button>
+        </Flex>
+      </View>
+      <GroupDisplay inputData={groupedStudents}/>
       <Button onClick={signOut}>Sign Out</Button>
     </View>
   );

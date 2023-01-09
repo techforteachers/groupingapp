@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/groups": {
+      "name": "/groups",
+      "lambdaFunction": "tftGenerateGroupLambda",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.Display {
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 5;
+  }
+  
+  th,
+  td {
+    background: white;
+    padding: 25px;
+    color: black;
+  }
+  
+  p {
+    text-align: left;
+  }
+
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  table, th, td{
+    border: .8px black;
+    border-collapse: collapse;
+    border-style: solid;
+  }
+  
