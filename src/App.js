@@ -25,10 +25,19 @@ import './Display.css';
 function App({ signOut, user }) {
   const [students, setStudents] = useState([]);
   const [groupedStudents, setGroupedStudents] = useState([]);
+  const [username, setUsername] = useState([]);
 
   useEffect(() => {
     fetchStudents();
+    //What is the right place to set the user ID? 
+    getUserID();
   }, []);
+
+  async function getUserID(){
+    const user = await Auth.currentAuthenticatedUser();
+    setUsername(user.username);
+    console.log(user.username);
+  }
 
   async function fetchStudents() {
     const apiData = await API.graphql({ query: listStudents });
