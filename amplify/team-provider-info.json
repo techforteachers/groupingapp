@@ -1,17 +1,4 @@
 {
-  "staging": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-amplify97a95b780bcd4-staging-23857-authRole",
-      "UnauthRoleArn": "arn:aws:iam::069437775715:role/amplify-amplify97a95b780bcd4-staging-23857-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::069437775715:role/amplify-amplify97a95b780bcd4-staging-23857-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-amplify97a95b780bcd4-staging-23857-deployment",
-      "UnauthRoleName": "amplify-amplify97a95b780bcd4-staging-23857-unauthRole",
-      "StackName": "amplify-amplify97a95b780bcd4-staging-23857",
-      "StackId": "arn:aws:cloudformation:us-east-1:069437775715:stack/amplify-amplify97a95b780bcd4-staging-23857/c60881d0-8b0f-11ed-b7eb-12dd93be99e1",
-      "AmplifyAppId": "d2ot1algkw1w0m"
-    }
-  },
   "dev": {
     "awscloudformation": {
       "AuthRoleName": "amplify-tftgroupingapp-dev-215244-authRole",
@@ -38,6 +25,19 @@
           "s3Key": "amplify-builds/tftGenerateGroupLambda-5a6874375546646a6956-build.zip"
         }
       }
+    }
+  },
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplify97a95b780bcd4-staging-23857-authRole",
+      "UnauthRoleArn": "arn:aws:iam::069437775715:role/amplify-amplify97a95b780bcd4-staging-23857-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::069437775715:role/amplify-amplify97a95b780bcd4-staging-23857-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-amplify97a95b780bcd4-staging-23857-deployment",
+      "UnauthRoleName": "amplify-amplify97a95b780bcd4-staging-23857-unauthRole",
+      "StackName": "amplify-amplify97a95b780bcd4-staging-23857",
+      "StackId": "arn:aws:cloudformation:us-east-1:069437775715:stack/amplify-amplify97a95b780bcd4-staging-23857/c60881d0-8b0f-11ed-b7eb-12dd93be99e1",
+      "AmplifyAppId": "d2ot1algkw1w0m"
     }
   }
 }
