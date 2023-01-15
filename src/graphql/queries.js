@@ -8,6 +8,7 @@ export const getStudent = /* GraphQL */ `
       first_name
       last_name
       grade
+      user
       createdAt
       updatedAt
     }
@@ -25,6 +26,35 @@ export const listStudents = /* GraphQL */ `
         first_name
         last_name
         grade
+        user
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const studentsByUser = /* GraphQL */ `
+  query StudentsByUser(
+    $user: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelStudentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    studentsByUser(
+      user: $user
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        first_name
+        last_name
+        grade
+        user
         createdAt
         updatedAt
       }

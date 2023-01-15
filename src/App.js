@@ -25,7 +25,7 @@ import './Display.css';
 function App({ signOut, user }) {
   const [students, setStudents] = useState([]);
   const [groupedStudents, setGroupedStudents] = useState([]);
-  const [username, setUsername] = useState([]);
+  const [userName, setUsername] = useState([]);
 
   useEffect(() => {
     fetchStudents();
@@ -35,7 +35,9 @@ function App({ signOut, user }) {
 
   async function getUserID(){
     const user = await Auth.currentAuthenticatedUser();
-    setUsername(user.username);
+    if (user){
+      setUsername(user.username);
+    }
     console.log(user.username);
   }
 
@@ -51,11 +53,13 @@ function App({ signOut, user }) {
     const data = {
       first_name: form.get("First Name"),
       last_name: form.get("Last Name"),
-      grade: form.get("Grade")
+      grade: form.get("Grade"),
+      user:userName
     };
     console.log(data.first_name);
     console.log(data.last_name);
     console.log(data.grade);
+    console.log(data.user);
     await API.graphql({
       query: createStudentMutation,
       variables: { input: data },
