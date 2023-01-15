@@ -3,4 +3,5 @@ type Student @model @auth(rules: [{allow: public}]) {
   first_name: String!
   last_name: String!
   grade: Int!
+  user: ID! @index
 }
