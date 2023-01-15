@@ -93,7 +93,8 @@ function App({ signOut, user }) {
         const data = {
           first_name: cont["First Name"],
           last_name: cont["Last Name"],
-          grade: cont["Grade"]
+          grade: cont["Grade"],
+          user:userName
         };
         console.log(data.first_name);
         console.log(data.last_name);
