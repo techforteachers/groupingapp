@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Amplify, Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
-import { HomePageLayout } from './HomePageLayout';
+import { GroupingApp } from './GroupingApp';
 Amplify.configure(awsconfig);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 );*/
 
 root.render(
-  <HomePageLayout/>
+  <GroupingApp/>
 );
 
 // If you want to start measuring performance in your app, pass a function
