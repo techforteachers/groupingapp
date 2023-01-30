@@ -7,9 +7,7 @@ export function Header(props) {
     const { tokens } = useTheme();
 
     return(
-        <Flex
-            backgroundColor={tokens.colors.blue[40]}
-        >
+        <Flex>
             <Logo/> 
             <Greeting isLoggedIn={props.isLoggedIn} username={props.user}></Greeting>
             <HeaderLoginUI 

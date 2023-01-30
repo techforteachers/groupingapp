@@ -2,62 +2,89 @@ import React from "react";
 import { Header } from "./Header";
 import { Main }  from "./Main";
 import { Footer } from "./Footer";
-export class GroupingApp extends React.Component  {
-    constructor(props){
-        super(props);
-        
-        this.state = {isLoggedIn : false, user : "Guest", currentView : ""}
+import { SideBar } from "./SideBar";
+import { useEffect, useState } from "react";
+import { Card, useTheme, View, Grid} from "@aws-amplify/ui-react";
+
+
+export function GroupingApp (props)  {
+        const { tokens } = useTheme();
+        const [isLoggedIn, setIsLoggedIn] = useState(false);
+        const [user, setUser] = useState("Guest");
+        const[ currentView, setCurrentView ] = useState("");
         //alertStatus: false displays "successfully signed out" and true displays "successfully signed in"
-        this.handleLoginClick = this.handleLoginClick.bind(this);
-        this.handleLogoutClick = this.handleLogoutClick.bind(this);
-        this.handleSignupClick = this.handleSignupClick.bind(this);
-        this.handleChangeUser = this.handleChangeUser.bind(this);
-        this.handleChangeView = this.handleChangeView.bind(this);
-    }
 
     
 
-    handleLoginClick(){
-        this.setState({currentView : "loginUI"})
+    function handleLoginClick(){
+        setCurrentView("loginUI");
     }
 
-    handleLogoutClick(){
-        this.setState({isLoggedIn : false}); 
-        this.setState({currentView : "loginUI"})
+    function handleLogoutClick(){
+        setIsLoggedIn(false); 
+        setCurrentView("loginUI")
     }
 
-    handleSignupClick(){
-        this.setState({currentView : "signupUI"})
+    function handleSignupClick(){
+        setCurrentView("signupUI")
     }
 
-    handleChangeUser(newStatus, newUser){
-        this.setState({isLoggedIn : newStatus});
-        this.setState({user : newUser})
+    function handleChangeUser(newStatus, newUser){
+        setIsLoggedIn(newStatus);
+        setUser(newUser)
     }
 
-    handleChangeView(newView){
-        this.setState({currentView : newView});
+    function handleChangeView(newView){
+        setCurrentView(newView);
     }
 
-    render(){
-        return(
-            <div>
+    let treeView;
+    treeView = 
+    <SideBar/>
+    return(
+        <Grid
+            templateColumns="1fr 3fr 1fr"
+            templateRows="1fr 3fr 1fr"
+        >
+            <Card
+                columnStart="1"
+                columnEnd="-1"
+                backgroundColor={tokens.colors.blue[40]}
+            >
                 <Header 
-                    user={this.state.user} 
-                    isLoggedIn={this.state.isLoggedIn} 
-                    handleLoginClick={this.handleLoginClick} 
-                    handleLogoutClick={this.handleLogoutClick} 
-                    handleSignupClick={this.handleSignupClick}
+                    user={user} 
+                    isLoggedIn={isLoggedIn} 
+                    handleLoginClick={handleLoginClick} 
+                    handleLogoutClick={handleLogoutClick} 
+                    handleSignupClick={handleSignupClick}
+                    
                 />
+            </Card>
+            <Card
+                columnStart="1"
+                columnEnd="2" 
+            >
+                {treeView}
+            </Card>
+            <Card
+                columnStart="2"
+                columnEnd="-1"
+                backgroundColor={tokens.colors.blue[10]}
+            >
                 <Main 
-                    currentView={this.state.currentView} 
-                    setCurrentView={this.handleChangeView}
-                    isLoggedIn={this.state.isLoggedIn} 
-                    handleChangeUser={this.handleChangeUser}
+                    currentView={currentView} 
+                    setCurrentView={handleChangeView}
+                    isLoggedIn={isLoggedIn} 
+                    handleChangeUser={handleChangeUser}
+                    
                 />
-                <Footer></Footer>
-            </div>
-        );
-    }
-
+            </Card>
+            <Card
+                columnStart="1"
+                columnEnd="-1"
+            >
+                <Footer/>
+            </Card>
+        </Grid>
+    );
 }

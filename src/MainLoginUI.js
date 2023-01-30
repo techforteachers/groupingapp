@@ -9,7 +9,6 @@ export function LoginUI (props) {
             const user = Auth.signIn(document.getElementById("usernameInput").value, document.getElementById("passwordInput").value)
             .then((user) => {
                 props.handleChangeUser(true, user.username);
-                props.setAlert(true);
             });
             
         } catch (error) {
@@ -125,7 +124,6 @@ export function VerificationUI (props) {
             await Auth.confirmSignUp(Username, document.getElementById("verificationCodeInput").value)
             .then(() => {
                 props.handleChangeUser(true, Username);
-                props.setAlert(true);
             });
             props.setCurrentView("");
           } catch (error) {
