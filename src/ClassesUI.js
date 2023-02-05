@@ -2,20 +2,21 @@ import React from "react";
 import { Grid } from "@aws-amplify/ui-react";
 import { Button, Flex } from "@aws-amplify/ui-react";
 import { useState, useEffect } from "react";
+import TreeItem from '@mui/lab/TreeItem';
 export function ClassesUI (props){
     const [selectedClass, setSelectedClass] = useState();
-    const [classes, setClasses] = useState([]);
     const [classButtons, setClassButtons] = useState([]);
 
     function addClass () {
-        let newClasses = classes.slice();
-        newClasses.push("test");
-        setClasses(newClasses);
+        let newClasses = props.classes.slice();
+        let className = "test" + newClasses.length;
+        newClasses.push(className);
+        props.setClasses(newClasses);
     }
 
     useEffect(() => {
         updateClassButtons();
-    }, [classes])
+    }, [props])
 
     function selectClass(e){
         setSelectedClass(e.currentTarget.id)
@@ -28,7 +29,7 @@ export function ClassesUI (props){
     }
 
     function updateClassButtons(){
-        const listItems = classes.map(
+        const listItems = props.classes.map(
             (element) => {
                 return (
                     <Button id={element} onClick={selectClass}>{element}</Button>
@@ -39,15 +40,15 @@ export function ClassesUI (props){
     }
         
     function removeClass(){
-        let index = classes.indexOf(selectedClass);
-        let newClasses = classes.slice();
+        let index = props.classes.indexOf(selectedClass);
+        let newClasses = props.classes.slice();
         if (index > -1){
             newClasses.splice(index, 1);
         }
         else{
             console.log("Class not found")
         }
-        setClasses(newClasses);
+        props.setClasses(newClasses);
         updateClassButtons();
     }
 

@@ -12,6 +12,7 @@ export function GroupingApp (props)  {
         const [isLoggedIn, setIsLoggedIn] = useState(false);
         const [user, setUser] = useState("Guest");
         const[ currentView, setCurrentView ] = useState("");
+        const[ classes, setClasses ] = useState([]);
         //alertStatus: false displays "successfully signed out" and true displays "successfully signed in"
 
     
@@ -38,9 +39,6 @@ export function GroupingApp (props)  {
         setCurrentView(newView);
     }
 
-    let treeView;
-    treeView = 
-    <SideBar/>
     return(
         <Grid
             templateColumns="1fr 3fr 1fr"
@@ -64,7 +62,7 @@ export function GroupingApp (props)  {
                 columnStart="1"
                 columnEnd="2" 
             >
-                {treeView}
+                <SideBar classes={classes}/>
             </Card>
             <Card
                 columnStart="2"
@@ -76,7 +74,8 @@ export function GroupingApp (props)  {
                     setCurrentView={handleChangeView}
                     isLoggedIn={isLoggedIn} 
                     handleChangeUser={handleChangeUser}
-                    
+                    setClasses={setClasses}
+                    classes={classes}
                 />
             </Card>
             <Card

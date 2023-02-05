@@ -11,7 +11,7 @@ export function Main (props) {
 
     useEffect(() => {
         if(props.isLoggedIn == true){
-            setView(<ClassesUI/>);
+            setView(<ClassesUI setClasses={props.setClasses} classes={props.classes}/>);
         } 
         else if (props.currentView == "loginUI"){
             setView(<LoginUI handleChangeUser={props.handleChangeUser}/>);

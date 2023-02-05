@@ -6,13 +6,20 @@
 
 export { default as FAQItem } from "./FAQItem";
 export { default as CommentCard } from "./CommentCard";
+export { default as App } from "./App";
 export { default as ProductCard } from "./ProductCard";
 export { default as Ampligram } from "./Ampligram";
+export { default as Signup } from "./Signup";
+export { default as Help } from "./Help";
+export { default as LogIn } from "./LogIn";
 export { default as NavBar } from "./NavBar";
+export { default as Component2 } from "./Component2";
+export { default as About } from "./About";
 export { default as SideBar } from "./SideBar";
 export { default as Features4x1 } from "./Features4x1";
 export { default as FormCheckout } from "./FormCheckout";
 export { default as StandardCard } from "./StandardCard";
+export { default as Logo } from "./Logo";
 export { default as ReviewCard } from "./ReviewCard";
 export { default as ProductDetail } from "./ProductDetail";
 export { default as HeroLayout1 } from "./HeroLayout1";
