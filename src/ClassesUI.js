@@ -8,10 +8,7 @@ export function ClassesUI (props){
     const [classButtons, setClassButtons] = useState([]);
 
     function addClass () {
-        let newClasses = props.classes.slice();
-        let className = "test" + newClasses.length;
-        newClasses.push(className);
-        props.setClasses(newClasses);
+        props.setCurrentView("classDetailUI");
     }
 
     useEffect(() => {
@@ -32,24 +29,38 @@ export function ClassesUI (props){
         const listItems = props.classes.map(
             (element) => {
                 return (
-                    <Button id={element} onClick={selectClass}>{element}</Button>
+                    <Button id={element.classname} onClick={selectClass}>{element.classname}</Button>
                 )
             }
         ) 
         setClassButtons(listItems);
     }
         
+    function findIndex(className){
+        for(let i=0; i<props.classes.length; i++){
+            if(props.classes[i].classname == className){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     function removeClass(){
-        let index = props.classes.indexOf(selectedClass);
-        let newClasses = props.classes.slice();
-        if (index > -1){
-            newClasses.splice(index, 1);
+        let index = findIndex(selectedClass)
+        if(index == -1){
+            console.log("Class not found: " + selectedClass)
         }
         else{
-            console.log("Class not found")
+            let newClasses = props.classes.slice();
+            if (index > -1){
+                newClasses.splice(index, 1);
+            }
+            else{
+                console.log("Class not found")
+            }
+            props.setClasses(newClasses);
+            updateClassButtons();
         }
-        props.setClasses(newClasses);
-        updateClassButtons();
     }
 
     return(

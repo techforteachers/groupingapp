@@ -9,6 +9,7 @@ export function LoginUI (props) {
             const user = Auth.signIn(document.getElementById("usernameInput").value, document.getElementById("passwordInput").value)
             .then((user) => {
                 props.handleChangeUser(true, user.username);
+                props.setCurrentView("classPreviewUI");
             });
             
         } catch (error) {
@@ -125,7 +126,7 @@ export function VerificationUI (props) {
             .then(() => {
                 props.handleChangeUser(true, Username);
             });
-            props.setCurrentView("");
+            props.setCurrentView("classPreviewUI");
           } catch (error) {
               console.log('error confirming sign up', error);
           }

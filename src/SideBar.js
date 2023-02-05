@@ -10,22 +10,27 @@ export function SideBar(props){
         const listItems = props.classes.map(
             (element) => {
                 return (
-                    <TreeItem nodeId={element} label={element}/>
+                    <TreeItem nodeId={element.classname} label={element.classname}/>
                 )
             }
         ) 
         setTreeItems(listItems);
     }, [props])
 
+    let tree;
+    if(props.classes.length != 0){
+        tree =
+        <TreeItem nodeId="1" label="Classes">
+            {treeItems}
+        </TreeItem>
+    }
     return(
         <TreeView
             aria-label="multi-select"
             multiSelect
             sx={{ height: 216, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
         >
-            <TreeItem nodeId="1" label="Classes">
-                {treeItems}
-            </TreeItem>
+            {tree}
         </TreeView>
     );
 }

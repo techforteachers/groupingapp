@@ -39,6 +39,18 @@ export function GroupingApp (props)  {
         setCurrentView(newView);
     }
 
+    function handleCreateClass(data){
+        const classData = {
+            username: user,
+            classname: data.classname,
+            students: data.students
+        }
+
+        let newClasses = classes.slice();
+        newClasses.push(classData);
+        setClasses(newClasses);
+    }
+
     return(
         <Grid
             templateColumns="1fr 3fr 1fr"
@@ -76,6 +88,7 @@ export function GroupingApp (props)  {
                     handleChangeUser={handleChangeUser}
                     setClasses={setClasses}
                     classes={classes}
+                    createClass={handleCreateClass}
                 />
             </Card>
             <Card
