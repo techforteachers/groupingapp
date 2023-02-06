@@ -4,11 +4,10 @@ import { Button, Flex } from "@aws-amplify/ui-react";
 import { useState, useEffect } from "react";
 import TreeItem from '@mui/lab/TreeItem';
 export function ClassesUI (props){
-    const [selectedClass, setSelectedClass] = useState();
     const [classButtons, setClassButtons] = useState([]);
-
+    
     function addClass () {
-        props.setCurrentView("classDetailUI");
+        props.setCurrentView("createClassUI");
     }
 
     useEffect(() => {
@@ -16,7 +15,7 @@ export function ClassesUI (props){
     }, [props])
 
     function selectClass(e){
-        setSelectedClass(e.currentTarget.id)
+        props.setSelectedClass(e.currentTarget.id)
         if(e){
             console.log(e.currentTarget.id);
         }
@@ -46,21 +45,20 @@ export function ClassesUI (props){
     }
 
     function removeClass(){
-        let index = findIndex(selectedClass)
+        let index = findIndex(props.selectedClass)
         if(index == -1){
-            console.log("Class not found: " + selectedClass)
+            console.log("Class not found: " + props.selectedClass)
         }
         else{
             let newClasses = props.classes.slice();
-            if (index > -1){
-                newClasses.splice(index, 1);
-            }
-            else{
-                console.log("Class not found")
-            }
+            newClasses.splice(index, 1);
             props.setClasses(newClasses);
             updateClassButtons();
         }
+    }
+
+    function editClass(){
+        props.setCurrentView("editClassUI");
     }
 
     return(
@@ -75,7 +73,7 @@ export function ClassesUI (props){
                 <Button id="createClassButton" onClick={addClass}>+</Button>
             </Grid>
             <Flex justifyContent="flex-end" alignItems="flex-end">
-                <Button>Edit</Button>
+                <Button onClick={editClass}>Edit</Button>
                 <Button onClick={removeClass}>Remove</Button>
                 <Button>Generate Groups</Button>
             </Flex>

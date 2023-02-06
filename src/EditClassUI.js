@@ -12,13 +12,21 @@ import {
   } from "@aws-amplify/ui-react";
 import React from "react";
 import { useEffect, useState} from "react";
-export function SetClassUI(props){
+export function EditClassUI(props){
     const [localStudents, setLocalStudents] = useState([]);
     const [localClassName, setLocalClassName] = useState();
-
+    const [currentClassIndex, setCurrentClassIndex] = useState();
     useEffect(() => {
-        console.log(localStudents);
-    }, [localStudents]);
+        let index = findClassIndex(props.selectedClass)
+        if(index == -1){
+            console.log("Class not found: " + props.selectedClass)
+        }
+        else{
+            setCurrentClassIndex(index);
+            setLocalStudents(props.classes[index].students);
+            setLocalClassName(props.classes[index].classname)
+        }
+    }, [props]);
 
     function handleCreateStudent(e){
         e.preventDefault();
@@ -26,7 +34,8 @@ export function SetClassUI(props){
         const data = {
           firstname: form.get("First Name"),
           lastname: form.get("Last Name"),
-          grade: form.get("Grade")
+          grade: form.get("Grade"),
+          id: localStudents.length
         };
         console.log(data.firstname);
         console.log(data.lastname);
@@ -38,19 +47,26 @@ export function SetClassUI(props){
         e.target.reset();
     }
 
-    function handleCreateClass(){
-        if(validateClassName(localClassName) == true){
-            const data = {
-                classname : localClassName,
-                students: localStudents
-            }
-            props.createClass(data);
-            props.setCurrentView("classPreviewUI");
+    function handleDeleteStudent(student){
+        let index = findStudentIndex(student.id)
+        if(index == -1){
+            console.log("Student not found: " + student.firstname + " " + student.lastname);
         }
         else{
-            console.log("Class name already exists")
+            let newStudents = localStudents.slice();
+            newStudents.splice(index, 1);
+            setLocalStudents(newStudents);
         }
+    }
 
+    function handleEditClass(){
+        const data = {
+            classname : localClassName,
+            students: localStudents,
+            id: props.classes[currentClassIndex].id
+        }
+        props.editClass(data, currentClassIndex);
+        props.setCurrentView("classPreviewUI");
     }
 
     function handleChangeClassName(e){
@@ -72,13 +88,32 @@ export function SetClassUI(props){
         
     }
 
+    function findStudentIndex(id){
+        for(let i=0; i<localStudents.length; i++){
+            if(localStudents[i].id == id){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    function findClassIndex(className){
+        for(let i=0; i<props.classes.length; i++){
+            if(props.classes[i].classname == className){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
     return(
         <div>
             <TextField
                 label="Name:"
                 name="Class Name"
                 onChange={handleChangeClassName}
-                placeholder="Class Name"
+                placeholder={localClassName}
             />
             <View as="form" onSubmit={handleCreateStudent}>
                 <Flex direction="row" justifyContent="center">
@@ -108,7 +143,28 @@ export function SetClassUI(props){
                     </Button>
                 </Flex>
             </View>
-            <Button onClick={handleCreateClass}>Create Class</Button>
+            <View margin="3rem 0">
+                {localStudents.map((student) => (
+                <Flex
+                    key={student.id || student.lastname}
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                >
+                    <Text as="strong" fontWeight={700}>
+                    {student.firstname}
+                    </Text>
+                    <Text as="strong" fontWeight={700}>
+                    {student.lastname}
+                    </Text>
+                    <Text as="span">{student.grade}</Text>
+                    <Button variation="link" onClick={() => handleDeleteStudent(student)}>
+                    Delete student
+                    </Button>
+                </Flex>
+                ))}
+            </View>
+            <Button onClick={handleEditClass}>Done</Button>
         </div>
     );
 }

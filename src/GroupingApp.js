@@ -43,11 +43,25 @@ export function GroupingApp (props)  {
         const classData = {
             username: user,
             classname: data.classname,
-            students: data.students
+            students: data.students,
+            id: data.id
         }
 
         let newClasses = classes.slice();
         newClasses.push(classData);
+        setClasses(newClasses);
+    }
+
+    function handleEditClass(data, index){
+        const classData = {
+            username: user,
+            classname: data.classname,
+            students: data.students,
+            id: data.id
+        }
+
+        let newClasses = classes.slice();
+        newClasses[index] = classData;
         setClasses(newClasses);
     }
 
@@ -89,6 +103,7 @@ export function GroupingApp (props)  {
                     setClasses={setClasses}
                     classes={classes}
                     createClass={handleCreateClass}
+                    editClass={handleEditClass}
                 />
             </Card>
             <Card
