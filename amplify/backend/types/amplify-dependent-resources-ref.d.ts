@@ -27,7 +27,14 @@ export type AmplifyDependentResourcesAttributes = {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
-            "LambdaExecutionRole": "string"
+            "LambdaExecutionRole": "string",
+            "LambdaExecutionRoleArn": "string"
+        }
+    },
+    "storage": {
+        "UserFiles": {
+            "BucketName": "string",
+            "Region": "string"
         }
     }
 }

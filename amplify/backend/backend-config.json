@@ -95,5 +95,12 @@
         }
       ]
     }
+  },
+  "storage": {
+    "UserFiles": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
   }
 }

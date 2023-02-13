@@ -1,0 +1,14 @@
+{
+  "resourceName": "UserFiles",
+  "policyUUID": "72af0fdb",
+  "bucketName": "user-files",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
