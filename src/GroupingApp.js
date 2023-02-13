@@ -6,6 +6,8 @@ import { SideBar } from "./SideBar";
 import { useEffect, useState } from "react";
 import { Card, useTheme, View, Grid} from "@aws-amplify/ui-react";
 
+/* Giving function to alot of different conponets through props*/ 
+
 
 export function GroupingApp (props)  {
         const { tokens } = useTheme();
