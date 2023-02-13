@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { API, Auth, Analytics } from "aws-amplify";
+
 import {
   Button,
   Flex,
@@ -12,6 +13,7 @@ import {
   withAuthenticator,
   useAuthenticator
 } from "@aws-amplify/ui-react";
+
 import '@aws-amplify/ui-react/styles.css';
 import { listStudents } from "./graphql/queries";
 import {
