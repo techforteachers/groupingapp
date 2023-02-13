@@ -8,12 +8,12 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Text, View } from "@aws-amplify/ui-react";
-export default function Logo(props) {
+export default function Checkoff(props) {
   const { overrides, ...rest } = props;
   return (
     <View
-      width="115px"
-      height="67px"
+      width="29px"
+      height="34px"
       display="block"
       gap="unset"
       alignItems="unset"
@@ -21,16 +21,32 @@ export default function Logo(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       {...rest}
-      {...getOverrideProps(overrides, "Logo")}
+      {...getOverrideProps(overrides, "Checkoff")}
     >
+      <View
+        width="31px"
+        height="31px"
+        display="block"
+        gap="unset"
+        alignItems="unset"
+        justifyContent="unset"
+        position="absolute"
+        top="2.94%"
+        bottom="5.88%"
+        left="-3.45%"
+        right="-3.45%"
+        border="1px SOLID rgba(2,31,60,1)"
+        borderRadius="9px"
+        padding="0px 0px 0px 0px"
+        {...getOverrideProps(overrides, "Rectangle 38")}
+      ></View>
       <Text
-        fontFamily="Encode Sans"
-        fontSize="50px"
-        fontWeight="900"
+        fontFamily="Inter"
+        fontSize="20px"
+        fontWeight="600"
         color="rgba(2,31,60,1)"
-        textTransform="uppercase"
-        lineHeight="66.84375px"
-        textAlign="center"
+        lineHeight="33.537498474121094px"
+        textAlign="left"
         display="block"
         direction="column"
         justifyContent="unset"
@@ -41,12 +57,12 @@ export default function Logo(props) {
         position="absolute"
         top="0%"
         bottom="0%"
-        left="0%"
-        right="0%"
+        left="17.24%"
+        right="20.69%"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children="TFT"
-        {...getOverrideProps(overrides, "Logo36522987")}
+        children="✓"
+        {...getOverrideProps(overrides, "\u2713")}
       ></Text>
     </View>
   );

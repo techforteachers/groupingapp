@@ -5,6 +5,7 @@ import { LoginUI, SignUpUI, VerificationUI } from "./MainLoginUI";
 import { ClassesUI } from "./ClassesUI";
 import { CreateClassUI } from "./CreateClassUI";
 import { EditClassUI } from "./EditClassUI";
+import { HelpPage } from "./HelpPage";
 //import { SignUp } from "@aws-amplify/ui-react/dist/types/components/Authenticator/SignUp";
 export function Main (props) {
     const { tokens } = useTheme();

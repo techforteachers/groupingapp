@@ -8,12 +8,12 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Text, View } from "@aws-amplify/ui-react";
-export default function Logo(props) {
+export default function Otherbtn(props) {
   const { overrides, ...rest } = props;
   return (
     <View
-      width="115px"
-      height="67px"
+      width="79px"
+      height="37px"
       display="block"
       gap="unset"
       alignItems="unset"
@@ -21,15 +21,14 @@ export default function Logo(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       {...rest}
-      {...getOverrideProps(overrides, "Logo")}
+      {...getOverrideProps(overrides, "Otherbtn")}
     >
       <Text
-        fontFamily="Encode Sans"
-        fontSize="50px"
-        fontWeight="900"
-        color="rgba(2,31,60,1)"
-        textTransform="uppercase"
-        lineHeight="66.84375px"
+        fontFamily="Inter"
+        fontSize="28px"
+        fontWeight="700"
+        color="rgba(3,10,17,1)"
+        lineHeight="37.432498931884766px"
         textAlign="center"
         display="block"
         direction="column"
@@ -45,8 +44,8 @@ export default function Logo(props) {
         right="0%"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children="TFT"
-        {...getOverrideProps(overrides, "Logo36522987")}
+        children="Other"
+        {...getOverrideProps(overrides, "Other_btn")}
       ></Text>
     </View>
   );

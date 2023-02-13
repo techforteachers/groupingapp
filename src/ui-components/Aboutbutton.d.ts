@@ -7,7 +7,7 @@
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { ViewProps } from "@aws-amplify/ui-react";
-export declare type LoginProps = React.PropsWithChildren<Partial<ViewProps> & {
+export declare type AboutbuttonProps = React.PropsWithChildren<Partial<ViewProps> & {
     overrides?: EscapeHatchProps | undefined | null;
 }>;
-export default function Login(props: LoginProps): React.ReactElement;
+export default function Aboutbutton(props: AboutbuttonProps): React.ReactElement;

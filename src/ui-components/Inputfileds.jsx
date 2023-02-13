@@ -7,13 +7,13 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Text, View } from "@aws-amplify/ui-react";
-export default function Logo(props) {
+import { View } from "@aws-amplify/ui-react";
+export default function Inputfileds(props) {
   const { overrides, ...rest } = props;
   return (
     <View
-      width="115px"
-      height="67px"
+      width="516px"
+      height="78px"
       display="block"
       gap="unset"
       alignItems="unset"
@@ -21,33 +21,26 @@ export default function Logo(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       {...rest}
-      {...getOverrideProps(overrides, "Logo")}
+      {...getOverrideProps(overrides, "Inputfileds")}
     >
-      <Text
-        fontFamily="Encode Sans"
-        fontSize="50px"
-        fontWeight="900"
-        color="rgba(2,31,60,1)"
-        textTransform="uppercase"
-        lineHeight="66.84375px"
-        textAlign="center"
+      <View
+        width="520px"
+        height="82px"
         display="block"
-        direction="column"
-        justifyContent="unset"
-        width="unset"
-        height="unset"
         gap="unset"
         alignItems="unset"
+        justifyContent="unset"
         position="absolute"
-        top="0%"
-        bottom="0%"
-        left="0%"
-        right="0%"
+        top="-2.56%"
+        bottom="-2.56%"
+        left="-0.39%"
+        right="-0.39%"
+        border="2px SOLID rgba(2,31,60,1)"
+        borderRadius="22px"
         padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children="TFT"
-        {...getOverrideProps(overrides, "Logo36522987")}
-      ></Text>
+        backgroundColor="rgba(246,248,255,1)"
+        {...getOverrideProps(overrides, "Input_fileds")}
+      ></View>
     </View>
   );
 }

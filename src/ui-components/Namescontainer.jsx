@@ -7,13 +7,13 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Text, View } from "@aws-amplify/ui-react";
-export default function Logo(props) {
+import { View } from "@aws-amplify/ui-react";
+export default function Namescontainer(props) {
   const { overrides, ...rest } = props;
   return (
     <View
-      width="115px"
-      height="67px"
+      width="497px"
+      height="395px"
       display="block"
       gap="unset"
       alignItems="unset"
@@ -21,33 +21,26 @@ export default function Logo(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       {...rest}
-      {...getOverrideProps(overrides, "Logo")}
+      {...getOverrideProps(overrides, "Namescontainer")}
     >
-      <Text
-        fontFamily="Encode Sans"
-        fontSize="50px"
-        fontWeight="900"
-        color="rgba(2,31,60,1)"
-        textTransform="uppercase"
-        lineHeight="66.84375px"
-        textAlign="center"
+      <View
+        width="503px"
+        height="401px"
         display="block"
-        direction="column"
-        justifyContent="unset"
-        width="unset"
-        height="unset"
         gap="unset"
         alignItems="unset"
+        justifyContent="unset"
         position="absolute"
-        top="0%"
-        bottom="0%"
-        left="0%"
-        right="0%"
+        top="-0.76%"
+        bottom="-0.76%"
+        left="-0.6%"
+        right="-0.6%"
+        border="3px SOLID rgba(2,31,60,1)"
+        borderRadius="30px"
         padding="0px 0px 0px 0px"
-        whiteSpace="pre-wrap"
-        children="TFT"
-        {...getOverrideProps(overrides, "Logo36522987")}
-      ></Text>
+        backgroundColor="rgba(0,81,161,0.1)"
+        {...getOverrideProps(overrides, "Rectangle 44")}
+      ></View>
     </View>
   );
 }

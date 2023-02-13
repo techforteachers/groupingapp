@@ -8,7 +8,7 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Text, View } from "@aws-amplify/ui-react";
-export default function LogIn(props) {
+export default function Login(props) {
   const { overrides, ...rest } = props;
   return (
     <View
@@ -21,7 +21,7 @@ export default function LogIn(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       {...rest}
-      {...getOverrideProps(overrides, "LogIn")}
+      {...getOverrideProps(overrides, "Login")}
     >
       <View
         width="127px"
