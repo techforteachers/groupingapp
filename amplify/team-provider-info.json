@@ -23,6 +23,10 @@
           "deploymentBucketName": "amplify-tftgroupingapp-newdev-161604-deployment",
           "s3Key": "amplify-builds/tftGenerateGroupLambda-5a6874375546646a6956-build.zip"
         }
+      },
+      "api": {
+        "tftGenerateGroupAPI": {},
+        "tftgroupingapp": {}
       }
     }
   }
