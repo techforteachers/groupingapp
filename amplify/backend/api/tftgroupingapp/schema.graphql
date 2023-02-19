@@ -1,6 +1,4 @@
-input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }
-
-type Student @model{
+type Student @model @auth(rules: [{ allow: owner }]){
   id: ID!
   first_name: String!
   last_name: String!
@@ -9,7 +7,7 @@ type Student @model{
   classes: [Class] @manyToMany(relationName: "ClassStudent")
 }
 
-type Class @model{
+type Class @model @auth(rules: [{ allow: owner }]){
   id: ID!
   className: String!
   students: [Student] @manyToMany(relationName: "ClassStudent")
