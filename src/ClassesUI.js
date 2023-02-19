@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid } from "@aws-amplify/ui-react";
-import { Button, Flex } from "@aws-amplify/ui-react";
+import { Button, Flex, Text } from "@aws-amplify/ui-react";
 import { useState, useEffect } from "react";
 import TreeItem from '@mui/lab/TreeItem';
 export function ClassesUI (props){
@@ -73,9 +73,44 @@ export function ClassesUI (props){
                 <Button id="createClassButton" onClick={addClass}>+</Button>
             </Grid>
             <Flex justifyContent="flex-end" alignItems="flex-end">
-                <Button onClick={editClass}>Edit</Button>
-                <Button onClick={removeClass}>Remove</Button>
-                <Button>Generate Groups</Button>
+                <Button
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    onClick={editClass}
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Edit"
+                        ></Text>
+                </Button>
+                <Button
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    onClick={removeClass}
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Remove"
+                        ></Text>
+                </Button>
+                <Button
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Generate Groups"
+                        ></Text>
+                </Button>
             </Flex>
         </div>
         
