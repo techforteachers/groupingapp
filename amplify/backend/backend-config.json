@@ -15,12 +15,26 @@
       "service": "API Gateway"
     },
     "tftgroupingapp": {
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "tftgroupingapp3553f84b",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [
             {
               "authenticationType": "AWS_IAM"
+            },
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authtftgroupingapp3553f84b"
+              }
             }
           ],
           "defaultAuthentication": {

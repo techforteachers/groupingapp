@@ -19,11 +19,13 @@ export const createStudent = /* GraphQL */ `
           classId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -45,11 +47,13 @@ export const updateStudent = /* GraphQL */ `
           classId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -71,11 +75,13 @@ export const deleteStudent = /* GraphQL */ `
           classId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -94,12 +100,14 @@ export const createClass = /* GraphQL */ `
           classId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       user
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -118,12 +126,14 @@ export const updateClass = /* GraphQL */ `
           classId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       user
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -142,12 +152,14 @@ export const deleteClass = /* GraphQL */ `
           classId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       user
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -171,6 +183,7 @@ export const createClassStudent = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       class {
         id
@@ -181,9 +194,11 @@ export const createClassStudent = /* GraphQL */ `
         user
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -207,6 +222,7 @@ export const updateClassStudent = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       class {
         id
@@ -217,9 +233,11 @@ export const updateClassStudent = /* GraphQL */ `
         user
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -243,6 +261,7 @@ export const deleteClassStudent = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       class {
         id
@@ -253,9 +272,11 @@ export const deleteClassStudent = /* GraphQL */ `
         user
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;

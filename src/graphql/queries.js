@@ -16,11 +16,13 @@ export const getStudent = /* GraphQL */ `
           classId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -42,115 +44,7 @@ export const listStudents = /* GraphQL */ `
         }
         createdAt
         updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getClass = /* GraphQL */ `
-  query GetClass($id: ID!) {
-    getClass(id: $id) {
-      id
-      className
-      students {
-        items {
-          id
-          studentId
-          classId
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      user
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listClasses = /* GraphQL */ `
-  query ListClasses(
-    $filter: ModelClassFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listClasses(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        className
-        students {
-          nextToken
-        }
-        user
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getClassStudent = /* GraphQL */ `
-  query GetClassStudent($id: ID!) {
-    getClassStudent(id: $id) {
-      id
-      studentId
-      classId
-      student {
-        id
-        first_name
-        last_name
-        grade
-        user
-        classes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      class {
-        id
-        className
-        students {
-          nextToken
-        }
-        user
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listClassStudents = /* GraphQL */ `
-  query ListClassStudents(
-    $filter: ModelClassStudentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listClassStudents(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        studentId
-        classId
-        student {
-          id
-          first_name
-          last_name
-          grade
-          user
-          createdAt
-          updatedAt
-        }
-        class {
-          id
-          className
-          user
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
+        owner
       }
       nextToken
     }
@@ -182,6 +76,52 @@ export const studentsByUser = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getClass = /* GraphQL */ `
+  query GetClass($id: ID!) {
+    getClass(id: $id) {
+      id
+      className
+      students {
+        items {
+          id
+          studentId
+          classId
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      user
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listClasses = /* GraphQL */ `
+  query ListClasses(
+    $filter: ModelClassFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listClasses(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        className
+        students {
+          nextToken
+        }
+        user
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
     }
@@ -211,6 +151,80 @@ export const classesByUser = /* GraphQL */ `
         user
         createdAt
         updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getClassStudent = /* GraphQL */ `
+  query GetClassStudent($id: ID!) {
+    getClassStudent(id: $id) {
+      id
+      studentId
+      classId
+      student {
+        id
+        first_name
+        last_name
+        grade
+        user
+        classes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      class {
+        id
+        className
+        students {
+          nextToken
+        }
+        user
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listClassStudents = /* GraphQL */ `
+  query ListClassStudents(
+    $filter: ModelClassStudentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listClassStudents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        studentId
+        classId
+        student {
+          id
+          first_name
+          last_name
+          grade
+          user
+          createdAt
+          updatedAt
+          owner
+        }
+        class {
+          id
+          className
+          user
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
     }
@@ -243,6 +257,7 @@ export const classStudentsByStudentId = /* GraphQL */ `
           user
           createdAt
           updatedAt
+          owner
         }
         class {
           id
@@ -250,9 +265,11 @@ export const classStudentsByStudentId = /* GraphQL */ `
           user
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -285,6 +302,7 @@ export const classStudentsByClassId = /* GraphQL */ `
           user
           createdAt
           updatedAt
+          owner
         }
         class {
           id
@@ -292,9 +310,11 @@ export const classStudentsByClassId = /* GraphQL */ `
           user
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
