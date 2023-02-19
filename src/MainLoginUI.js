@@ -28,14 +28,11 @@ export function LoginUI (props) {
                 label="Password"
                 id='passwordInput'
             /> 
-            <Button
-                height='5rem'
-                fontSize='2rem'
-                loadingText=""
+            <SubmitButton
                 onClick={onSignIn}
                 >
                 Submit
-            </Button>
+            </SubmitButton>
             <Text
                 variation="error"
                 as="p"
@@ -75,6 +72,7 @@ export function SignUpUI (props) {
             props.setCurrentView("verificationUI");
             props.setPotentialUser(username);
         } catch (error) {
+            document.getElementById("signUperrorText").innerText = error;
             console.log('error signing up:', error);
         }
     }
@@ -94,14 +92,11 @@ export function SignUpUI (props) {
                 label="Email"
                 id='emailSignUpInput'
             /> 
-            <Button
-                height='5rem'
-                fontSize='2rem'
-                loadingText=""
+            <SubmitButton
                 onClick={onSignUp}
                 >
                 Submit
-            </Button>
+            </SubmitButton>
             <Text
                 variation="error"
                 as="p"
@@ -138,14 +133,68 @@ export function VerificationUI (props) {
                 label="Verification Code"
                 id='verificationCodeInput'
             /> 
-            <Button
-                height='5rem'
-                fontSize='2rem'
-                loadingText=""
+            <SubmitButton
                 onClick={onVerificationCode}
                 >
                 Submit
+            </SubmitButton>
+        </View>
+    );
+}
+
+function SubmitButton(props){
+    return(
+        <View    
+        width="100px"
+        height="50px"
+        display="block"
+        gap="unset"
+        alignItems="unset"
+        justifyContent="unset"
+        position="relative"
+        padding="0px 0px 0px 0px"
+        >
+            <Button
+            width="100px"
+            height="50px"
+            display="block"
+            gap="unset"
+            alignItems="unset"
+            justifyContent="unset"
+            position="absolute"
+            top="0%"
+            bottom="0%"
+            left="0%"
+            right="0%"
+            border="2px SOLID rgba(2,31,60,1)"
+            borderRadius="105px"
+            padding="0px 0px 0px 0px"
+            onClick={props.onClick}
+            >
+                <Text
+                fontSize="17px"
+                fontWeight="650"
+                color="rgba(0,0,0,1)"
+                lineHeight="33.421875px"
+                textAlign="center"
+                display="block"
+                direction="column"
+                justifyContent="unset"
+                width="unset"
+                height="unset"
+                gap="unset"
+                alignItems="unset"
+                position="absolute"
+                top="15.76%"
+                bottom="24.24%"
+                left="18.26%"
+                right="18.26%"
+                padding="0px 0px 0px 0px"
+                whiteSpace="pre-wrap"
+                children="Submit"
+                ></Text>
             </Button>
+        
         </View>
     );
 }

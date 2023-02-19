@@ -4,18 +4,19 @@ import { Main }  from "./Main";
 import { Footer } from "./Footer";
 import { SideBar } from "./SideBar";
 import { useEffect, useState } from "react";
-import { Card, useTheme, View, Grid} from "@aws-amplify/ui-react";
+import { Card, useTheme, View, Grid, Divider, Text} from "@aws-amplify/ui-react";
 
 
 export function GroupingApp (props)  {
-        const { tokens } = useTheme();
-        const [isLoggedIn, setIsLoggedIn] = useState(false);
-        const [user, setUser] = useState("Guest");
-        const[ currentView, setCurrentView ] = useState("");
-        const[ classes, setClasses ] = useState([]);
-        //alertStatus: false displays "successfully signed out" and true displays "successfully signed in"
-
-    
+    const { tokens } = useTheme();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [user, setUser] = useState("Guest");
+    const[ currentView, setCurrentView ] = useState("");
+    const[ classes, setClasses ] = useState([]);
+    //alertStatus: false displays "successfully signed out" and true displays "successfully signed in"
+    const offWhite = "#F6F8FF"; 
+    const dividerColor = "#021F3C";
+    const background = "#EFF7FF"
 
     function handleLoginClick(){
         setCurrentView("loginUI");
@@ -67,13 +68,17 @@ export function GroupingApp (props)  {
 
     return(
         <Grid
-            templateColumns="1fr 3fr 1fr"
-            templateRows="1fr 3fr 1fr"
+            templateColumns="0.1rem 1fr 3fr 1fr 2fr 0.1rem"
+            templateRows="1fr 3fr 0.1fr"
+            columnGap="1rem"
+            rowGap="0.5rem"
+            backgroundColor={background}
         >
             <Card
                 columnStart="1"
                 columnEnd="-1"
-                backgroundColor={tokens.colors.blue[40]}
+                backgroundColor={offWhite}
+                border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
             >
                 <Header 
                     user={user} 
@@ -81,19 +86,23 @@ export function GroupingApp (props)  {
                     handleLoginClick={handleLoginClick} 
                     handleLogoutClick={handleLogoutClick} 
                     handleSignupClick={handleSignupClick}
-                    
                 />
             </Card>
             <Card
-                columnStart="1"
-                columnEnd="2" 
+                columnStart="2"
+                columnEnd="3" 
+                backgroundColor={offWhite}
+                border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
+                borderRadius="10px"
             >
                 <SideBar classes={classes}/>
             </Card>
             <Card
-                columnStart="2"
-                columnEnd="-1"
-                backgroundColor={tokens.colors.blue[10]}
+                columnStart="3"
+                columnEnd="6"
+                backgroundColor={offWhite}
+                border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
+                borderRadius="10px"
             >
                 <Main 
                     currentView={currentView} 
@@ -109,8 +118,10 @@ export function GroupingApp (props)  {
             <Card
                 columnStart="1"
                 columnEnd="-1"
+                backgroundColor={offWhite}
+                border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
             >
-                <Footer/>
+                <Footer backgroundColor={offWhite}/>
             </Card>
         </Grid>
     );
