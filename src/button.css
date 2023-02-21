@@ -1,0 +1,9 @@
+.amplify-button:hover {
+    background: rgb(205, 210, 215);
+}
+
+.amplify-button:focus {
+    background: #F6F8FF;
+    border: none;
+    outline: none;
+}

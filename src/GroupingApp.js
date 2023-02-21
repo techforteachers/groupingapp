@@ -5,7 +5,9 @@ import { Footer } from "./Footer";
 import { SideBar } from "./SideBar";
 import { useEffect, useState } from "react";
 import { Card, useTheme, View, Grid, Divider, Text} from "@aws-amplify/ui-react";
-
+import { createClass } from "./graphql/mutations";
+import { API } from "aws-amplify";
+import { updateClass } from "./graphql/mutations";
 
 export function GroupingApp (props)  {
     const { tokens } = useTheme();
@@ -40,30 +42,29 @@ export function GroupingApp (props)  {
         setCurrentView(newView);
     }
 
-    function handleCreateClass(data){
-        const classData = {
-            username: user,
-            classname: data.classname,
-            students: data.students,
-            id: data.id
+    async function handleCreateClass(data){
+        const newClassData = {
+            className: data.classname
         }
-
-        let newClasses = classes.slice();
-        newClasses.push(classData);
-        setClasses(newClasses);
+        const response = await API.graphql({
+            query: createClass,
+            variables: { input: newClassData },
+            authMode: 'AMAZON_COGNITO_USER_POOLS'
+        }); 
+        console.log(response.data.createClass.id);
+        setCurrentView("classPreviewUI");
     }
 
-    function handleEditClass(data, index){
-        const classData = {
-            username: user,
-            classname: data.classname,
-            students: data.students,
-            id: data.id
-        }
-
-        let newClasses = classes.slice();
-        newClasses[index] = classData;
-        setClasses(newClasses);
+    async function handleEditClass(data){
+        let classId = data.id;
+        let newClassName = data.classname;
+        const response = await API.graphql({
+            query: updateClass,
+            variables: { input: {id: classId, className: newClassName} },
+            authMode: 'AMAZON_COGNITO_USER_POOLS'
+        }); 
+        console.log(response.data.updateClass.className);
+        setCurrentView("classPreviewUI");
     }
 
     return(

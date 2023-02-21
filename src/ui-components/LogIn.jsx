@@ -20,8 +20,8 @@ export default function Login(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "Login")}
+      {...rest}
     >
       <View
         width="127px"

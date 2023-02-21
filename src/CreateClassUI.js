@@ -59,7 +59,6 @@ export function CreateClassUI(props){
                 id: props.classes.length
             }
             props.createClass(data);
-            props.setCurrentView("classPreviewUI");
         }
         else{
             console.log("Class name already exists")
@@ -104,7 +103,7 @@ export function CreateClassUI(props){
                 placeholder="Class Name"
             />
             <View as="form" onSubmit={handleCreateStudent}>
-                <Flex direction="row" justifyContent="center">
+                <Flex direction="row" justifyContent="start">
                     <TextField
                         name="First Name"
                         placeholder="John"
@@ -126,8 +125,18 @@ export function CreateClassUI(props){
                         label="Grade"
                         name="Grade"
                     />
-                    <Button type="submit" variation="primary">
-                        Create Student
+                    <Button
+                    type="submit"
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Create Student"
+                        ></Text>
                     </Button>
                 </Flex>
             </View>
@@ -152,7 +161,19 @@ export function CreateClassUI(props){
                 </Flex>
                 ))}
             </View>
-            <Button onClick={handleCreateClass}>Create Class</Button>
+            <Button
+                size="medium"
+                border="2px SOLID rgba(2,31,60,1)"
+                borderRadius="7px"
+                onClick={handleCreateClass}
+                >
+                    <Text
+                    textAlign="center"
+                    display="block"
+                    direction="column"
+                    children="Create Class"
+                    ></Text>
+            </Button>
         </div>
     );
 }

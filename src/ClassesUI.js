@@ -1,8 +1,11 @@
 import React from "react";
 import { Grid } from "@aws-amplify/ui-react";
-import { Button, Flex } from "@aws-amplify/ui-react";
+import { Button, Flex, Text } from "@aws-amplify/ui-react";
 import { useState, useEffect } from "react";
 import TreeItem from '@mui/lab/TreeItem';
+import { API } from "aws-amplify";
+import { listClasses } from "./graphql/queries";
+import { deleteClass } from "./graphql/mutations";
 export function ClassesUI (props){
     const [classButtons, setClassButtons] = useState([]);
     
@@ -24,37 +27,28 @@ export function ClassesUI (props){
         }
     }
 
-    function updateClassButtons(){
-        const listItems = props.classes.map(
+    async function updateClassButtons(){
+        const listItems = await API.graphql({
+            query: listClasses,
+            authMode: 'AMAZON_COGNITO_USER_POOLS'
+        });
+        const buttons = listItems.data.listClasses.items.map(
             (element) => {
                 return (
-                    <Button id={element.classname} onClick={selectClass}>{element.classname}</Button>
+                    <Button id={element.id} onClick={selectClass}>{element.className}</Button>
                 )
             }
         ) 
-        setClassButtons(listItems);
+        setClassButtons(buttons);
     }
-        
-    function findIndex(className){
-        for(let i=0; i<props.classes.length; i++){
-            if(props.classes[i].classname == className){
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    function removeClass(){
-        let index = findIndex(props.selectedClass)
-        if(index == -1){
-            console.log("Class not found: " + props.selectedClass)
-        }
-        else{
-            let newClasses = props.classes.slice();
-            newClasses.splice(index, 1);
-            props.setClasses(newClasses);
-            updateClassButtons();
-        }
+    async function removeClass(){
+        let id = props.selectedClass; 
+        await API.graphql({
+            query: deleteClass,
+            variables: { input: { id }},
+            authMode: 'AMAZON_COGNITO_USER_POOLS'
+        });
+        updateClassButtons();
     }
 
     function editClass(){
@@ -73,9 +67,44 @@ export function ClassesUI (props){
                 <Button id="createClassButton" onClick={addClass}>+</Button>
             </Grid>
             <Flex justifyContent="flex-end" alignItems="flex-end">
-                <Button onClick={editClass}>Edit</Button>
-                <Button onClick={removeClass}>Remove</Button>
-                <Button>Generate Groups</Button>
+                <Button
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    onClick={editClass}
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Edit"
+                        ></Text>
+                </Button>
+                <Button
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    onClick={removeClass}
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Remove"
+                        ></Text>
+                </Button>
+                <Button
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Generate Groups"
+                        ></Text>
+                </Button>
             </Flex>
         </div>
         
