@@ -6,8 +6,17 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ViewProps } from "@aws-amplify/ui-react";
+import { IconProps, ViewProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type PorfilebtnOverridesProps = {
+    Porfilebtn?: PrimitiveOverrideProps<ViewProps>;
+    "Rectangle 2336523001"?: PrimitiveOverrideProps<ViewProps>;
+    "Rectangle 24"?: PrimitiveOverrideProps<ViewProps>;
+    Intersect?: PrimitiveOverrideProps<IconProps>;
+    "Rectangle 5"?: PrimitiveOverrideProps<ViewProps>;
+    "Rectangle 2336523005"?: PrimitiveOverrideProps<ViewProps>;
+} & EscapeHatchProps;
 export declare type PorfilebtnProps = React.PropsWithChildren<Partial<ViewProps> & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: PorfilebtnOverridesProps | undefined | null;
 }>;
 export default function Porfilebtn(props: PorfilebtnProps): React.ReactElement;

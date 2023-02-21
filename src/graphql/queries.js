@@ -8,7 +8,6 @@ export const getStudent = /* GraphQL */ `
       first_name
       last_name
       grade
-      user
       classes {
         items {
           id
@@ -38,39 +37,6 @@ export const listStudents = /* GraphQL */ `
         first_name
         last_name
         grade
-        user
-        classes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const studentsByUser = /* GraphQL */ `
-  query StudentsByUser(
-    $user: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelStudentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    studentsByUser(
-      user: $user
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        first_name
-        last_name
-        grade
-        user
         classes {
           nextToken
         }
@@ -98,7 +64,6 @@ export const getClass = /* GraphQL */ `
         }
         nextToken
       }
-      user
       createdAt
       updatedAt
       owner
@@ -118,37 +83,6 @@ export const listClasses = /* GraphQL */ `
         students {
           nextToken
         }
-        user
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
-export const classesByUser = /* GraphQL */ `
-  query ClassesByUser(
-    $user: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelClassFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    classesByUser(
-      user: $user
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        className
-        students {
-          nextToken
-        }
-        user
         createdAt
         updatedAt
         owner
@@ -168,7 +102,6 @@ export const getClassStudent = /* GraphQL */ `
         first_name
         last_name
         grade
-        user
         classes {
           nextToken
         }
@@ -182,7 +115,6 @@ export const getClassStudent = /* GraphQL */ `
         students {
           nextToken
         }
-        user
         createdAt
         updatedAt
         owner
@@ -209,7 +141,6 @@ export const listClassStudents = /* GraphQL */ `
           first_name
           last_name
           grade
-          user
           createdAt
           updatedAt
           owner
@@ -217,7 +148,6 @@ export const listClassStudents = /* GraphQL */ `
         class {
           id
           className
-          user
           createdAt
           updatedAt
           owner
@@ -254,7 +184,6 @@ export const classStudentsByStudentId = /* GraphQL */ `
           first_name
           last_name
           grade
-          user
           createdAt
           updatedAt
           owner
@@ -262,7 +191,6 @@ export const classStudentsByStudentId = /* GraphQL */ `
         class {
           id
           className
-          user
           createdAt
           updatedAt
           owner
@@ -299,7 +227,6 @@ export const classStudentsByClassId = /* GraphQL */ `
           first_name
           last_name
           grade
-          user
           createdAt
           updatedAt
           owner
@@ -307,7 +234,6 @@ export const classStudentsByClassId = /* GraphQL */ `
         class {
           id
           className
-          user
           createdAt
           updatedAt
           owner

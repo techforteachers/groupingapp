@@ -11,7 +11,6 @@ export const onCreateStudent = /* GraphQL */ `
       first_name
       last_name
       grade
-      user
       classes {
         items {
           id
@@ -39,7 +38,6 @@ export const onUpdateStudent = /* GraphQL */ `
       first_name
       last_name
       grade
-      user
       classes {
         items {
           id
@@ -67,7 +65,6 @@ export const onDeleteStudent = /* GraphQL */ `
       first_name
       last_name
       grade
-      user
       classes {
         items {
           id
@@ -104,7 +101,6 @@ export const onCreateClass = /* GraphQL */ `
         }
         nextToken
       }
-      user
       createdAt
       updatedAt
       owner
@@ -130,7 +126,6 @@ export const onUpdateClass = /* GraphQL */ `
         }
         nextToken
       }
-      user
       createdAt
       updatedAt
       owner
@@ -156,7 +151,6 @@ export const onDeleteClass = /* GraphQL */ `
         }
         nextToken
       }
-      user
       createdAt
       updatedAt
       owner
@@ -177,7 +171,6 @@ export const onCreateClassStudent = /* GraphQL */ `
         first_name
         last_name
         grade
-        user
         classes {
           nextToken
         }
@@ -191,7 +184,6 @@ export const onCreateClassStudent = /* GraphQL */ `
         students {
           nextToken
         }
-        user
         createdAt
         updatedAt
         owner
@@ -216,7 +208,6 @@ export const onUpdateClassStudent = /* GraphQL */ `
         first_name
         last_name
         grade
-        user
         classes {
           nextToken
         }
@@ -230,7 +221,6 @@ export const onUpdateClassStudent = /* GraphQL */ `
         students {
           nextToken
         }
-        user
         createdAt
         updatedAt
         owner
@@ -255,7 +245,6 @@ export const onDeleteClassStudent = /* GraphQL */ `
         first_name
         last_name
         grade
-        user
         classes {
           nextToken
         }
@@ -269,7 +258,6 @@ export const onDeleteClassStudent = /* GraphQL */ `
         students {
           nextToken
         }
-        user
         createdAt
         updatedAt
         owner

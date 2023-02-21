@@ -12,21 +12,16 @@ import {
   } from "@aws-amplify/ui-react";
 import React from "react";
 import { useEffect, useState} from "react";
+import { getClass } from "./graphql/queries";
+import { API } from "aws-amplify";
 export function EditClassUI(props){
     const [localStudents, setLocalStudents] = useState([]);
     const [localClassName, setLocalClassName] = useState();
-    const [currentClassIndex, setCurrentClassIndex] = useState();
-    useEffect(() => {
-        let index = findClassIndex(props.selectedClass)
-        if(index == -1){
-            console.log("Class not found: " + props.selectedClass)
-        }
-        else{
-            setCurrentClassIndex(index);
-            setLocalStudents(props.classes[index].students);
-            setLocalClassName(props.classes[index].classname)
-        }
-    }, [props]);
+    /*useEffect(() => {
+        //setLocalStudents(props.classes[index].students);
+        let currentClass = getCurrentClass(props.selectedClass);
+        setLocalClassName(currentClass.className)
+    }, [props]);*/
 
     function handleCreateStudent(e){
         e.preventDefault();
@@ -63,10 +58,9 @@ export function EditClassUI(props){
         const data = {
             classname : localClassName,
             students: localStudents,
-            id: props.classes[currentClassIndex].id
+            id: props.selectedClass
         }
-        props.editClass(data, currentClassIndex);
-        props.setCurrentView("classPreviewUI");
+        props.editClass(data);
     }
 
     function handleChangeClassName(e){
@@ -106,6 +100,14 @@ export function EditClassUI(props){
         return -1;
     }
 
+    async function getCurrentClass(classId){
+        let currentClass = await API.graphql({
+            query: getClass,
+            variables: {input: {classId}},
+            authMode: 'AMAZON_COGNITO_USER_POOLS'
+        });
+        return currentClass
+    }
 
     return(
         <div>

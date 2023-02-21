@@ -11,7 +11,6 @@ export const createStudent = /* GraphQL */ `
       first_name
       last_name
       grade
-      user
       classes {
         items {
           id
@@ -39,7 +38,6 @@ export const updateStudent = /* GraphQL */ `
       first_name
       last_name
       grade
-      user
       classes {
         items {
           id
@@ -67,7 +65,6 @@ export const deleteStudent = /* GraphQL */ `
       first_name
       last_name
       grade
-      user
       classes {
         items {
           id
@@ -104,7 +101,6 @@ export const createClass = /* GraphQL */ `
         }
         nextToken
       }
-      user
       createdAt
       updatedAt
       owner
@@ -130,7 +126,6 @@ export const updateClass = /* GraphQL */ `
         }
         nextToken
       }
-      user
       createdAt
       updatedAt
       owner
@@ -156,7 +151,6 @@ export const deleteClass = /* GraphQL */ `
         }
         nextToken
       }
-      user
       createdAt
       updatedAt
       owner
@@ -177,7 +171,6 @@ export const createClassStudent = /* GraphQL */ `
         first_name
         last_name
         grade
-        user
         classes {
           nextToken
         }
@@ -191,7 +184,6 @@ export const createClassStudent = /* GraphQL */ `
         students {
           nextToken
         }
-        user
         createdAt
         updatedAt
         owner
@@ -216,7 +208,6 @@ export const updateClassStudent = /* GraphQL */ `
         first_name
         last_name
         grade
-        user
         classes {
           nextToken
         }
@@ -230,7 +221,6 @@ export const updateClassStudent = /* GraphQL */ `
         students {
           nextToken
         }
-        user
         createdAt
         updatedAt
         owner
@@ -255,7 +245,6 @@ export const deleteClassStudent = /* GraphQL */ `
         first_name
         last_name
         grade
-        user
         classes {
           nextToken
         }
@@ -269,7 +258,6 @@ export const deleteClassStudent = /* GraphQL */ `
         students {
           nextToken
         }
-        user
         createdAt
         updatedAt
         owner

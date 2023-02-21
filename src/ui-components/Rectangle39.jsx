@@ -20,8 +20,8 @@ export default function Rectangle39(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "Rectangle39")}
+      {...rest}
     >
       <View
         width="665px"

@@ -59,7 +59,6 @@ export function CreateClassUI(props){
                 id: props.classes.length
             }
             props.createClass(data);
-            props.setCurrentView("classPreviewUI");
         }
         else{
             console.log("Class name already exists")
