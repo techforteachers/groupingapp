@@ -6,17 +6,15 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ViewProps } from "@aws-amplify/ui-react";
+import { DividerProps, FlexProps, IconProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type SidebarOverridesProps = {
-    Sidebar?: PrimitiveOverrideProps<ViewProps>;
-    "Rectangle 44"?: PrimitiveOverrideProps<ViewProps>;
-} & EscapeHatchProps;
-export declare type SidebarProps = React.PropsWithChildren<Partial<ViewProps> & {
-    overrides?: SidebarOverridesProps | undefined | null;
-}>;
-export default function Sidebar(props: SidebarProps): React.ReactElement;
-29767091?: PrimitiveOverrideProps<TextProps>;
+export declare type SideBarOverridesProps = {
+    SideBar?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 32129767087"?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 32129767088"?: PrimitiveOverrideProps<FlexProps>;
+    "Rectangle 1162"?: PrimitiveOverrideProps<ViewProps>;
+    "Frame 414"?: PrimitiveOverrideProps<FlexProps>;
+    ORGANIZATION29767091?: PrimitiveOverrideProps<TextProps>;
     "Frame 32129767092"?: PrimitiveOverrideProps<FlexProps>;
     Icon29767093?: PrimitiveOverrideProps<ViewProps>;
     Vector29767094?: PrimitiveOverrideProps<IconProps>;
