@@ -12,86 +12,62 @@ import {
   } from "@aws-amplify/ui-react";
 import React from "react";
 import { useEffect, useState} from "react";
+import { API } from "aws-amplify";
+import { createStudent } from "./graphql/mutations";
+import { listStudents } from "./graphql/queries";
+import { deleteStudent } from "./graphql/mutations";
 export function CreateClassUI(props){
     const [localStudents, setLocalStudents] = useState([]);
     const [localClassName, setLocalClassName] = useState();
 
-    useEffect(() => {
-        console.log(localStudents);
-    }, [localStudents]);
-
-    function handleCreateStudent(e){
+    async function handleCreateStudent(e){
         e.preventDefault();
         const form = new FormData(e.target);
         const data = {
-          firstname: form.get("First Name"),
-          lastname: form.get("Last Name"),
-          grade: form.get("Grade"),
-          id: localStudents.length
+          first_name: form.get("First Name"),
+          last_name: form.get("Last Name"),
+          grade: form.get("Grade")
         };
-        console.log(data.firstname);
-        console.log(data.lastname);
+        console.log(data.first_name);
+        console.log(data.last_name);
         console.log(data.grade);
 
-        let newStudents = localStudents.slice();
-        newStudents.push(data);
-        setLocalStudents(newStudents);
+        await API.graphql({
+            query: createStudent,
+            variables: {input : data},
+            authMode: 'AMAZON_COGNITO_USER_POOLS'
+        })
+        updateLocalStudents();
         e.target.reset();
     }
 
-    function handleDeleteStudent(student){
-        let index = findIndex(student.id)
-        if(index == -1){
-            console.log("Student not found: " + student.firstname + " " + student.lastname);
-        }
-        else{
-            let newStudents = localStudents.slice();
-            newStudents.splice(index, 1);
-            setLocalStudents(newStudents);
-        }
+    async function handleDeleteStudent(student){
+        let id = student.id;
+        await API.graphql({
+            query: deleteStudent,
+            variables: {input: {id}}
+        })
+        updateLocalStudents();
     }
 
     function handleCreateClass(){
-        if(validateClassName(localClassName) == true){
-            const data = {
-                classname : localClassName,
-                students: localStudents,
-                id: props.classes.length
-            }
-            props.createClass(data);
+        const data = {
+            classname : localClassName,
+            students: localStudents,
         }
-        else{
-            console.log("Class name already exists")
-        }
-
+        props.createClass(data);
     }
 
     function handleChangeClassName(e){
         setLocalClassName(e.currentTarget.value);
     }
 
-    function validateClassName(className){
-        if(className == null){
-            return false;
-        }
-        else{
-            for(let i=0; i<props.classes.length; i++){
-                if(props.classes[i].classname == className){
-                    return false;
-                }
-            }
-            return true;
-        }
-        
-    }
-
-    function findIndex(id){
-        for(let i=0; i<localStudents.length; i++){
-            if(localStudents[i].id == id){
-                return i;
-            }
-        }
-        return -1;
+    async function updateLocalStudents(){
+        let students = await API.graphql({
+            query:listStudents,
+            authMode: 'AMAZON_COGNITO_USER_POOLS'
+        })
+        setLocalStudents(students.data.listStudents.items);
     }
 
     return(
@@ -143,16 +119,16 @@ export function CreateClassUI(props){
             <View margin="3rem 0">
                 {localStudents.map((student) => (
                 <Flex
-                    key={student.id || student.lastname}
+                    key={student.id || student.last_name}
                     direction="row"
                     justifyContent="center"
                     alignItems="center"
                 >
                     <Text as="strong" fontWeight={700}>
-                    {student.firstname}
+                    {student.first_name}
                     </Text>
                     <Text as="strong" fontWeight={700}>
-                    {student.lastname}
+                    {student.last_name}
                     </Text>
                     <Text as="span">{student.grade}</Text>
                     <Button variation="link" onClick={() => handleDeleteStudent(student)}>

@@ -46,24 +46,24 @@ export function GroupingApp (props)  {
         const newClassData = {
             className: data.classname
         }
-        const response = await API.graphql({
+        const newClass = await API.graphql({
             query: createClass,
             variables: { input: newClassData },
             authMode: 'AMAZON_COGNITO_USER_POOLS'
         }); 
-        console.log(response.data.createClass.id);
+        console.log(newClass.data.createClass.id);
         setCurrentView("classPreviewUI");
     }
 
     async function handleEditClass(data){
         let classId = data.id;
         let newClassName = data.classname;
-        const response = await API.graphql({
+        const newClass = await API.graphql({
             query: updateClass,
             variables: { input: {id: classId, className: newClassName} },
             authMode: 'AMAZON_COGNITO_USER_POOLS'
         }); 
-        console.log(response.data.updateClass.className);
+        console.log(newClass.data.updateClass.className);
         setCurrentView("classPreviewUI");
     }
 
