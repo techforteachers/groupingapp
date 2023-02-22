@@ -5,9 +5,11 @@ import { Footer } from "./Footer";
 import { SideBar } from "./SideBar";
 import { useEffect, useState } from "react";
 import { Card, useTheme, View, Grid, Divider, Text} from "@aws-amplify/ui-react";
-import { createClass } from "./graphql/mutations";
+import { createClass, deleteClassStudent, deleteStudent } from "./graphql/mutations";
 import { API } from "aws-amplify";
 import { updateClass } from "./graphql/mutations";
+import { createStudent } from "./graphql/mutations";
+import { createClassStudent } from "./graphql/mutations";
 
 export function GroupingApp (props)  {
     const { tokens } = useTheme();
@@ -43,6 +45,7 @@ export function GroupingApp (props)  {
     }
 
     async function handleCreateClass(data){
+        let students = data.students;
         const newClassData = {
             className: data.classname
         }
@@ -51,18 +54,71 @@ export function GroupingApp (props)  {
             variables: { input: newClassData },
             authMode: 'AMAZON_COGNITO_USER_POOLS'
         }); 
+        const newClassId = newClass.data.createClass.id; 
+        for(let i=0; i<students.length; i++){
+            let currentStudent = students[i];
+            let firstname = currentStudent.first_name;
+            let lastname = currentStudent.last_name;
+            let grade = currentStudent.grade; 
+            let newStudent = await API.graphql({
+                query: createStudent,
+                variables: { input : { first_name: firstname, last_name: lastname, grade: grade } },
+                authMode: 'AMAZON_COGNITO_USER_POOLS'
+            });
+            let newStudentId = newStudent.data.createStudent.id;
+            await API.graphql({
+                query: createClassStudent,
+                variables: {input: {studentId: newStudentId, classId: newClassId}},
+                authMode: 'AMAZON_COGNITO_USER_POOLS'
+            });
+        }
+        
         console.log(newClass.data.createClass.id);
         setCurrentView("classPreviewUI");
     }
 
     async function handleEditClass(data){
-        let classId = data.id;
+        let classId = data.id; 
         let newClassName = data.classname;
+        let addedStudents = data.addedStudents;
+        let deletedStudents = data.deletedStudents;
+        let deletedClassStudents = data.deletedClassStudents;
         const newClass = await API.graphql({
             query: updateClass,
             variables: { input: {id: classId, className: newClassName} },
             authMode: 'AMAZON_COGNITO_USER_POOLS'
         }); 
+        for(let i=0; i<addedStudents.length; i++){
+            let currentStudent = addedStudents[i];
+            let firstname = currentStudent.first_name;
+            let lastname = currentStudent.last_name;
+            let grade = currentStudent.grade; 
+            let newStudent = await API.graphql({
+                query: createStudent,
+                variables: { input : { first_name: firstname, last_name: lastname, grade: grade } },
+                authMode: 'AMAZON_COGNITO_USER_POOLS'
+            });
+            let newStudentId = newStudent.data.createStudent.id;
+            await API.graphql({
+                query: createClassStudent,
+                variables: {input: {classId: classId, studentId: newStudentId}},
+                authMode: 'AMAZON_COGNITO_USER_POOLS'
+            });
+        }
+        for(let j=deletedStudents.length-1; j>=0; j--){
+            let currentStudent = deletedStudents[j];
+            let id = deletedClassStudents[j]
+            await API.graphql({
+                query: deleteClassStudent,
+                variables: {input: {id: id}},
+                authMode: 'AMAZON_COGNITO_USER_POOLS'
+            });
+            await API.graphql({
+                query: deleteStudent,
+                variables: {input: {id: currentStudent} },
+                authMode: 'AMAZON_COGNITO_USER_POOLS'
+            });
+        }
         console.log(newClass.data.updateClass.className);
         setCurrentView("classPreviewUI");
     }

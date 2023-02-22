@@ -12,54 +12,53 @@ import {
   } from "@aws-amplify/ui-react";
 import React from "react";
 import { useEffect, useState} from "react";
-import { getClass } from "./graphql/queries";
+import { getClass, listClassStudents } from "./graphql/queries";
 import { createStudent } from "./graphql/mutations";
-import { listStudents } from "./graphql/queries";
 import { deleteStudent } from "./graphql/mutations";
 import { API } from "aws-amplify";
 export function EditClassUI(props){
     const [localStudents, setLocalStudents] = useState([]);
+    const [localClassStudents, setLocalClassStudents] = useState([]);
+    const [deletedClassStudents, setDeletedClassStudents] = useState([]);
+    const [addedStudents, setAddedStudents] = useState([]);
+    const [deletedStudents, setDeletedStudents] = useState([]);
     const [localClassName, setLocalClassName] = useState();
     useEffect(() => {
         //setLocalClassName(props.classes[index].className)
         updateLocalStudents();
     }, [props]);
 
-    async function handleCreateStudent(e){
+    function handleCreateStudent(e){
         e.preventDefault();
         const form = new FormData(e.target);
+        let id = localStudents.length;
         const data = {
           first_name: form.get("First Name"),
           last_name: form.get("Last Name"),
-          grade: form.get("Grade")
+          grade: form.get("Grade"),
+          id:id
         };
         console.log(data.first_name);
         console.log(data.last_name);
         console.log(data.grade);
 
-        await API.graphql({
-            query: createStudent,
-            variables: {input : data},
-            authMode: 'AMAZON_COGNITO_USER_POOLS'
-        })
-        updateLocalStudents();
+        
+        addLocalStudent(data);
         e.target.reset();
     }
 
     async function handleDeleteStudent(student){
-        let id = student.id;
-        await API.graphql({
-            query: deleteStudent,
-            variables: {input: {id}}
-        })
-        updateLocalStudents();
+        deleteLocalStudent(student.id);
     }
 
     function handleEditClass(){
         const data = {
             classname : localClassName,
             students: localStudents,
-            id: props.selectedClass
+            id: props.selectedClass,
+            addedStudents: addedStudents,
+            deletedStudents: deletedStudents,
+            deletedClassStudents: deletedClassStudents
         }
         props.editClass(data);
     }
@@ -68,12 +67,67 @@ export function EditClassUI(props){
         setLocalClassName(e.currentTarget.value);
     }
 
+    function addLocalStudent(data){
+        let students = localStudents.slice();
+        students.push(data);
+        setLocalStudents(students);
+
+        let newStudents = addedStudents.slice();
+        newStudents.push(data);
+        setAddedStudents(newStudents);
+    }
+
+    function deleteLocalStudent(id){
+        let students = localStudents.slice();
+        let index = findStudentIndex(id);
+        students.splice(index, 1);
+        setLocalStudents(students);
+
+        let removedStudents = deletedStudents.slice();
+        removedStudents.push(id);
+        setDeletedStudents(removedStudents);
+
+        let removedClassStudents = deletedClassStudents.slice();
+        let classStudentId = findClassStudentId(id);
+        removedClassStudents.push(classStudentId);
+        setDeletedClassStudents(removedClassStudents);
+    }
+
+    function findStudentIndex(id){
+        for(let i=0; i<localStudents.length; i++){
+            if(localStudents[i].id == id){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    function findClassStudentId(id){
+        for(let i=0; i<localClassStudents.length; i++){
+            if(localClassStudents[i].studentId == id){
+                return localClassStudents[i].id;
+            }
+        }
+        return -1;
+    }
+
     async function updateLocalStudents(){
-        let students = await API.graphql({
-            query:listStudents,
+        let response = await API.graphql({
+            query: listClassStudents,
             authMode: 'AMAZON_COGNITO_USER_POOLS'
-        })
-        setLocalStudents(students.data.listStudents.items);
+        });
+        let totalStudents = response.data.listClassStudents.items
+        let students = []; 
+        let classStudents = [];
+        for(let i=0; i<totalStudents.length; i++){
+            let currentStudent = totalStudents[i];
+            if(currentStudent.classId == props.selectedClass){
+                students.push(currentStudent.student);
+                classStudents.push(currentStudent);
+            }
+        }
+        setLocalStudents(students);
+        setLocalClassStudents(classStudents);
     }
 
     return(

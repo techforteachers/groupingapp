@@ -4,8 +4,8 @@ import { Button, Flex, Text } from "@aws-amplify/ui-react";
 import { useState, useEffect } from "react";
 import TreeItem from '@mui/lab/TreeItem';
 import { API } from "aws-amplify";
-import { listClasses } from "./graphql/queries";
-import { deleteClass } from "./graphql/mutations";
+import { listClasses, listClassStudents } from "./graphql/queries";
+import { deleteClass, deleteClassStudent, deleteStudent } from "./graphql/mutations";
 export function ClassesUI (props){
     const [classButtons, setClassButtons] = useState([]);
     
@@ -43,6 +43,28 @@ export function ClassesUI (props){
     }
     async function removeClass(){
         let id = props.selectedClass; 
+        let response = await API.graphql({
+            query: listClassStudents,
+            authMode: 'AMAZON_COGNITO_USER_POOLS'
+        })
+        let classStudents = response.data.listClassStudents.items;
+        for(let i=classStudents.length-1; i>=0; i--){
+            let currentStudent = classStudents[i];
+            let classStudentId = currentStudent.id; 
+            let studentId = currentStudent.studentId;
+            if(props.selectedClass == currentStudent.classId){
+                await API.graphql({
+                    query: deleteClassStudent,
+                    variables: {input: {id: classStudentId}},
+                    authMode: 'AMAZON_COGNITO_USER_POOLS'
+                });
+                await API.graphql({
+                    query: deleteStudent,
+                    variables: {input: {id: studentId}},
+                    authMode: 'AMAZON_COGNITO_USER_POOLS'
+                });
+            }
+        }
         await API.graphql({
             query: deleteClass,
             variables: { input: { id }},

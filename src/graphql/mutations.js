@@ -178,16 +178,6 @@ export const createClassStudent = /* GraphQL */ `
         updatedAt
         owner
       }
-      class {
-        id
-        className
-        students {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
       createdAt
       updatedAt
       owner

@@ -1,19 +1,5 @@
 {
   "api": {
-    "tftGenerateGroupAPI": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "tftGenerateGroupLambda"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    },
     "tftgroupingapp": {
       "dependsOn": [
         {
@@ -69,22 +55,7 @@
       "service": "Cognito"
     }
   },
-  "function": {
-    "tftGenerateGroupLambda": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ],
-          "category": "api",
-          "resourceName": "tftgroupingapp"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
+  "function": {},
   "parameters": {
     "AMPLIFY_function_tftGenerateGroupLambda_deploymentBucketName": {
       "usedBy": [

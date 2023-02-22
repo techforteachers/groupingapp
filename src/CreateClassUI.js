@@ -20,34 +20,27 @@ export function CreateClassUI(props){
     const [localStudents, setLocalStudents] = useState([]);
     const [localClassName, setLocalClassName] = useState();
 
-    async function handleCreateStudent(e){
+    function handleCreateStudent(e){
         e.preventDefault();
         const form = new FormData(e.target);
+        let id = localStudents.length;
         const data = {
           first_name: form.get("First Name"),
           last_name: form.get("Last Name"),
-          grade: form.get("Grade")
+          grade: form.get("Grade"),
+          id:id
         };
         console.log(data.first_name);
         console.log(data.last_name);
         console.log(data.grade);
 
-        await API.graphql({
-            query: createStudent,
-            variables: {input : data},
-            authMode: 'AMAZON_COGNITO_USER_POOLS'
-        })
-        updateLocalStudents();
+        
+        addLocalStudent(data);
         e.target.reset();
     }
 
     async function handleDeleteStudent(student){
-        let id = student.id;
-        await API.graphql({
-            query: deleteStudent,
-            variables: {input: {id}}
-        })
-        updateLocalStudents();
+        deleteLocalStudent(student.id);
     }
 
     function handleCreateClass(){
@@ -62,12 +55,26 @@ export function CreateClassUI(props){
         setLocalClassName(e.currentTarget.value);
     }
 
-    async function updateLocalStudents(){
-        let students = await API.graphql({
-            query:listStudents,
-            authMode: 'AMAZON_COGNITO_USER_POOLS'
-        })
-        setLocalStudents(students.data.listStudents.items);
+    function addLocalStudent(data){
+        let students = localStudents.slice();
+        students.push(data);
+        setLocalStudents(students);
+    }
+
+    function deleteLocalStudent(id){
+        let students = localStudents.slice();
+        let index = findIndex(id);
+        students.splice(index, 1);
+        setLocalStudents(students);
+    }
+
+    function findIndex(id){
+        for(let i=0; i<localStudents.length; i++){
+            if(localStudents[i].id == id){
+                return i;
+            }
+        }
+        return -1;
     }
 
     return(
