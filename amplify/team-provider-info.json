@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-tftgroupingapp-newdev-161604-unauthRole",
       "StackName": "amplify-tftgroupingapp-newdev-161604",
       "StackId": "arn:aws:cloudformation:us-east-1:069437775715:stack/amplify-tftgroupingapp-newdev-161604/7573a640-a663-11ed-bef8-0ab634256341",
-      "AmplifyAppId": "d2ot1algkw1w0m"
+      "AmplifyAppId": "d2ot1algkw1w0m",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-tftgroupingapp-newdev-161604-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
@@ -22,6 +23,10 @@
         "tftGenerateGroupLambda": {
           "deploymentBucketName": "amplify-tftgroupingapp-newdev-161604-deployment",
           "s3Key": "amplify-builds/tftGenerateGroupLambda-5a6874375546646a6956-build.zip"
+        },
+        "tftGenerateGroupsFunction": {
+          "deploymentBucketName": "amplify-tftgroupingapp-newdev-161604-deployment",
+          "s3Key": "amplify-builds/tftGenerateGroupsFunction-5a3179506375786a7370-build.zip"
         }
       },
       "api": {
