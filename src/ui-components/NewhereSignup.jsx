@@ -21,8 +21,8 @@ export default function NewhereSignup(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       opacity="0.4000000059604645"
-      {...getOverrideProps(overrides, "NewhereSignup")}
       {...rest}
+      {...getOverrideProps(overrides, "NewhereSignup")}
     >
       <Text
         fontFamily="Inter"

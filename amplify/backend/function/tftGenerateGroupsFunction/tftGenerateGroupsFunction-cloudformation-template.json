@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.7.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "Lambda Function resource stack creation using Amplify CLI",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -15,10 +15,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "apitftgroupingappGraphQLAPIIdOutput": {
-      "Type": "String",
-      "Default": "apitftgroupingappGraphQLAPIIdOutput"
     }
   },
   "Conditions": {
@@ -51,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "tftGenerateGroupLambda",
+            "tftGenerateGroupsFunction",
             {
               "Fn::Join": [
                 "",
                 [
-                  "tftGenerateGroupLambda",
+                  "tftGenerateGroupsFunction",
                   "-",
                   {
                     "Ref": "env"
@@ -73,35 +69,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "API_TFTGROUPINGAPP_STUDENTTABLE_NAME": {
-              "Fn::ImportValue": {
-                "Fn::Sub": "${apitftgroupingappGraphQLAPIIdOutput}:GetAtt:StudentTable:Name"
-              }
-            },
-            "API_TFTGROUPINGAPP_STUDENTTABLE_ARN": {
-              "Fn::Join": [
-                "",
-                [
-                  "arn:aws:dynamodb:",
-                  {
-                    "Ref": "AWS::Region"
-                  },
-                  ":",
-                  {
-                    "Ref": "AWS::AccountId"
-                  },
-                  ":table/",
-                  {
-                    "Fn::ImportValue": {
-                      "Fn::Sub": "${apitftgroupingappGraphQLAPIIdOutput}:GetAtt:StudentTable:Name"
-                    }
-                  }
-                ]
-              ]
-            },
-            "API_TFTGROUPINGAPP_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apitftgroupingappGraphQLAPIIdOutput"
             }
           }
         },
@@ -122,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "tftgroupingappLambdaRole5ad62ea3",
+            "tftgroupingappLambdaRole45cca967",
             {
               "Fn::Join": [
                 "",
                 [
-                  "tftgroupingappLambdaRole5ad62ea3",
+                  "tftgroupingappLambdaRole45cca967",
                   "-",
                   {
                     "Ref": "env"
@@ -197,81 +164,6 @@
           ]
         }
       }
-    },
-    "AmplifyResourcesPolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:dynamodb:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":table/",
-                      {
-                        "Fn::ImportValue": {
-                          "Fn::Sub": "${apitftgroupingappGraphQLAPIIdOutput}:GetAtt:StudentTable:Name"
-                        }
-                      }
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:dynamodb:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":table/",
-                      {
-                        "Fn::ImportValue": {
-                          "Fn::Sub": "${apitftgroupingappGraphQLAPIIdOutput}:GetAtt:StudentTable:Name"
-                        }
-                      },
-                      "/index/*"
-                    ]
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      }
     }
   },
   "Outputs": {
@@ -296,14 +188,6 @@
     "LambdaExecutionRole": {
       "Value": {
         "Ref": "LambdaExecutionRole"
-      }
-    },
-    "LambdaExecutionRoleArn": {
-      "Value": {
-        "Fn::GetAtt": [
-          "LambdaExecutionRole",
-          "Arn"
-        ]
       }
     }
   }

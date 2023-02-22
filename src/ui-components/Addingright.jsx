@@ -29,8 +29,8 @@ export default function Addingright(props) {
           style: { transform: "translate(100%, 0%)" },
         },
       ]}
-      {...getOverrideProps(overrides, "Addingright")}
       {...rest}
+      {...getOverrideProps(overrides, "Addingright")}
     ></Icon>
   );
 }

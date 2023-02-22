@@ -21,8 +21,8 @@ export default function ItemCard(props) {
       position="relative"
       padding="16px 16px 16px 16px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "ItemCard")}
       {...rest}
+      {...getOverrideProps(overrides, "ItemCard")}
     >
       <Badge
         gap="0"
