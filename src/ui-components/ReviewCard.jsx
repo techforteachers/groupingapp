@@ -29,8 +29,8 @@ export default function ReviewCard(props) {
       alignItems="center"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "ReviewCard")}
       {...rest}
+      {...getOverrideProps(overrides, "ReviewCard")}
     >
       <Image
         width="400px"

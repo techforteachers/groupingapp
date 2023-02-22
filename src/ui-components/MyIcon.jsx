@@ -341,8 +341,8 @@ export default function MyIcon(props) {
           style: { transform: "translate(4.17%, 12.5%)" },
         },
       ]}
-      {...getOverrideProps(overrides, "MyIcon")}
       {...rest}
+      {...getOverrideProps(overrides, "MyIcon")}
     ></Icon>
   );
 }

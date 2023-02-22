@@ -20,8 +20,8 @@ export default function Sideviewbtn(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "Sideviewbtn")}
       {...rest}
+      {...getOverrideProps(overrides, "Sideviewbtn")}
     >
       <View
         width="247px"

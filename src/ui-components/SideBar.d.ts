@@ -6,6 +6,9 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
+<<<<<<< HEAD
+import { FlexProps } from "@aws-amplify/ui-react";
+=======
 import { DividerProps, FlexProps, IconProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SideBarOverridesProps = {
@@ -69,7 +72,8 @@ export declare type SideBarOverridesProps = {
     "Icon/settings"?: PrimitiveOverrideProps<ViewProps>;
     Vector29767144?: PrimitiveOverrideProps<IconProps>;
 } & EscapeHatchProps;
+>>>>>>> e6749249f058baa1a765eab4a831f1cd3803c53e
 export declare type SideBarProps = React.PropsWithChildren<Partial<FlexProps> & {
-    overrides?: SideBarOverridesProps | undefined | null;
+    overrides?: EscapeHatchProps | undefined | null;
 }>;
 export default function SideBar(props: SideBarProps): React.ReactElement;
