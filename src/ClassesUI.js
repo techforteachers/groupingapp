@@ -77,6 +77,10 @@ export function ClassesUI (props){
         props.setCurrentView("editClassUI");
     }
 
+    function generateGroups(){
+        props.setCurrentView("generateGroupsUI")
+    }
+
     return(
         <div>
             <Grid
@@ -119,6 +123,7 @@ export function ClassesUI (props){
                     size="medium"
                     border="2px SOLID rgba(2,31,60,1)"
                     borderRadius="7px"
+                    onClick={generateGroups}
                     >
                         <Text
                         textAlign="center"

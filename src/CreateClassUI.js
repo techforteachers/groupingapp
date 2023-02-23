@@ -61,6 +61,14 @@ export function CreateClassUI(props){
         setLocalStudents(students);
     }
 
+    function addMultipleLocalStudents(students){
+        let currentStudents = localStudents.slice();
+        for(let i=0; i<students.length; i++){
+            currentStudents.push(students[i]);
+        }
+        setLocalStudents(currentStudents);
+    }
+
     function deleteLocalStudent(id){
         let students = localStudents.slice();
         let index = findIndex(id);
@@ -75,6 +83,70 @@ export function CreateClassUI(props){
             }
         }
         return -1;
+    }
+    
+    async function handleOnFileUpload(event){
+        const uploadedFile = event.target.files[0];
+        let students = [];
+        let startId = localStudents.length;
+        if(!uploadedFile){
+            console.log(uploadedFile + " is null")
+            return;
+        }
+
+        let reader = new FileReader();
+        reader.onload = async function (e) {
+            const contents = e.target.result;
+            const contentArr = splitContents(contents);
+            for (let i=0; i<contentArr.length; i++){
+                const cont = contentArr[i];
+                const data = {
+                    first_name: cont["First Name"],
+                    last_name: cont["Last Name"],
+                    grade: cont["Grade"],
+                    id: startId+i
+                };
+                console.log(data.first_name);
+                console.log(data.last_name);
+                console.log(data.grade);
+                students.push(data);
+            }
+            addMultipleLocalStudents(students);
+            
+            return contentArr;
+        }
+        reader.readAsText(uploadedFile);
+    }
+
+    function splitContents(str, delimiter = ",") {
+    // slice from start of text to the first \n index
+    // strip away line breaker like \r or \n
+    // use split to create an array from string by delimiter
+    let headers = str.slice(0, str.indexOf("\n"));
+    headers = headers.replace(/(\r\n|\n|\r)/gm, '');
+    headers = headers.split(delimiter);
+
+    // slice from \n index + 1 to the end of the text
+    // use split to create an array of each csv value row
+    let rows = str.slice(str.indexOf("\n") + 1).split("\n");
+
+    // Map the rows
+    // split values from each row into an array, strip away remaining line breaker
+    // use headers.reduce to create an object
+    // object properties derived from headers:values
+    // the object passed as an element of the array
+    const arr = rows.map(function (row) {
+        row = row.replace(/(\r\n|\n|\r)/gm, '');
+        const values = row.split(delimiter);
+        const el = headers.reduce(function (object, header, index) {
+        object[header] = values[index];
+        return object;
+        }, {});
+        return el;
+    });
+
+    // return the array
+    return arr;
     }
 
     return(
@@ -123,6 +195,7 @@ export function CreateClassUI(props){
                     </Button>
                 </Flex>
             </View>
+            <TextField type="file" name="student_roster" label="Upload a list of students" onInput={handleOnFileUpload}/>
             <View margin="3rem 0">
                 {localStudents.map((student) => (
                 <Flex

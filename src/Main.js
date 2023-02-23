@@ -6,6 +6,7 @@ import { ClassesUI } from "./ClassesUI";
 import { CreateClassUI } from "./CreateClassUI";
 import { EditClassUI } from "./EditClassUI";
 import { HelpPage } from "./HelpPage";
+import { GenerateGroupsUI } from "./GenerateGroupsUI";
 import { Grid } from "react-ui";
 //import { SignUp } from "@aws-amplify/ui-react/dist/types/components/Authenticator/SignUp";
 export function Main (props) {
@@ -14,6 +15,7 @@ export function Main (props) {
     const [potentialUser, setPotentialUser] = useState();
     const [selectedClass, setSelectedClass] = useState();
     const [backButton, setBackButton] = useState();
+    const [groupedStudents, setGroupedStudents] = useState([]);
 
     useEffect(() => {
         if(props.isLoggedIn == true){
@@ -22,7 +24,7 @@ export function Main (props) {
                 setBackButton();
             }
             else if(props.currentView == "createClassUI"){
-                setView(<CreateClassUI createClass={props.createClass} classes={props.classes} setCurrentView={props.setCurrentView}/>)
+                setView(<CreateClassUI createClass={props.createClass} setCurrentView={props.setCurrentView}/>)
                 setBackButton(
                     <Button
                     size="medium"
@@ -40,7 +42,25 @@ export function Main (props) {
                 );
             }
             else if(props.currentView == "editClassUI"){
-                setView(<EditClassUI editClass={props.editClass} classes={props.classes} selectedClass={selectedClass} setCurrentView={props.setCurrentView}/>)
+                setView(<EditClassUI editClass={props.editClass} selectedClass={selectedClass} setCurrentView={props.setCurrentView}/>)
+                setBackButton(
+                    <Button
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    onClick={onBackClick}
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Back"
+                        ></Text>
+                    </Button>
+                );
+            }
+            else if(props.currentView == "generateGroupsUI"){
+                setView(<GenerateGroupsUI setGroupedStudents={setGroupedStudents} selectedClass={selectedClass} setCurrentView={props.setCurrentView}/>)
                 setBackButton(
                     <Button
                     size="medium"
