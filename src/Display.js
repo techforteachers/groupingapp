@@ -34,7 +34,13 @@ const GroupDisplay = (props) => {
       cells.push(<th> {rotation} </th>)
       let results = [];
       for (let i in data[rotation]){
-      results.push(<td>{data[rotation][i].join(", ")}</td>)
+        let currentGroup = data[rotation][i];
+        let studentNames = "";
+        for(let j=0; j<currentGroup.length; j++){
+          studentNames += currentGroup[j].first_name + " " + currentGroup[j].last_name + ", ";
+        }
+        results.push(<td>{studentNames}</td>)
+        //results.push(<td>{data[rotation][i].join(", ")}</td>)
       }
       cells.push(results)
       cells.push(<tr></tr>)

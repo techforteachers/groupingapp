@@ -28,8 +28,8 @@ export default function FormCheckout(props) {
       alignItems="flex-start"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "FormCheckout")}
+      {...rest}
     >
       <Flex
         gap="0"

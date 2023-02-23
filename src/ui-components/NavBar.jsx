@@ -28,8 +28,8 @@ export default function NavBar(props) {
       position="relative"
       padding="24px 32px 24px 32px"
       backgroundColor="rgba(255,255,255,1)"
-      {...rest}
       {...getOverrideProps(overrides, "NavBar")}
+      {...rest}
     >
       <Flex
         gap="2px"

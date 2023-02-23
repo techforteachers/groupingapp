@@ -1,5 +1,19 @@
 {
   "api": {
+    "tftGenerateGroupsAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "tftGenerateGroupsFunction"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "tftgroupingapp": {
       "dependsOn": [
         {
@@ -27,20 +41,6 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
-    },
-    "tftGenerateGroupsAPI": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "tftGenerateGroupsFunction",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        }
-      ]
     }
   },
   "auth": {
@@ -77,22 +77,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_tftGenerateGroupLambda_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "tftGenerateGroupLambda"
-        }
-      ]
-    },
-    "AMPLIFY_function_tftGenerateGroupLambda_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "tftGenerateGroupLambda"
-        }
-      ]
-    },
     "AMPLIFY_function_tftGenerateGroupsFunction_deploymentBucketName": {
       "usedBy": [
         {

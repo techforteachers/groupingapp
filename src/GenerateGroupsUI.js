@@ -59,6 +59,7 @@ export function GenerateGroupsUI (props){
         }
         const data = await API.post('tftGenerateGroupsAPI', '/students', requestData)
         props.setGroupedStudents(data);
+        props.setCurrentView("groupDisplayUI");
         console.log(data);
     }
 

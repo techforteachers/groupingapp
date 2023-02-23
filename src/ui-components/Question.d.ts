@@ -6,8 +6,14 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ViewProps } from "@aws-amplify/ui-react";
+import { IconProps, ViewProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type QuestionOverridesProps = {
+    Question?: PrimitiveOverrideProps<ViewProps>;
+    "Rectangle 8"?: PrimitiveOverrideProps<ViewProps>;
+    "?"?: PrimitiveOverrideProps<IconProps>;
+} & EscapeHatchProps;
 export declare type QuestionProps = React.PropsWithChildren<Partial<ViewProps> & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: QuestionOverridesProps | undefined | null;
 }>;
 export default function Question(props: QuestionProps): React.ReactElement;

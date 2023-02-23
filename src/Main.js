@@ -8,6 +8,7 @@ import { EditClassUI } from "./EditClassUI";
 import { HelpPage } from "./HelpPage";
 import { GenerateGroupsUI } from "./GenerateGroupsUI";
 import { Grid } from "react-ui";
+import GroupDisplay from "./Display";
 //import { SignUp } from "@aws-amplify/ui-react/dist/types/components/Authenticator/SignUp";
 export function Main (props) {
     const { tokens } = useTheme();
@@ -77,6 +78,24 @@ export function Main (props) {
                     </Button>
                 );
             }
+            else if(props.currentView == "groupDisplayUI"){
+                setView(<GroupDisplay inputData={groupedStudents}/>)
+                setBackButton(
+                    <Button
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    onClick={onBackClick}
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Back"
+                        ></Text>
+                    </Button>
+                );
+            }
         } 
         else if (props.currentView == "loginUI"){
             setView(<LoginUI handleChangeUser={props.handleChangeUser} setCurrentView={props.setCurrentView}/>);
@@ -95,7 +114,12 @@ export function Main (props) {
       }, [props, selectedClass]);
 
     function onBackClick(){
-        props.setCurrentView("classPreviewUI");
+        if(props.currentView == "groupDisplayUI"){
+            props.setCurrentView("generateGroupsUI");
+        }
+        else{
+            props.setCurrentView("classPreviewUI");
+        }
     }
     
     return(
