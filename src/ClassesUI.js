@@ -40,6 +40,7 @@ export function ClassesUI (props){
             }
         ) 
         setClassButtons(buttons);
+        
     }
     async function removeClass(){
         let id = props.selectedClass; 
@@ -71,6 +72,7 @@ export function ClassesUI (props){
             authMode: 'AMAZON_COGNITO_USER_POOLS'
         });
         updateClassButtons();
+        props.setUpdateTree(!props.updateTree);
     }
 
     function editClass(){

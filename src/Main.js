@@ -21,7 +21,7 @@ export function Main (props) {
     useEffect(() => {
         if(props.isLoggedIn == true){
             if(props.currentView == "classPreviewUI"){
-                setView(<ClassesUI setSelectedClass={setSelectedClass} selectedClass={selectedClass} setClasses={props.setClasses} classes={props.classes} setCurrentView={props.setCurrentView}/>);
+                setView(<ClassesUI updateTree={props.updateTree} setUpdateTree={props.setUpdateTree} setSelectedClass={setSelectedClass} selectedClass={selectedClass} setCurrentView={props.setCurrentView}/>);
                 setBackButton();
             }
             else if(props.currentView == "createClassUI"){

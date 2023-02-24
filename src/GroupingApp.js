@@ -16,7 +16,7 @@ export function GroupingApp (props)  {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState("Guest");
     const[ currentView, setCurrentView ] = useState("");
-    const[ classes, setClasses ] = useState([]);
+    const[ updateTree, setUpdateTree ] = useState(false);
     //alertStatus: false displays "successfully signed out" and true displays "successfully signed in"
     const offWhite = "#F6F8FF"; 
     const dividerColor = "#021F3C";
@@ -28,6 +28,7 @@ export function GroupingApp (props)  {
 
     function handleLogoutClick(){
         setIsLoggedIn(false); 
+        setUser("Guest");
         setCurrentView("loginUI")
     }
 
@@ -55,6 +56,7 @@ export function GroupingApp (props)  {
             authMode: 'AMAZON_COGNITO_USER_POOLS'
         }); 
         const newClassId = newClass.data.createClass.id; 
+
         for(let i=0; i<students.length; i++){
             let currentStudent = students[i];
             let firstname = currentStudent.first_name;
@@ -75,6 +77,7 @@ export function GroupingApp (props)  {
         
         console.log(newClass.data.createClass.id);
         setCurrentView("classPreviewUI");
+        setUpdateTree(!updateTree);
     }
 
     async function handleEditClass(data){
@@ -121,6 +124,7 @@ export function GroupingApp (props)  {
         }
         console.log(newClass.data.updateClass.className);
         setCurrentView("classPreviewUI");
+        setUpdateTree(!updateTree);
     }
 
     return(
@@ -152,7 +156,7 @@ export function GroupingApp (props)  {
                 border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
                 borderRadius="10px"
             >
-                <SideBar classes={classes}/>
+                <SideBar updateTree={updateTree} user={user}/>
             </Card>
             <Card
                 columnStart="3"
@@ -166,10 +170,10 @@ export function GroupingApp (props)  {
                     setCurrentView={handleChangeView}
                     isLoggedIn={isLoggedIn} 
                     handleChangeUser={handleChangeUser}
-                    setClasses={setClasses}
-                    classes={classes}
                     createClass={handleCreateClass}
                     editClass={handleEditClass}
+                    setUpdateTree={setUpdateTree}
+                    updateTree={updateTree}
                 />
             </Card>
             <Card
