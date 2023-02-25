@@ -73,6 +73,7 @@ export function ClassesUI (props){
         });
         updateClassButtons();
         props.setUpdateTree(!props.updateTree);
+        props.setSelectedClass(null);
     }
 
     function editClass(){
@@ -80,7 +81,13 @@ export function ClassesUI (props){
     }
 
     function generateGroups(){
-        props.setCurrentView("generateGroupsUI")
+        if(props.selectedClass != null){
+            props.setCurrentView("generateGroupsUI")
+            document.getElementById("errorText").innerText = "";
+        }
+        else{
+            document.getElementById("errorText").innerText = "Please select a class";
+        }
     }
 
     return(
@@ -95,6 +102,11 @@ export function ClassesUI (props){
                 <Button id="createClassButton" onClick={addClass}>+</Button>
             </Grid>
             <Flex justifyContent="flex-end" alignItems="flex-end">
+                <Text
+                    variation="error"
+                    fontWeight={600}
+                    id='errorText'
+                />
                 <Button
                     size="medium"
                     border="2px SOLID rgba(2,31,60,1)"
@@ -135,6 +147,7 @@ export function ClassesUI (props){
                         ></Text>
                 </Button>
             </Flex>
+            
         </div>
         
     );

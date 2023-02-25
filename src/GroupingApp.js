@@ -130,7 +130,7 @@ export function GroupingApp (props)  {
     return(
         <Grid
             templateColumns="0.1rem 1fr 3fr 1fr 2fr 0.1rem"
-            templateRows="1fr 3fr 0.1fr"
+            templateRows="0.1fr 3fr 0.1fr"
             columnGap="1rem"
             rowGap="0.5rem"
             backgroundColor={background}
@@ -138,6 +138,7 @@ export function GroupingApp (props)  {
             <Card
                 columnStart="1"
                 columnEnd="-1"
+                height={90}
                 backgroundColor={offWhite}
                 border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
             >
@@ -180,6 +181,7 @@ export function GroupingApp (props)  {
                 columnStart="1"
                 columnEnd="-1"
                 backgroundColor={offWhite}
+                height={90}
                 border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
             >
                 <Footer backgroundColor={offWhite}/>

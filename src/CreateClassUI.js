@@ -158,7 +158,7 @@ export function CreateClassUI(props){
                 placeholder="Class Name"
             />
             <View as="form" onSubmit={handleCreateStudent}>
-                <Flex direction="row" justifyContent="start">
+                <Flex direction="row" justifyContent="start" alignItems="flex-end">
                     <TextField
                         name="First Name"
                         placeholder="John"
@@ -182,6 +182,8 @@ export function CreateClassUI(props){
                     />
                     <Button
                     type="submit"
+                    height={45}
+                    width={55}
                     size="medium"
                     border="2px SOLID rgba(2,31,60,1)"
                     borderRadius="7px"
@@ -190,7 +192,7 @@ export function CreateClassUI(props){
                         textAlign="center"
                         display="block"
                         direction="column"
-                        children="Create Student"
+                        children="Add"
                         ></Text>
                     </Button>
                 </Flex>

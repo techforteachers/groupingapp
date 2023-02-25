@@ -83,7 +83,7 @@ export function GenerateGroupsUI (props){
                         onSelectionModelChange={(ids) => {
                             const selectedIds = new Set(ids);
                             const selectedRowData = rows.filter((row) => 
-                            selectedIds.has(row.id.toString())
+                                selectedIds.has(row.id.toString())
                             );
                             setSelectedStudents(selectedRowData);
                         }}

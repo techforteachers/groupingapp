@@ -25,6 +25,7 @@ export function EditClassUI(props){
     const [localClassName, setLocalClassName] = useState();
     useEffect(() => {
         //setLocalClassName(props.classes[index].className)
+        //updateLocalClassName();
         updateLocalStudents();
     }, [props]);
 
@@ -141,6 +142,17 @@ export function EditClassUI(props){
         setLocalClassStudents(classStudents);
     }
 
+    async function updateLocalClassName(){
+        let id = props.selectedClass;
+        let response = await API.graphql({
+            query: getClass,
+            variables: {input : { id }},
+            authMode: 'AMAZON_COGNITO_USER_POOLS'
+        });
+        let currentClass = response.data.getClass;
+        console.log(currentClass);
+    }
+
     async function handleOnFileUpload(event){
         const uploadedFile = event.target.files[0];
         let students = [];
@@ -214,7 +226,7 @@ export function EditClassUI(props){
                 placeholder={localClassName}
             />
             <View as="form" onSubmit={handleCreateStudent}>
-                <Flex direction="row" justifyContent="start">
+            <Flex direction="row" justifyContent="start" alignItems="flex-end">
                     <TextField
                         name="First Name"
                         placeholder="John"
@@ -238,6 +250,8 @@ export function EditClassUI(props){
                     />
                     <Button
                     type="submit"
+                    height={45}
+                    width={55}
                     size="medium"
                     border="2px SOLID rgba(2,31,60,1)"
                     borderRadius="7px"
@@ -246,7 +260,7 @@ export function EditClassUI(props){
                         textAlign="center"
                         display="block"
                         direction="column"
-                        children="Create Student"
+                        children="Add"
                         ></Text>
                     </Button>
                 </Flex>

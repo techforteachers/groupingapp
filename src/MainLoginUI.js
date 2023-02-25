@@ -51,8 +51,7 @@ export function LoginUI (props) {
                 textDecoration="none"
                 width="30vw"
                 id='errorText'
-            >
-            </Text>
+            />
         </View>
     );
 }

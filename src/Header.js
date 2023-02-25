@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Tabs, TabItem, useTheme, Flex, Button, View, Grid } from '@aws-amplify/ui-react';
+import { Tabs, TabItem, useTheme, Flex, Button, View, Grid, Card } from '@aws-amplify/ui-react';
 import { Logo } from "./Logo";
 import { Greeting } from "./Greeting";
 import { HeaderLoginUI } from "./HeaderLoginUI";
