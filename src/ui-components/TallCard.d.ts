@@ -6,16 +6,8 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
-export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type TallCardOverridesProps = {
-    TallCard?: PrimitiveOverrideProps<FlexProps>;
-    image?: PrimitiveOverrideProps<ImageProps>;
-    "Text Grouping"?: PrimitiveOverrideProps<FlexProps>;
-    "Classic Long Sleeve T-Shirt"?: PrimitiveOverrideProps<TextProps>;
-    $99?: PrimitiveOverrideProps<TextProps>;
-} & EscapeHatchProps;
+import { FlexProps } from "@aws-amplify/ui-react";
 export declare type TallCardProps = React.PropsWithChildren<Partial<FlexProps> & {
-    overrides?: TallCardOverridesProps | undefined | null;
+    overrides?: EscapeHatchProps | undefined | null;
 }>;
 export default function TallCard(props: TallCardProps): React.ReactElement;

@@ -7,11 +7,7 @@
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { IconProps } from "@aws-amplify/ui-react";
-export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type Question2OverridesProps = {
-    Question2?: PrimitiveOverrideProps<IconProps>;
-} & EscapeHatchProps;
 export declare type Question2Props = React.PropsWithChildren<Partial<IconProps> & {
-    overrides?: Question2OverridesProps | undefined | null;
+    overrides?: EscapeHatchProps | undefined | null;
 }>;
 export default function Question2(props: Question2Props): React.ReactElement;

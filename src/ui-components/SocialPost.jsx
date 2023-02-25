@@ -22,8 +22,8 @@ export default function SocialPost(props) {
       position="relative"
       padding="24px 24px 24px 24px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "SocialPost")}
       {...rest}
+      {...getOverrideProps(overrides, "SocialPost")}
     >
       <Flex
         gap="40px"

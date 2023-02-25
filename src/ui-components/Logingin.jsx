@@ -20,8 +20,8 @@ export default function Logingin(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "Logingin")}
       {...rest}
+      {...getOverrideProps(overrides, "Logingin")}
     >
       <View
         width="516px"

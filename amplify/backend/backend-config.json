@@ -41,6 +41,20 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
+    },
+    "tftGenerateStationGroupsAPI": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "tftGenerateStationGroupsFunction",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "auth": {
@@ -71,6 +85,11 @@
   },
   "function": {
     "tftGenerateGroupsFunction": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "tftGenerateStationGroupsFunction": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
