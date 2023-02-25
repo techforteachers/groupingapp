@@ -20,8 +20,8 @@ export default function Porfilebtn(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "Porfilebtn")}
       {...rest}
+      {...getOverrideProps(overrides, "Porfilebtn")}
     >
       <View
         width="70px"

@@ -21,7 +21,8 @@
       },
       "api": {
         "tftgroupingapp": {},
-        "tftGenerateGroupsAPI": {}
+        "tftGenerateGroupsAPI": {},
+        "tftGenerateStationGroupsAPI": {}
       },
       "function": {
         "tftGenerateGroupsFunction": {
