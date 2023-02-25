@@ -14,6 +14,20 @@
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
     },
+    "tftGenerateStationGroupsAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "tftGenerateStationGroupsFunction"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "tftgroupingapp": {
       "dependsOn": [
         {
@@ -74,6 +88,11 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "tftGenerateStationGroupsFunction": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "parameters": {
@@ -90,6 +109,38 @@
         {
           "category": "function",
           "resourceName": "tftGenerateGroupsFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_tftGenerateStationGroupsFunction_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tftGenerateStationGroupsFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_tftGenerateStationGroupsFunction_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tftGenerateStationGroupsFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_tftGenerateStationGroups_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tftGenerateStationGroups"
+        }
+      ]
+    },
+    "AMPLIFY_function_tftGenerateStationGroups_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tftGenerateStationGroups"
         }
       ]
     }
