@@ -15,6 +15,7 @@ import { useEffect, useState} from "react";
 import { getClass, listClassStudents } from "./graphql/queries";
 import { createStudent } from "./graphql/mutations";
 import { deleteStudent } from "./graphql/mutations";
+import { getMyClass } from "./customGraphql/customQueries";
 import { API } from "aws-amplify";
 export function EditClassUI(props){
     const [localStudents, setLocalStudents] = useState([]);
@@ -25,8 +26,7 @@ export function EditClassUI(props){
     const [localClassName, setLocalClassName] = useState();
     useEffect(() => {
         //setLocalClassName(props.classes[index].className)
-        //updateLocalClassName();
-        updateLocalStudents();
+        updateLocal();
     }, [props]);
 
     function handleCreateStudent(e){
@@ -123,34 +123,23 @@ export function EditClassUI(props){
         return -1;
     }
 
-    async function updateLocalStudents(){
+    async function updateLocal(){
+        let classId = props.selectedClass;
         let response = await API.graphql({
-            query: listClassStudents,
+            query: getMyClass,
+            variables: {id : classId},
             authMode: 'AMAZON_COGNITO_USER_POOLS'
         });
-        let totalStudents = response.data.listClassStudents.items
-        let students = []; 
-        let classStudents = [];
-        for(let i=0; i<totalStudents.length; i++){
-            let currentStudent = totalStudents[i];
-            if(currentStudent.classId == props.selectedClass){
-                students.push(currentStudent.student);
-                classStudents.push(currentStudent);
-            }
+        let currentClassName = response.data.getClass.className;
+        setLocalClassName(currentClassName);
+
+
+        let items = response.data.getClass.students.items;
+        let students = [];
+        for(let i = 0; i<items.length; i++){
+            students.push(items[i].student);
         }
         setLocalStudents(students);
-        setLocalClassStudents(classStudents);
-    }
-
-    async function updateLocalClassName(){
-        let id = props.selectedClass;
-        let response = await API.graphql({
-            query: getClass,
-            variables: {input : { id }},
-            authMode: 'AMAZON_COGNITO_USER_POOLS'
-        });
-        let currentClass = response.data.getClass;
-        console.log(currentClass);
     }
 
     async function handleOnFileUpload(event){
@@ -303,3 +292,5 @@ export function EditClassUI(props){
         </div>
     );
 }
+
+

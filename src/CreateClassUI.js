@@ -12,10 +12,6 @@ import {
   } from "@aws-amplify/ui-react";
 import React from "react";
 import { useEffect, useState} from "react";
-import { API } from "aws-amplify";
-import { createStudent } from "./graphql/mutations";
-import { listStudents } from "./graphql/queries";
-import { deleteStudent } from "./graphql/mutations";
 export function CreateClassUI(props){
     const [localStudents, setLocalStudents] = useState([]);
     const [localClassName, setLocalClassName] = useState();
@@ -40,7 +36,10 @@ export function CreateClassUI(props){
     }
 
     async function handleDeleteStudent(student){
-        deleteLocalStudent(student.id);
+        let students = localStudents.slice();
+        let index = findIndex(student.id);
+        students.splice(index, 1);
+        setLocalStudents(students);
     }
 
     function handleCreateClass(){
@@ -67,13 +66,6 @@ export function CreateClassUI(props){
             currentStudents.push(students[i]);
         }
         setLocalStudents(currentStudents);
-    }
-
-    function deleteLocalStudent(id){
-        let students = localStudents.slice();
-        let index = findIndex(id);
-        students.splice(index, 1);
-        setLocalStudents(students);
     }
 
     function findIndex(id){
