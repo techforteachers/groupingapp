@@ -14,6 +14,7 @@ export const getMyClass = /* GraphQL */ `
                 id
                 last_name
                 first_name
+                grade
             }
         }
         nextToken
