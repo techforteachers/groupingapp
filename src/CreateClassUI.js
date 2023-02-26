@@ -8,7 +8,8 @@ import {
     View,
     Divider,
     withAuthenticator,
-    useAuthenticator
+    useAuthenticator,
+    Loader
   } from "@aws-amplify/ui-react";
 import React from "react";
 import { useEffect, useState} from "react";
@@ -47,7 +48,8 @@ export function CreateClassUI(props){
             classname : localClassName,
             students: localStudents,
         }
-        props.createClass(data);
+        props.setLoader(<Loader variation="linear" size="small" />);
+        props.createClass(data).then(() => {props.setLoader();});
     }
 
     function handleChangeClassName(e){

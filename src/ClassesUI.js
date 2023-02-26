@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@aws-amplify/ui-react";
+import { Grid, Loader } from "@aws-amplify/ui-react";
 import { Button, Flex, Text } from "@aws-amplify/ui-react";
 import { useState, useEffect } from "react";
 import TreeItem from '@mui/lab/TreeItem';
@@ -43,6 +43,7 @@ export function ClassesUI (props){
         
     }
     async function removeClass(){
+        props.setLoader(<Loader variation="linear" size="small" />);
         let classId = props.selectedClass; 
         let response = await API.graphql({
             query: getClass,
@@ -73,6 +74,7 @@ export function ClassesUI (props){
         updateClassButtons();
         props.setUpdateTree(!props.updateTree);
         props.setSelectedClass(null);
+        props.setLoader();
     }
 
     function editClass(){

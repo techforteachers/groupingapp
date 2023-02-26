@@ -8,7 +8,8 @@ import {
     View,
     Divider,
     withAuthenticator,
-    useAuthenticator
+    useAuthenticator,
+    Loader
   } from "@aws-amplify/ui-react";
 import React from "react";
 import { useEffect, useState} from "react";
@@ -61,7 +62,8 @@ export function EditClassUI(props){
             deletedStudents: deletedStudents,
             deletedClassStudents: deletedClassStudents
         }
-        props.editClass(data);
+        props.setLoader(<Loader variation="linear" size="small" />);
+        props.editClass(data).then(() => {props.setLoader();});
     }
 
     function handleChangeClassName(e){
@@ -116,7 +118,7 @@ export function EditClassUI(props){
 
     function findClassStudentId(id){
         for(let i=0; i<localClassStudents.length; i++){
-            if(localClassStudents[i].studentId == id){
+            if(localClassStudents[i].student.id == id){
                 return localClassStudents[i].id;
             }
         }
@@ -135,6 +137,7 @@ export function EditClassUI(props){
 
 
         let items = response.data.getClass.students.items;
+        setLocalClassStudents(items);
         let students = [];
         for(let i = 0; i<items.length; i++){
             students.push(items[i].student);

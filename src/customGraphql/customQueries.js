@@ -5,6 +5,11 @@ export const getMyClass = /* GraphQL */ `
       className
       students {
         items {
+            id
+            classId
+            createdAt
+            updatedAt
+            owner
             student {
                 id
                 last_name
