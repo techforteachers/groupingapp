@@ -6,7 +6,7 @@ import { Amplify, Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 
 import App from './App';
-import { GroupingApp } from './GroupingApp';
+import { GroupingApp } from './1Page/GroupingApp';
 
 Amplify.configure(awsconfig);
 

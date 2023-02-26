@@ -1,5 +1,5 @@
 import React from "react";
-import { Greeting } from "./Greeting";
+//import { Greeting } from "./Greeting"; /* why call greeting ui in child when Heade.js already has  */
 import { Flex, View, TextField, Button, Text, Alert } from "@aws-amplify/ui-react";
 import { useState, useEffect } from 'react';
 
@@ -30,18 +30,18 @@ function LoginButton(props) {
     );
   }
   
-  function LogoutButton(props) {
-    return (
-      <button onClick={props.onClick}>
-        Log Out
-      </button>
-    );
-  }
+function LogoutButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Log Out
+    </button>
+  );
+}
 
-  function SignupButton(props) {
-    return (
-      <button onClick={props.onClick}>
-        Sign Up
-      </button>
-    );
-  }
+function SignupButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Sign Up
+    </button>
+  );
+}

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Amplify } from 'aws-amplify';
 import { API, Auth, Analytics } from "aws-amplify";
-import {AuthState, onAuthUIStateChange} from "./ui-components";
+import {AuthState, onAuthUIStateChange} from "../ui-components";
 import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
-import awsExports from './aws-exports';
+import awsExports from '../../aws-exports';
 Amplify.configure(awsExports);
 
 export function SignIn () {

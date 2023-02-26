@@ -21,7 +21,7 @@ import {
   deleteStudent as deleteStudentMutation,
 } from "./graphql/mutations";
 
-import GroupDisplay from './Display';
+import GroupDisplay from './2Functions/Display';
 import './Display.css';
 
 function App({ signOut, user }) {

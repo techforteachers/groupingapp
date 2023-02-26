@@ -43,7 +43,7 @@ const GroupDisplay = (props) => {
   }
 
   return (
-    <React.Fragment>
+    <>
        <br></br><br></br>
        <h1>Groups</h1>
        <br/>
@@ -57,7 +57,7 @@ const GroupDisplay = (props) => {
         </tbody>
       </table>
       <br></br><br></br><br></br>
-    </React.Fragment>
+      </>  
   );
 };
 

@@ -1,11 +1,11 @@
 import React from "react";
 import { Card, useTheme, Flex, Button } from '@aws-amplify/ui-react';
 import { useEffect, useState } from "react";
-import { LoginUI, SignUpUI, VerificationUI } from "./MainLoginUI";
-import { ClassesUI } from "./ClassesUI";
-import { CreateClassUI } from "./CreateClassUI";
-import { EditClassUI } from "./EditClassUI";
-import { HelpPage } from "./HelpPage";
+import { LoginUI, SignUpUI, VerificationUI } from "../3Componets/MainLoginUI";
+import { ClassesUI } from "../2Functions/ClassesUI";
+import { CreateClassUI } from "../2Functions/CreateClassUI";
+import { EditClassUI } from "../2Functions/EditClassUI";
+import { HelpPage } from "../4Buttons/HelpPage";
 //import { SignUp } from "@aws-amplify/ui-react/dist/types/components/Authenticator/SignUp";
 export function Main (props) {
     const { tokens } = useTheme();

@@ -1,8 +1,8 @@
 import React from "react";
 import { Header } from "./Header";
 import { Main }  from "./Main";
-import { Footer } from "./Footer";
-import { SideBar } from "./SideBar";
+import { Footer } from "../3Componets/Footer";
+import { SideBar } from "../3Componets/SideBar";
 import { useEffect, useState } from "react";
 import { Card, useTheme, View, Grid} from "@aws-amplify/ui-react";
 

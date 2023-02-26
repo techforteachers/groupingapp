@@ -1,6 +1,9 @@
 import React from "react";
 import { View, TextField, Button, Text } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
+
+/*  */
+
 export function LoginUI (props) {
 
     async function onSignIn(){
@@ -46,14 +49,11 @@ export function LoginUI (props) {
                 textDecoration="none"
                 width="30vw"
                 id='errorText'
-            >
+                >
             </Text>
         </View>
     );
 }
-    
-
-
 
 export function SignUpUI (props) { 
     async function onSignUp(){
@@ -149,3 +149,4 @@ export function VerificationUI (props) {
         </View>
     );
 }
+

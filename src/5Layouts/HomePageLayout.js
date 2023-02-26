@@ -5,7 +5,7 @@ import TreeView from '@mui/lab/TreeView';
 import TreeItem from '@mui/lab/TreeItem';
 import Button from '@mui/material/Button';
 import { Tabs, TabItem, Grid, Card, useTheme, View, Heading, Text, Authenticator, Flex } from '@aws-amplify/ui-react';
-import {NavBar, SideBar} from "./ui-components";
+import {NavBar, SideBar} from "../ui-components";
 
 
 export const HomePageLayout = () => {
