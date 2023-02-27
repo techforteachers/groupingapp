@@ -6,8 +6,8 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ViewProps } from "@aws-amplify/ui-react";
-export declare type LoginProps = React.PropsWithChildren<Partial<ViewProps> & {
+import { IconProps } from "@aws-amplify/ui-react";
+export declare type Question2Props = React.PropsWithChildren<Partial<IconProps> & {
     overrides?: EscapeHatchProps | undefined | null;
 }>;
-export default function Login(props: LoginProps): React.ReactElement;
+export default function Question2(props: Question2Props): React.ReactElement;

@@ -1,4 +1,36 @@
 {
+  "newdev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tftgroupingapp-newdev-161604-authRole",
+      "UnauthRoleArn": "arn:aws:iam::069437775715:role/amplify-tftgroupingapp-newdev-161604-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::069437775715:role/amplify-tftgroupingapp-newdev-161604-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-tftgroupingapp-newdev-161604-deployment",
+      "UnauthRoleName": "amplify-tftgroupingapp-newdev-161604-unauthRole",
+      "StackName": "amplify-tftgroupingapp-newdev-161604",
+      "StackId": "arn:aws:cloudformation:us-east-1:069437775715:stack/amplify-tftgroupingapp-newdev-161604/7573a640-a663-11ed-bef8-0ab634256341",
+      "AmplifyAppId": "d2ot1algkw1w0m",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-tftgroupingapp-newdev-161604-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "auth": {
+        "tftgroupingapp3553f84b": {}
+      },
+      "storage": {
+        "UserFiles": {}
+      },
+      "function": {
+        "tftGenerateGroupsFunction": {
+          "deploymentBucketName": "amplify-tftgroupingapp-newdev-161604-deployment",
+          "s3Key": "amplify-builds/tftGenerateGroupsFunction-5a3179506375786a7370-build.zip"
+        },
+        "tftGenerateStationGroupsFunction": {
+          "deploymentBucketName": "amplify-tftgroupingapp-newdev-161604-deployment",
+          "s3Key": "amplify-builds/tftGenerateStationGroupsFunction-556a7a666c4849613156-build.zip"
+        }
+      }
+    }
+  },
   "dev": {
     "awscloudformation": {
       "AuthRoleName": "amplify-tftgroupingapp-dev-215244-authRole",

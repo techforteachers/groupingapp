@@ -8,12 +8,12 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Text, View } from "@aws-amplify/ui-react";
-export default function Logo(props) {
+export default function Chosefromfiles(props) {
   const { overrides, ...rest } = props;
   return (
     <View
-      width="115px"
-      height="67px"
+      width="361px"
+      height="68px"
       display="block"
       gap="unset"
       alignItems="unset"
@@ -21,15 +21,32 @@ export default function Logo(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       {...rest}
-      {...getOverrideProps(overrides, "Logo")}
+      {...getOverrideProps(overrides, "Chosefromfiles")}
     >
+      <View
+        width="369px"
+        height="76px"
+        display="block"
+        gap="unset"
+        alignItems="unset"
+        justifyContent="unset"
+        position="absolute"
+        top="-5.88%"
+        bottom="-5.88%"
+        left="-1.11%"
+        right="-1.11%"
+        border="4px SOLID rgba(201,213,224,0.22)"
+        borderRadius="31px"
+        padding="0px 0px 0px 0px"
+        backgroundColor="rgba(2,31,60,1)"
+        {...getOverrideProps(overrides, "Rectangle 24")}
+      ></View>
       <Text
-        fontFamily="Encode Sans"
-        fontSize="50px"
-        fontWeight="900"
-        color="rgba(2,31,60,1)"
-        textTransform="uppercase"
-        lineHeight="66.84375px"
+        fontFamily="Inter"
+        fontSize="30px"
+        fontWeight="600"
+        color="rgba(255,255,255,1)"
+        lineHeight="40.10624694824219px"
         textAlign="center"
         display="block"
         direction="column"
@@ -39,14 +56,14 @@ export default function Logo(props) {
         gap="unset"
         alignItems="unset"
         position="absolute"
-        top="0%"
-        bottom="0%"
-        left="0%"
-        right="0%"
+        top="22.06%"
+        bottom="19.12%"
+        left="17.73%"
+        right="17.73%"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children="TFT"
-        {...getOverrideProps(overrides, "Logo36522987")}
+        children="chose from files"
+        {...getOverrideProps(overrides, "chose from files")}
       ></Text>
     </View>
   );

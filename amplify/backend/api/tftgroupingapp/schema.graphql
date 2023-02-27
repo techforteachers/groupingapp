@@ -1,7 +1,13 @@
-type Student @model @auth(rules: [{allow: public}]) {
+type Student @model @auth(rules: [{ allow: owner }]){
   id: ID!
   first_name: String!
   last_name: String!
   grade: Int!
-  user: ID! @index
+  classes: [Class] @manyToMany(relationName: "ClassStudent")
+}
+
+type Class @model @auth(rules: [{ allow: owner }]){
+  id: ID!
+  className: String!
+  students: [Student] @manyToMany(relationName: "ClassStudent")
 }

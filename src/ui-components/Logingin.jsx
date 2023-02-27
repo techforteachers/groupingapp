@@ -8,12 +8,12 @@
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Text, View } from "@aws-amplify/ui-react";
-export default function Logo(props) {
+export default function Logingin(props) {
   const { overrides, ...rest } = props;
   return (
     <View
-      width="115px"
-      height="67px"
+      width="516px"
+      height="66px"
       display="block"
       gap="unset"
       alignItems="unset"
@@ -21,15 +21,31 @@ export default function Logo(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       {...rest}
-      {...getOverrideProps(overrides, "Logo")}
+      {...getOverrideProps(overrides, "Logingin")}
     >
+      <View
+        width="516px"
+        height="66px"
+        display="block"
+        gap="unset"
+        alignItems="unset"
+        justifyContent="unset"
+        position="absolute"
+        top="0%"
+        bottom="0%"
+        left="0%"
+        right="0%"
+        border="2px SOLID rgba(239,247,255,1)"
+        borderRadius="20px"
+        padding="0px 0px 0px 0px"
+        {...getOverrideProps(overrides, "Rectangle 23")}
+      ></View>
       <Text
-        fontFamily="Encode Sans"
-        fontSize="50px"
-        fontWeight="900"
-        color="rgba(2,31,60,1)"
-        textTransform="uppercase"
-        lineHeight="66.84375px"
+        fontFamily="Inter"
+        fontSize="25px"
+        fontWeight="600"
+        color="rgba(239,247,255,1)"
+        lineHeight="33.421875px"
         textAlign="center"
         display="block"
         direction="column"
@@ -39,14 +55,14 @@ export default function Logo(props) {
         gap="unset"
         alignItems="unset"
         position="absolute"
-        top="0%"
-        bottom="0%"
-        left="0%"
-        right="0%"
+        top="24.24%"
+        bottom="25.76%"
+        left="43.02%"
+        right="42.83%"
         padding="0px 0px 0px 0px"
         whiteSpace="pre-wrap"
-        children="TFT"
-        {...getOverrideProps(overrides, "Logo36522987")}
+        children="Log in"
+        {...getOverrideProps(overrides, "Log in")}
       ></Text>
     </View>
   );
