@@ -53,12 +53,17 @@ export function CreateClassUI(props){
     }
 
     function handleCreateClass(){
-        const data = {
-            classname : localClassName,
-            students: localStudents,
+        if(localClassName != null){
+            const data = {
+                classname : localClassName,
+                students: localStudents,
+            }
+            props.setLoader(<Loader variation="linear" size="small" />);
+            props.createClass(data).then(() => {props.setLoader();});
         }
-        props.setLoader(<Loader variation="linear" size="small" />);
-        props.createClass(data).then(() => {props.setLoader();});
+        else{
+            document.getElementById("errorText").innerText = "*Please enter a class name*";
+        }
     }
 
     function handleChangeClassName(e){
@@ -145,7 +150,7 @@ export function CreateClassUI(props){
     return(
         <div>
             <TextField
-                label="Name:"
+                label="*Name:"
                 name="Class Name"
                 onChange={handleChangeClassName}
                 placeholder="Class Name"
@@ -194,7 +199,11 @@ export function CreateClassUI(props){
             <Flex justifyContent="center" alignItems="center" padding={15}>
                 <EnhancedTable rows={localStudents} handleDeleteStudent={handleDeleteStudent}/>
             </Flex>
-            
+            <Text
+                variation="error"
+                fontWeight={600}
+                id='errorText'
+            />
             <Button
                 size="medium"
                 border="2px SOLID rgba(2,31,60,1)"
