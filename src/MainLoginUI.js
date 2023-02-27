@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TextField, Button, Text } from '@aws-amplify/ui-react';
+import { View, TextField, Button, Text, Flex } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 export function LoginUI (props) {
 
@@ -18,7 +18,9 @@ export function LoginUI (props) {
         }
     }
     return(
-        <View>
+        <View
+        width="25rem"
+        >
             <TextField
                 label="Username"
                 id='usernameInput'
@@ -28,14 +30,17 @@ export function LoginUI (props) {
                 label="Password"
                 id='passwordInput'
             /> 
-            <Button
-                height='5rem'
-                fontSize='2rem'
-                loadingText=""
-                onClick={onSignIn}
-                >
-                Submit
-            </Button>
+            <Flex
+                justifyContent="end"
+                alignItems="end"
+                paddingTop="1rem"
+            >
+                <SubmitButton
+                    onClick={onSignIn}
+                    >
+                    Submit
+                </SubmitButton>
+            </Flex>
             <Text
                 variation="error"
                 as="p"
@@ -46,8 +51,7 @@ export function LoginUI (props) {
                 textDecoration="none"
                 width="30vw"
                 id='errorText'
-            >
-            </Text>
+            />
         </View>
     );
 }
@@ -75,11 +79,14 @@ export function SignUpUI (props) {
             props.setCurrentView("verificationUI");
             props.setPotentialUser(username);
         } catch (error) {
+            document.getElementById("signUperrorText").innerText = error;
             console.log('error signing up:', error);
         }
     }
     return(
-        <View>
+        <View
+        width="25rem"
+        >
             <TextField
                 label="Username"
                 id='usernameSignUpInput'
@@ -94,14 +101,17 @@ export function SignUpUI (props) {
                 label="Email"
                 id='emailSignUpInput'
             /> 
-            <Button
-                height='5rem'
-                fontSize='2rem'
-                loadingText=""
-                onClick={onSignUp}
-                >
-                Submit
-            </Button>
+            <Flex
+                justifyContent="end"
+                alignItems="end"
+                paddingTop="1rem"
+            >
+                <SubmitButton
+                    onClick={onSignUp}
+                    >
+                    Submit
+                </SubmitButton>
+            </Flex>
             <Text
                 variation="error"
                 as="p"
@@ -132,20 +142,44 @@ export function VerificationUI (props) {
           }
     }
     return(
-        <View>
+        <View
+        width="25rem"
+        >
             <TextField
                 type="number"
                 label="Verification Code"
                 id='verificationCodeInput'
             /> 
-            <Button
-                height='5rem'
-                fontSize='2rem'
-                loadingText=""
-                onClick={onVerificationCode}
-                >
-                Submit
-            </Button>
+            <Flex
+                justifyContent="end"
+                alignItems="end"
+                paddingTop="1rem"
+            >
+                <SubmitButton
+                    onClick={onVerificationCode}
+                    >
+                    Submit
+                </SubmitButton>
+            </Flex>
+            
         </View>
+    );
+}
+
+function SubmitButton(props){
+    return(
+        <Button
+        size="medium"
+        border="2px SOLID rgba(2,31,60,1)"
+        borderRadius="7px"
+        onClick={props.onClick}
+        >
+            <Text
+            textAlign="center"
+            display="block"
+            direction="column"
+            children="Submit"
+            ></Text>
+        </Button>
     );
 }

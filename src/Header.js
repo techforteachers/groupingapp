@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
-import { Tabs, TabItem, useTheme, Flex, Button, View, Grid } from '@aws-amplify/ui-react';
+import { Tabs, TabItem, useTheme, Flex, Button, View, Grid, Card } from '@aws-amplify/ui-react';
 import { Logo } from "./Logo";
 import { Greeting } from "./Greeting";
 import { HeaderLoginUI } from "./HeaderLoginUI";
+import { HelpPage } from "./HelpPage";
+
 export function Header(props) {
     const { tokens } = useTheme();
 
@@ -16,6 +18,7 @@ export function Header(props) {
                 handleLoginClick={props.handleLoginClick} 
                 handleSignupClick={props.handleSignupClick}
             />
+            <HelpPage/>
         </Flex>
     );
 }

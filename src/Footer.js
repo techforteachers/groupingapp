@@ -1,11 +1,11 @@
 import React from "react";
 import { Card, useTheme } from '@aws-amplify/ui-react';
 
-export function Footer() {
+export function Footer(props) {
     const {tokens} = useTheme();
     return(
         <Card
-            backgroundColor={tokens.colors.blue[40]}
+        backgroundColor={props.backgroundColor}
         >
             Footer
         </Card>

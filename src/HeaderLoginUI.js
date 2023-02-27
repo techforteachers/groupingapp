@@ -1,7 +1,9 @@
 import React from "react";
 import { Greeting } from "./Greeting";
-import { Flex, View, TextField, Button, Text, Alert } from "@aws-amplify/ui-react";
+import { Flex, View, TextField, Button, Text, Alert, ButtonGroup } from "@aws-amplify/ui-react";
 import { useState, useEffect } from 'react';
+import Login from "./ui-components/LogIn";
+import "./button.css"
 
 export function HeaderLoginUI (props) {
 
@@ -15,33 +17,45 @@ export function HeaderLoginUI (props) {
     }
 
     return(
-        <Flex>
+          <ButtonGroup>
             {logButton}
             {signupButton}
-        </Flex>
+          </ButtonGroup>
     );
 }
 
 function LoginButton(props) {
     return (
-      <button onClick={props.onClick}>
-        Log In
-      </button>
-    );
+      <Button
+      onClick={props.onClick}
+      display="block"
+      border="2px SOLID rgba(2,31,60,0)"
+      >
+        Log in
+      </Button>
+      )
   }
   
   function LogoutButton(props) {
     return (
-      <button onClick={props.onClick}>
-        Log Out
-      </button>
+      <Button
+      onClick={props.onClick}
+      display="block"
+      border="2px SOLID rgba(2,31,60,0)"
+      >
+        Sign out
+      </Button>
     );
   }
 
   function SignupButton(props) {
     return (
-      <button onClick={props.onClick}>
-        Sign Up
-      </button>
+      <Button
+      onClick={props.onClick}
+      display="block"
+      border="2px SOLID rgba(2,31,60,0)"
+      >
+        Sign up
+      </Button>
     );
   }
