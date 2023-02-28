@@ -1,0 +1,43 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tftgroupingapp-dev-215244-authRole",
+      "UnauthRoleArn": "arn:aws:iam::069437775715:role/amplify-tftgroupingapp-dev-215244-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::069437775715:role/amplify-tftgroupingapp-dev-215244-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-tftgroupingapp-dev-215244-deployment",
+      "UnauthRoleName": "amplify-tftgroupingapp-dev-215244-unauthRole",
+      "StackName": "amplify-tftgroupingapp-dev-215244",
+      "StackId": "arn:aws:cloudformation:us-east-1:069437775715:stack/amplify-tftgroupingapp-dev-215244/19af3b60-8b12-11ed-a29f-0e7a55f3853d",
+      "AmplifyAppId": "d2ot1algkw1w0m"
+    },
+    "categories": {
+      "api": {
+        "tftgroupingapp": {},
+        "tftGenerateGroupAPI": {}
+      },
+      "auth": {
+        "tftgroupingapp3553f84b": {}
+      },
+      "function": {
+        "tftGenerateGroupLambda": {
+          "deploymentBucketName": "amplify-tftgroupingapp-dev-215244-deployment",
+          "s3Key": "amplify-builds/tftGenerateGroupLambda-5a6874375546646a6956-build.zip"
+        }
+      }
+    }
+  },
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplify97a95b780bcd4-staging-23857-authRole",
+      "UnauthRoleArn": "arn:aws:iam::069437775715:role/amplify-amplify97a95b780bcd4-staging-23857-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::069437775715:role/amplify-amplify97a95b780bcd4-staging-23857-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-amplify97a95b780bcd4-staging-23857-deployment",
+      "UnauthRoleName": "amplify-amplify97a95b780bcd4-staging-23857-unauthRole",
+      "StackName": "amplify-amplify97a95b780bcd4-staging-23857",
+      "StackId": "arn:aws:cloudformation:us-east-1:069437775715:stack/amplify-amplify97a95b780bcd4-staging-23857/c60881d0-8b0f-11ed-b7eb-12dd93be99e1",
+      "AmplifyAppId": "d2ot1algkw1w0m"
+    }
+  }
+}

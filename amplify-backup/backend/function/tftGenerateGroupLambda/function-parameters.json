@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "storage": {
+      "Student:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

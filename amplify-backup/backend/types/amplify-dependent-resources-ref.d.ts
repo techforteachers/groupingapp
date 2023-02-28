@@ -1,16 +1,12 @@
 export type AmplifyDependentResourcesAttributes = {
     "api": {
-        "tftGenerateGroupsAPI": {
-            "RootUrl": "string",
-            "ApiName": "string",
-            "ApiId": "string"
-        },
-        "tftGenerateStationGroupsAPI": {
+        "tftGenerateGroupAPI": {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"
         },
         "tftgroupingapp": {
+            "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }
@@ -27,25 +23,11 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "function": {
-        "tftGenerateGroupsFunction": {
+        "tftGenerateGroupLambda": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
-            "LambdaExecutionRole": "string",
-            "LambdaExecutionRoleArn": "string"
-        },
-        "tftGenerateStationGroupsFunction": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string",
-            "LambdaExecutionRoleArn": "string"
-        }
-    },
-    "storage": {
-        "UserFiles": {
-            "BucketName": "string",
-            "Region": "string"
+            "LambdaExecutionRole": "string"
         }
     }
 }

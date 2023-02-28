@@ -29,13 +29,8 @@ export default function Addingright(props) {
           style: { transform: "translate(100%, 0%)" },
         },
       ]}
-<<<<<<< HEAD
-      {...rest}
-      {...getOverrideProps(overrides, "Addingright")}
-=======
       {...getOverrideProps(overrides, "Addingright")}
       {...rest}
->>>>>>> d8a34af1928fbc19c46f294208c7c2c6cc9fe3f9
     ></Icon>
   );
 }
