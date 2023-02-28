@@ -126,7 +126,7 @@ export function GroupingApp (props)  {
         setCurrentView("classPreviewUI");
         setUpdateTree(!updateTree);
     }
-
+ 
     return(
         <Grid
             templateColumns="0.1rem 1fr 3fr 1fr 2fr 0.1rem"

@@ -43,24 +43,29 @@ export function GenerateGroupsUI (props){
     }
 
     async function generateGroups(){
-        const user = await Auth.currentAuthenticatedUser()
-        const token = user.signInUserSession.idToken.jwtToken
-        const numGroups = document.getElementById("numGroupsInput").value
-        console.log("token: ", token)
-    
-        const requestData = {
-            headers: {                 
-                Authorization: token,
-            },
-            body: {
-              numGroups: numGroups,
-              students: selectedStudents
+        if(selectedStudents != 0){
+            const user = await Auth.currentAuthenticatedUser()
+            const token = user.signInUserSession.idToken.jwtToken
+            const numGroups = document.getElementById("numGroupsInput").value
+            console.log("token: ", token)
+        
+            const requestData = {
+                headers: {                 
+                    Authorization: token,
+                },
+                body: {
+                  numGroups: numGroups,
+                  students: selectedStudents
+                }
             }
+            const data = await API.post('tftGenerateGroupsAPI', '/students', requestData)
+            props.setGroupedStudents(data);
+            props.setCurrentView("groupDisplayUI");
+            console.log(data);
         }
-        const data = await API.post('tftGenerateGroupsAPI', '/students', requestData)
-        props.setGroupedStudents(data);
-        props.setCurrentView("groupDisplayUI");
-        console.log(data);
+        else{
+            document.getElementById("errorText").innerText = "*Please select at least one student*";
+        }
     }
 
     return(
@@ -120,6 +125,11 @@ export function GenerateGroupsUI (props){
                     children="Generate Groups"
                     ></Text>
                 </Button>
+                <Text
+                    variation="error"
+                    fontWeight={600}
+                    id='errorText'
+                />
             </Flex>
         </Grid>
     );

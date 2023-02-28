@@ -1,10 +1,10 @@
 import React from "react";
-import { Grid } from "@aws-amplify/ui-react";
+import { Grid, Loader } from "@aws-amplify/ui-react";
 import { Button, Flex, Text } from "@aws-amplify/ui-react";
 import { useState, useEffect } from "react";
 import TreeItem from '@mui/lab/TreeItem';
 import { API } from "aws-amplify";
-import { listClasses, listClassStudents } from "./graphql/queries";
+import { getClass, listClasses, listClassStudents } from "./graphql/queries";
 import { deleteClass, deleteClassStudent, deleteStudent } from "./graphql/mutations";
 export function ClassesUI (props){
     const [classButtons, setClassButtons] = useState([]);
@@ -19,6 +19,7 @@ export function ClassesUI (props){
 
     function selectClass(e){
         props.setSelectedClass(e.currentTarget.id)
+        
         if(e){
             console.log(e.currentTarget.id);
         }
@@ -34,50 +35,71 @@ export function ClassesUI (props){
         });
         const buttons = listItems.data.listClasses.items.map(
             (element) => {
-                return (
-                    <Button id={element.id} onClick={selectClass}>{element.className}</Button>
-                )
+                if(props.selectedClass == element.id){
+                    return (
+                        <Button backgroundColor="#d3d3d3" border="1px SOLID rgba(2,31,60,1)" id={element.id} onClick={selectClass}>{element.className}</Button>
+                    )
+                }
+                else{
+                    return (
+                        <Button id={element.id} onClick={selectClass}>{element.className}</Button>
+                    )
+                }
             }
         ) 
         setClassButtons(buttons);
-        
     }
+    
     async function removeClass(){
-        let id = props.selectedClass; 
-        let response = await API.graphql({
-            query: listClassStudents,
-            authMode: 'AMAZON_COGNITO_USER_POOLS'
-        })
-        let classStudents = response.data.listClassStudents.items;
-        for(let i=classStudents.length-1; i>=0; i--){
-            let currentStudent = classStudents[i];
-            let classStudentId = currentStudent.id; 
-            let studentId = currentStudent.studentId;
-            if(props.selectedClass == currentStudent.classId){
+        if(props.selectedClass != null){
+            if (window.confirm('Are you sure you wish to delete this class?'))
+            {
+                props.setLoader(<Loader variation="linear" size="small" />);
+                let classId = props.selectedClass; 
+                let response = await API.graphql({
+                    query: getClass,
+                    variables: {id: classId},
+                    authMode: 'AMAZON_COGNITO_USER_POOLS'
+                })
+                let classStudents = response.data.getClass.students.items;
+                for(let i=classStudents.length-1; i>=0; i--){
+                    let currentStudent = classStudents[i];
+                    let classStudentId = currentStudent.id; 
+                    let studentId = currentStudent.studentId;
+                    await API.graphql({
+                        query: deleteClassStudent,
+                        variables: {input: {id: classStudentId}},
+                        authMode: 'AMAZON_COGNITO_USER_POOLS'
+                    });
+                    await API.graphql({
+                        query: deleteStudent,
+                        variables: {input: {id: studentId}},
+                        authMode: 'AMAZON_COGNITO_USER_POOLS'
+                    });
+                }
                 await API.graphql({
-                    query: deleteClassStudent,
-                    variables: {input: {id: classStudentId}},
+                    query: deleteClass,
+                    variables: { input: { id : classId }},
                     authMode: 'AMAZON_COGNITO_USER_POOLS'
                 });
-                await API.graphql({
-                    query: deleteStudent,
-                    variables: {input: {id: studentId}},
-                    authMode: 'AMAZON_COGNITO_USER_POOLS'
-                });
+                updateClassButtons();
+                props.setUpdateTree(!props.updateTree);
+                props.setSelectedClass(null);
+                props.setLoader();
             }
         }
-        await API.graphql({
-            query: deleteClass,
-            variables: { input: { id }},
-            authMode: 'AMAZON_COGNITO_USER_POOLS'
-        });
-        updateClassButtons();
-        props.setUpdateTree(!props.updateTree);
-        props.setSelectedClass(null);
+        else{
+            document.getElementById("errorText").innerText = "*Please select a class*";
+        }
     }
 
     function editClass(){
-        props.setCurrentView("editClassUI");
+        if(props.selectedClass != null){
+            props.setCurrentView("editClassUI");
+        }
+        else{
+            document.getElementById("errorText").innerText = "*Please select a class*";
+        }
     }
 
     function generateGroups(){
@@ -86,7 +108,7 @@ export function ClassesUI (props){
             document.getElementById("errorText").innerText = "";
         }
         else{
-            document.getElementById("errorText").innerText = "Please select a class";
+            document.getElementById("errorText").innerText = "*Please select a class*";
         }
     }
 

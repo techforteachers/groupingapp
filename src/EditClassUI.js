@@ -8,14 +8,17 @@ import {
     View,
     Divider,
     withAuthenticator,
-    useAuthenticator
+    useAuthenticator,
+    Loader
   } from "@aws-amplify/ui-react";
 import React from "react";
 import { useEffect, useState} from "react";
 import { getClass, listClassStudents } from "./graphql/queries";
 import { createStudent } from "./graphql/mutations";
 import { deleteStudent } from "./graphql/mutations";
+import { getMyClass } from "./customGraphql/customQueries";
 import { API } from "aws-amplify";
+import EnhancedTable from "./StudentTable";
 export function EditClassUI(props){
     const [localStudents, setLocalStudents] = useState([]);
     const [localClassStudents, setLocalClassStudents] = useState([]);
@@ -25,14 +28,19 @@ export function EditClassUI(props){
     const [localClassName, setLocalClassName] = useState();
     useEffect(() => {
         //setLocalClassName(props.classes[index].className)
-        //updateLocalClassName();
-        updateLocalStudents();
+        updateLocal();
     }, [props]);
+
+    function generateUUID() {
+        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+          (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    }
 
     function handleCreateStudent(e){
         e.preventDefault();
         const form = new FormData(e.target);
-        let id = localStudents.length;
+        let id = generateUUID();
         const data = {
           first_name: form.get("First Name"),
           last_name: form.get("Last Name"),
@@ -48,8 +56,35 @@ export function EditClassUI(props){
         e.target.reset();
     }
 
-    async function handleDeleteStudent(student){
-        deleteLocalStudent(student.id);
+    function handleDeleteStudent(toBeDeleted){
+        let students = localStudents.slice();
+        students = students.filter ( student => ! toBeDeleted.includes ( student.id) ) ;
+        setLocalStudents(students);
+
+        let tempCreatedStudents = addedStudents.slice();
+        let createdStudents = [];
+        for(let i=0; i<tempCreatedStudents.length; i++){
+            createdStudents.push(tempCreatedStudents[i].id);
+        }
+        let removedStudents = deletedStudents.slice();
+        
+        removedStudents = removedStudents.concat(toBeDeleted);
+        removedStudents = removedStudents.filter ( removedStudent => ! createdStudents.includes ( removedStudent) ) ;
+        setDeletedStudents(removedStudents);
+        
+        createdStudents = createdStudents.filter ( addedStudent => ! toBeDeleted.includes ( addedStudent.id));
+        setAddedStudents(createdStudents);
+
+        //let removedClassStudents = deletedClassStudents.slice();
+        //removedClassStudents = removedClassStudents.filter(classStudent => ! removedStudents.includes (classStudent.student.id));
+        let deletedClassStudentIds = [];
+        for(let i=0; i<removedStudents.length; i++){
+            let classStudentId = findClassStudentId(removedStudents[i]);
+            if( classStudentId != -1){
+                deletedClassStudentIds.push(classStudentId);
+            }
+        }
+        setDeletedClassStudents(deletedClassStudentIds);
     }
 
     function handleEditClass(){
@@ -61,7 +96,8 @@ export function EditClassUI(props){
             deletedStudents: deletedStudents,
             deletedClassStudents: deletedClassStudents
         }
-        props.editClass(data);
+        props.setLoader(<Loader variation="linear" size="small" />);
+        props.editClass(data).then(() => {props.setLoader();});
     }
 
     function handleChangeClassName(e){
@@ -78,22 +114,6 @@ export function EditClassUI(props){
         setAddedStudents(newStudents);
     }
 
-    function deleteLocalStudent(id){
-        let students = localStudents.slice();
-        let index = findStudentIndex(id);
-        students.splice(index, 1);
-        setLocalStudents(students);
-
-        let removedStudents = deletedStudents.slice();
-        removedStudents.push(id);
-        setDeletedStudents(removedStudents);
-
-        let removedClassStudents = deletedClassStudents.slice();
-        let classStudentId = findClassStudentId(id);
-        removedClassStudents.push(classStudentId);
-        setDeletedClassStudents(removedClassStudents);
-    }
-
     function addMultipleLocalStudents(students){
         let currentStudents = localStudents.slice();
         let newStudents = addedStudents.slice();
@@ -105,58 +125,39 @@ export function EditClassUI(props){
         setAddedStudents(newStudents);
     }
 
-    function findStudentIndex(id){
-        for(let i=0; i<localStudents.length; i++){
-            if(localStudents[i].id == id){
-                return i;
-            }
-        }
-        return -1;
-    }
-
     function findClassStudentId(id){
         for(let i=0; i<localClassStudents.length; i++){
-            if(localClassStudents[i].studentId == id){
+            if(localClassStudents[i].student.id == id){
                 return localClassStudents[i].id;
             }
         }
         return -1;
     }
 
-    async function updateLocalStudents(){
+    async function updateLocal(){
+        let classId = props.selectedClass;
         let response = await API.graphql({
-            query: listClassStudents,
+            query: getMyClass,
+            variables: {id : classId},
             authMode: 'AMAZON_COGNITO_USER_POOLS'
         });
-        let totalStudents = response.data.listClassStudents.items
-        let students = []; 
-        let classStudents = [];
-        for(let i=0; i<totalStudents.length; i++){
-            let currentStudent = totalStudents[i];
-            if(currentStudent.classId == props.selectedClass){
-                students.push(currentStudent.student);
-                classStudents.push(currentStudent);
-            }
+        let currentClassName = response.data.getClass.className;
+        setLocalClassName(currentClassName);
+
+
+        let items = response.data.getClass.students.items;
+        setLocalClassStudents(items);
+        let students = [];
+        for(let i = 0; i<items.length; i++){
+            students.push(items[i].student);
         }
         setLocalStudents(students);
-        setLocalClassStudents(classStudents);
-    }
-
-    async function updateLocalClassName(){
-        let id = props.selectedClass;
-        let response = await API.graphql({
-            query: getClass,
-            variables: {input : { id }},
-            authMode: 'AMAZON_COGNITO_USER_POOLS'
-        });
-        let currentClass = response.data.getClass;
-        console.log(currentClass);
     }
 
     async function handleOnFileUpload(event){
         const uploadedFile = event.target.files[0];
         let students = [];
-        let startId = localStudents.length;
+        
         if(!uploadedFile){
             console.log(uploadedFile + " is null")
             return;
@@ -167,12 +168,13 @@ export function EditClassUI(props){
             const contents = e.target.result;
             const contentArr = splitContents(contents);
             for (let i=0; i<contentArr.length; i++){
+                let id = generateUUID();
                 const cont = contentArr[i];
                 const data = {
                     first_name: cont["First Name"],
                     last_name: cont["Last Name"],
                     grade: cont["Grade"],
-                    id: startId+i
+                    id: id
                 };
                 console.log(data.first_name);
                 console.log(data.last_name);
@@ -266,27 +268,9 @@ export function EditClassUI(props){
                 </Flex>
             </View>
             <TextField type="file" name="student_roster" label="Upload a list of students" onInput={handleOnFileUpload}/>
-            <View margin="3rem 0">
-                {localStudents.map((student) => (
-                <Flex
-                    key={student.id || student.last_name}
-                    direction="row"
-                    justifyContent="center"
-                    alignItems="center"
-                >
-                    <Text as="strong" fontWeight={700}>
-                    {student.first_name}
-                    </Text>
-                    <Text as="strong" fontWeight={700}>
-                    {student.last_name}
-                    </Text>
-                    <Text as="span">{student.grade}</Text>
-                    <Button variation="link" onClick={() => handleDeleteStudent(student)}>
-                    Delete student
-                    </Button>
-                </Flex>
-                ))}
-            </View>
+            <Flex justifyContent="center" alignItems="center" padding={15}>
+                <EnhancedTable rows={localStudents} handleDeleteStudent={handleDeleteStudent}/>
+            </Flex>
             <Button
                 size="medium"
                 border="2px SOLID rgba(2,31,60,1)"
@@ -303,3 +287,5 @@ export function EditClassUI(props){
         </div>
     );
 }
+
+
