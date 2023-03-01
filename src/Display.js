@@ -1,21 +1,25 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import { Button, Flex, Text } from '@aws-amplify/ui-react';
+import { Auth, API } from 'aws-amplify';
 //const data = require("./testData");
 
 
 const GroupDisplay = (props) => {
   //format inputData array into json
-  if(props.inputData.length == 0){
+  var selectedStudents = props.studentsTBG;
+  const [groupedStudents, setGroupedStudents] = useState(props.inputData)
+  
+  if(groupedStudents.length == 0){
     return(
       <p>data not available</p>
     );
   }
   let dataDict = {};
-  for(let i = 0; i < props.inputData.length; i++){
+  for(let i = 0; i < groupedStudents.length; i++){
     let groupNumInt = i+1;
     let groupNumString = groupNumInt.toString();
     let header = "Group " + groupNumString; 
-    dataDict[header] = props.inputData[i];
+    dataDict[header] = groupedStudents[i];
   }
   let data = [dataDict];
 
@@ -48,22 +52,61 @@ const GroupDisplay = (props) => {
     return cells
   }
 
+  async function regenerateGroups(){
+    const user = await Auth.currentAuthenticatedUser()
+    const token = user.signInUserSession.idToken.jwtToken
+    const numGroups = props.numGroups
+    console.log("token: ", token)
+
+    const requestData = {
+        headers: {                 
+            Authorization: token,
+        },
+        body: {
+          numGroups: numGroups,
+          students: selectedStudents
+        }
+    }
+    const data = await API.post('tftGenerateGroupsAPI', '/students', requestData)
+    setGroupedStudents(data);
+    console.log(data);
+  }
+
   return (
-    <React.Fragment>
-       <br></br><br></br>
-       <h1>Groups</h1>
-       <br/>
-      <table class="center">
-        <thead>
-          <tr>{renderHeaderCells()}</tr>
-        </thead>
-        <tr></tr><tr></tr>
-        <tbody>
-          {renderResults()}
-        </tbody>
-      </table>
-      <br></br><br></br><br></br>
-    </React.Fragment>
+    <Flex
+    direction="column"
+    alignItems="center"
+    justifyContent="center"
+    >
+      <React.Fragment>
+        <br></br><br></br>
+        <h1>Groups</h1>
+        <br/>
+        <table class="center">
+          <thead>
+            <tr>{renderHeaderCells()}</tr>
+          </thead>
+          <tr></tr><tr></tr>
+          <tbody>
+            {renderResults()}
+          </tbody>
+        </table>
+        <br></br><br></br><br></br>
+      </React.Fragment>
+      <Button
+        size="medium"
+        border="2px SOLID rgba(2,31,60,1)"
+        borderRadius="7px"
+        onClick={regenerateGroups}
+        >
+          <Text
+          textAlign="center"
+          display="block"
+          direction="column"
+          children="Regenerate Groups"
+          ></Text>
+      </Button>
+    </Flex>
   );
 };
 

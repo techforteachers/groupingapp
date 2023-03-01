@@ -6,12 +6,11 @@ export function LoginUI (props) {
     async function onSignIn(){
         console.log(document.getElementById("usernameInput").value)
         try {
-            const user = Auth.signIn(document.getElementById("usernameInput").value, document.getElementById("passwordInput").value)
-            .then((user) => {
+            const user = await Auth.signIn(document.getElementById("usernameInput").value, document.getElementById("passwordInput").value);
+            if(user != null){
                 props.handleChangeUser(true, user.username);
                 props.setCurrentView("classPreviewUI");
-            });
-            
+            }
         } catch (error) {
             document.getElementById("errorText").innerText = error;
             console.log('error signing in', error);

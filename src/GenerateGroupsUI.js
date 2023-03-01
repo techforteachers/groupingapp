@@ -60,6 +60,8 @@ export function GenerateGroupsUI (props){
             }
             const data = await API.post('tftGenerateGroupsAPI', '/students', requestData)
             props.setGroupedStudents(data);
+            props.setNumGroups(numGroups);
+            props.setStudentsTBG(selectedStudents);
             props.setCurrentView("groupDisplayUI");
             console.log(data);
         }
@@ -93,7 +95,6 @@ export function GenerateGroupsUI (props){
                             setSelectedStudents(selectedRowData);
                         }}
                     />
-                    
                 </div>
             </Card>
             <Flex
@@ -104,6 +105,7 @@ export function GenerateGroupsUI (props){
             justifyContent="center" 
             alignItems="center"
             >
+                
                 <StepperField
                     max={students.length}
                     min={1}

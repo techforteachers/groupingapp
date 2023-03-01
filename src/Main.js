@@ -16,9 +16,12 @@ export function Main (props) {
     const [view, setView] = useState();
     const [potentialUser, setPotentialUser] = useState();
     const [selectedClass, setSelectedClass] = useState();
+    const [studentsTBG, setStudentsTBG] = useState([]);
     const [backButton, setBackButton] = useState();
     const [groupedStudents, setGroupedStudents] = useState([]);
     const [loader, setLoader] = useState();
+    const [numGroups, setNumGroups] = useState();
+    
 
     useEffect(() => {
         if(props.isLoggedIn == true){
@@ -63,7 +66,7 @@ export function Main (props) {
                 );
             }
             else if(props.currentView == "generateGroupsUI"){
-                setView(<GenerateGroupsUI setLoader={setLoader} setGroupedStudents={setGroupedStudents} selectedClass={selectedClass} setCurrentView={props.setCurrentView}/>)
+                setView(<GenerateGroupsUI setStudentsTBG={setStudentsTBG} setNumGroups={setNumGroups} setLoader={setLoader} setGroupedStudents={setGroupedStudents} selectedClass={selectedClass} setCurrentView={props.setCurrentView}/>)
                 setBackButton(
                     <Button
                     size="medium"
@@ -81,7 +84,7 @@ export function Main (props) {
                 );
             }
             else if(props.currentView == "groupDisplayUI"){
-                setView(<GroupDisplay setLoader={setLoader} inputData={groupedStudents}/>)
+                setView(<GroupDisplay studentsTBG={studentsTBG} setCurrentView={props.setCurrentView} numGroups={numGroups} groupedStudents={groupedStudents} setLoader={setLoader} inputData={groupedStudents}/>)
                 setBackButton(
                     <Button
                     size="medium"
