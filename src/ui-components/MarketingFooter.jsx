@@ -20,8 +20,8 @@ export default function MarketingFooter(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "MarketingFooter")}
+      {...rest}
     >
       <View
         width="1440px"
