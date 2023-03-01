@@ -6,15 +6,8 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ImageProps, ViewProps } from "@aws-amplify/ui-react";
-import { HeroLayout3Props } from "./HeroLayout3";
-export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type HeroLayout2OverridesProps = {
-    HeroLayout2?: PrimitiveOverrideProps<ViewProps>;
-    image?: PrimitiveOverrideProps<ImageProps>;
-    HeroLayout3?: HeroLayout3Props;
-} & EscapeHatchProps;
+import { ViewProps } from "@aws-amplify/ui-react";
 export declare type HeroLayout2Props = React.PropsWithChildren<Partial<ViewProps> & {
-    overrides?: HeroLayout2OverridesProps | undefined | null;
+    overrides?: EscapeHatchProps | undefined | null;
 }>;
 export default function HeroLayout2(props: HeroLayout2Props): React.ReactElement;

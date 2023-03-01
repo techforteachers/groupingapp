@@ -6,14 +6,8 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { TextProps, ViewProps } from "@aws-amplify/ui-react";
-export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type AppPreviewOverridesProps = {
-    AppPreview?: PrimitiveOverrideProps<ViewProps>;
-    "Rectangle 1"?: PrimitiveOverrideProps<ViewProps>;
-    "App Preview"?: PrimitiveOverrideProps<TextProps>;
-} & EscapeHatchProps;
+import { ViewProps } from "@aws-amplify/ui-react";
 export declare type AppPreviewProps = React.PropsWithChildren<Partial<ViewProps> & {
-    overrides?: AppPreviewOverridesProps | undefined | null;
+    overrides?: EscapeHatchProps | undefined | null;
 }>;
 export default function AppPreview(props: AppPreviewProps): React.ReactElement;

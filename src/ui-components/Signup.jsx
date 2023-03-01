@@ -20,8 +20,8 @@ export default function Signup(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "Signup")}
       {...rest}
+      {...getOverrideProps(overrides, "Signup")}
     >
       <View
         width="140px"

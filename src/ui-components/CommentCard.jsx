@@ -22,8 +22,8 @@ export default function CommentCard(props) {
       position="relative"
       padding="16px 16px 16px 16px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "CommentCard")}
       {...rest}
+      {...getOverrideProps(overrides, "CommentCard")}
     >
       <Flex
         gap="16px"
