@@ -9,7 +9,8 @@ import { HelpPage } from "./HelpPage";
 import { GenerateGroupsUI } from "./GenerateGroupsUI";
 import { Grid } from "react-ui";
 import { Loader } from "@aws-amplify/ui-react";
-import GroupDisplay from "./Display";
+import {GroupDisplayUI} from "./GroupDisplay";
+import { StationsDisplayUI } from "./StationDisplay";
 //import { SignUp } from "@aws-amplify/ui-react/dist/types/components/Authenticator/SignUp";
 export function Main (props) {
     const { tokens } = useTheme();
@@ -84,7 +85,25 @@ export function Main (props) {
                 );
             }
             else if(props.currentView == "groupDisplayUI"){
-                setView(<GroupDisplay studentsTBG={studentsTBG} setCurrentView={props.setCurrentView} numGroups={numGroups} groupedStudents={groupedStudents} setLoader={setLoader} inputData={groupedStudents}/>)
+                setView(<GroupDisplayUI setLoader={setLoader} studentsTBG={studentsTBG} setCurrentView={props.setCurrentView} numGroups={numGroups} groupedStudents={groupedStudents}/>)
+                setBackButton(
+                    <Button
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    onClick={onBackClick}
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Back"
+                        ></Text>
+                    </Button>
+                );
+            }
+            else if(props.currentView == "stationDisplayUI"){
+                setView(<StationsDisplayUI setLoader={setLoader} studentsTBG={studentsTBG} setCurrentView={props.setCurrentView} numGroups={numGroups} groupedStudents={groupedStudents}/>)
                 setBackButton(
                     <Button
                     size="medium"
@@ -119,7 +138,7 @@ export function Main (props) {
       }, [props, selectedClass]);
 
     function onBackClick(){
-        if(props.currentView == "groupDisplayUI"){
+        if(props.currentView == "groupDisplayUI" || props.currentView == "stationDisplayUI"){
             props.setCurrentView("generateGroupsUI");
         }
         else{
