@@ -195,7 +195,7 @@ export function CreateClassUI(props){
                     </Button>
                 </Flex>
             </View>
-            <TextField type="file" name="student_roster" label="Upload a list of students" onInput={handleOnFileUpload}/>
+            <TextField accept=".csv" type="file" name="student_roster" label="Upload a list of students" onInput={handleOnFileUpload}/>
             <Flex justifyContent="center" alignItems="center" padding={15}>
                 <EnhancedTable rows={localStudents} handleDeleteStudent={handleDeleteStudent}/>
             </Flex>
