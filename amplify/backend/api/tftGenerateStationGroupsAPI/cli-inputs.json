@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/students": {
+      "name": "/students",
+      "lambdaFunction": "tftGenerateStationGroupsFunction",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

@@ -1,24 +1,30 @@
 import React from "react";
-import { View, TextField, Button, Text } from '@aws-amplify/ui-react';
+import { View, TextField, Button, Text, Flex } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 export function LoginUI (props) {
 
     async function onSignIn(){
         console.log(document.getElementById("usernameInput").value)
         try {
-            const user = Auth.signIn(document.getElementById("usernameInput").value, document.getElementById("passwordInput").value)
-            .then((user) => {
+            const user = await Auth.signIn(document.getElementById("usernameInput").value, document.getElementById("passwordInput").value);
+            if(user != null){
                 props.handleChangeUser(true, user.username);
                 props.setCurrentView("classPreviewUI");
-            });
-            
+                Auth.currentAuthenticatedUser().then((session) => {
+                    console.log(session);
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }
         } catch (error) {
             document.getElementById("errorText").innerText = error;
             console.log('error signing in', error);
         }
     }
     return(
-        <View>
+        <View
+        width="25rem"
+        >
             <TextField
                 label="Username"
                 id='usernameInput'
@@ -28,11 +34,17 @@ export function LoginUI (props) {
                 label="Password"
                 id='passwordInput'
             /> 
-            <SubmitButton
-                onClick={onSignIn}
-                >
-                Submit
-            </SubmitButton>
+            <Flex
+                justifyContent="end"
+                alignItems="end"
+                paddingTop="1rem"
+            >
+                <SubmitButton
+                    onClick={onSignIn}
+                    >
+                    Submit
+                </SubmitButton>
+            </Flex>
             <Text
                 variation="error"
                 as="p"
@@ -43,8 +55,7 @@ export function LoginUI (props) {
                 textDecoration="none"
                 width="30vw"
                 id='errorText'
-            >
-            </Text>
+            />
         </View>
     );
 }
@@ -63,9 +74,6 @@ export function SignUpUI (props) {
                 password,
                 attributes: {
                     email,
-                },
-                autoSignIn: { // optional - enables auto sign in after user is confirmed
-                    enabled: true,
                 }
             });
             console.log(user);
@@ -77,7 +85,9 @@ export function SignUpUI (props) {
         }
     }
     return(
-        <View>
+        <View
+        width="25rem"
+        >
             <TextField
                 label="Username"
                 id='usernameSignUpInput'
@@ -92,11 +102,17 @@ export function SignUpUI (props) {
                 label="Email"
                 id='emailSignUpInput'
             /> 
-            <SubmitButton
-                onClick={onSignUp}
-                >
-                Submit
-            </SubmitButton>
+            <Flex
+                justifyContent="end"
+                alignItems="end"
+                paddingTop="1rem"
+            >
+                <SubmitButton
+                    onClick={onSignUp}
+                    >
+                    Submit
+                </SubmitButton>
+            </Flex>
             <Text
                 variation="error"
                 as="p"
@@ -119,82 +135,52 @@ export function VerificationUI (props) {
         try {
             await Auth.confirmSignUp(Username, document.getElementById("verificationCodeInput").value)
             .then(() => {
-                props.handleChangeUser(true, Username);
+                props.setCurrentView("loginUI");
             });
-            props.setCurrentView("classPreviewUI");
+            
           } catch (error) {
               console.log('error confirming sign up', error);
           }
     }
     return(
-        <View>
+        <View
+        width="25rem"
+        >
             <TextField
                 type="number"
                 label="Verification Code"
                 id='verificationCodeInput'
             /> 
-            <SubmitButton
-                onClick={onVerificationCode}
-                >
-                Submit
-            </SubmitButton>
+            <Flex
+                justifyContent="end"
+                alignItems="end"
+                paddingTop="1rem"
+            >
+                <SubmitButton
+                    onClick={onVerificationCode}
+                    >
+                    Submit
+                </SubmitButton>
+            </Flex>
+            
         </View>
     );
 }
 
 function SubmitButton(props){
     return(
-        <View    
-        width="100px"
-        height="50px"
-        display="block"
-        gap="unset"
-        alignItems="unset"
-        justifyContent="unset"
-        position="relative"
-        padding="0px 0px 0px 0px"
+        <Button
+        size="medium"
+        border="2px SOLID rgba(2,31,60,1)"
+        borderRadius="7px"
+        onClick={props.onClick}
         >
-            <Button
-            width="100px"
-            height="50px"
+            <Text
+            textAlign="center"
             display="block"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            position="absolute"
-            top="0%"
-            bottom="0%"
-            left="0%"
-            right="0%"
-            border="2px SOLID rgba(2,31,60,1)"
-            borderRadius="105px"
-            padding="0px 0px 0px 0px"
-            onClick={props.onClick}
-            >
-                <Text
-                fontSize="17px"
-                fontWeight="650"
-                color="rgba(0,0,0,1)"
-                lineHeight="33.421875px"
-                textAlign="center"
-                display="block"
-                direction="column"
-                justifyContent="unset"
-                width="unset"
-                height="unset"
-                gap="unset"
-                alignItems="unset"
-                position="absolute"
-                top="15.76%"
-                bottom="24.24%"
-                left="18.26%"
-                right="18.26%"
-                padding="0px 0px 0px 0px"
-                whiteSpace="pre-wrap"
-                children="Submit"
-                ></Text>
-            </Button>
-        
-        </View>
+            direction="column"
+            children="Submit"
+            ></Text>
+        </Button>
     );
 }

@@ -20,8 +20,8 @@ export default function Addclass(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "Addclass")}
+      {...rest}
     >
       <View
         width="310px"

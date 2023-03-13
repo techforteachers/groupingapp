@@ -28,8 +28,8 @@ export default function ContactUs(props) {
       alignItems="flex-start"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "ContactUs")}
+      {...rest}
     >
       <Flex
         gap="8px"

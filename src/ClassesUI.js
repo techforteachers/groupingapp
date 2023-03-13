@@ -1,8 +1,11 @@
 import React from "react";
-import { Grid } from "@aws-amplify/ui-react";
-import { Button, Flex } from "@aws-amplify/ui-react";
+import { Grid, Loader } from "@aws-amplify/ui-react";
+import { Button, Flex, Text } from "@aws-amplify/ui-react";
 import { useState, useEffect } from "react";
 import TreeItem from '@mui/lab/TreeItem';
+import { API } from "aws-amplify";
+import { getClass, listClasses, listClassStudents } from "./graphql/queries";
+import { deleteClass, deleteClassStudent, deleteStudent } from "./graphql/mutations";
 export function ClassesUI (props){
     const [classButtons, setClassButtons] = useState([]);
     
@@ -16,6 +19,7 @@ export function ClassesUI (props){
 
     function selectClass(e){
         props.setSelectedClass(e.currentTarget.id)
+        
         if(e){
             console.log(e.currentTarget.id);
         }
@@ -24,41 +28,88 @@ export function ClassesUI (props){
         }
     }
 
-    function updateClassButtons(){
-        const listItems = props.classes.map(
+    async function updateClassButtons(){
+        const listItems = await API.graphql({
+            query: listClasses,
+            authMode: 'AMAZON_COGNITO_USER_POOLS'
+        });
+        const buttons = listItems.data.listClasses.items.map(
             (element) => {
-                return (
-                    <Button id={element.classname} onClick={selectClass}>{element.classname}</Button>
-                )
+                if(props.selectedClass == element.id){
+                    return (
+                        <Button backgroundColor="#d3d3d3" border="1px SOLID rgba(2,31,60,1)" id={element.id} onClick={selectClass}>{element.className}</Button>
+                    )
+                }
+                else{
+                    return (
+                        <Button id={element.id} onClick={selectClass}>{element.className}</Button>
+                    )
+                }
             }
         ) 
-        setClassButtons(listItems);
+        setClassButtons(buttons);
     }
-        
-    function findIndex(className){
-        for(let i=0; i<props.classes.length; i++){
-            if(props.classes[i].classname == className){
-                return i;
+    
+    async function removeClass(){
+        if(props.selectedClass != null){
+            if (window.confirm('Are you sure you wish to delete this class?'))
+            {
+                props.setLoader(<Loader variation="linear" size="small" />);
+                let classId = props.selectedClass; 
+                let response = await API.graphql({
+                    query: getClass,
+                    variables: {id: classId},
+                    authMode: 'AMAZON_COGNITO_USER_POOLS'
+                })
+                let classStudents = response.data.getClass.students.items;
+                for(let i=classStudents.length-1; i>=0; i--){
+                    let currentStudent = classStudents[i];
+                    let classStudentId = currentStudent.id; 
+                    let studentId = currentStudent.studentId;
+                    await API.graphql({
+                        query: deleteClassStudent,
+                        variables: {input: {id: classStudentId}},
+                        authMode: 'AMAZON_COGNITO_USER_POOLS'
+                    });
+                    await API.graphql({
+                        query: deleteStudent,
+                        variables: {input: {id: studentId}},
+                        authMode: 'AMAZON_COGNITO_USER_POOLS'
+                    });
+                }
+                await API.graphql({
+                    query: deleteClass,
+                    variables: { input: { id : classId }},
+                    authMode: 'AMAZON_COGNITO_USER_POOLS'
+                });
+                updateClassButtons();
+                props.setUpdateTree(!props.updateTree);
+                props.setSelectedClass(null);
+                props.setLoader();
             }
         }
-        return -1;
-    }
-
-    function removeClass(){
-        let index = findIndex(props.selectedClass)
-        if(index == -1){
-            console.log("Class not found: " + props.selectedClass)
-        }
         else{
-            let newClasses = props.classes.slice();
-            newClasses.splice(index, 1);
-            props.setClasses(newClasses);
-            updateClassButtons();
+            document.getElementById("errorText").innerText = "*Please select a class*";
         }
     }
 
     function editClass(){
-        props.setCurrentView("editClassUI");
+        if(props.selectedClass != null){
+            props.setCurrentView("editClassUI");
+        }
+        else{
+            document.getElementById("errorText").innerText = "*Please select a class*";
+        }
+    }
+
+    function generateGroups(){
+        if(props.selectedClass != null){
+            props.setCurrentView("generateGroupsUI")
+            document.getElementById("errorText").innerText = "";
+        }
+        else{
+            document.getElementById("errorText").innerText = "*Please select a class*";
+        }
     }
 
     return(
@@ -73,10 +124,52 @@ export function ClassesUI (props){
                 <Button id="createClassButton" onClick={addClass}>+</Button>
             </Grid>
             <Flex justifyContent="flex-end" alignItems="flex-end">
-                <Button onClick={editClass}>Edit</Button>
-                <Button onClick={removeClass}>Remove</Button>
-                <Button>Generate Groups</Button>
+                <Text
+                    variation="error"
+                    fontWeight={600}
+                    id='errorText'
+                />
+                <Button
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    onClick={editClass}
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Edit"
+                        ></Text>
+                </Button>
+                <Button
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    onClick={removeClass}
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Remove"
+                        ></Text>
+                </Button>
+                <Button
+                    size="medium"
+                    border="2px SOLID rgba(2,31,60,1)"
+                    borderRadius="7px"
+                    onClick={generateGroups}
+                    >
+                        <Text
+                        textAlign="center"
+                        display="block"
+                        direction="column"
+                        children="Generate Groups"
+                        ></Text>
+                </Button>
             </Flex>
+            
         </div>
         
     );

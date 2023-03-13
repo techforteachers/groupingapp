@@ -7,7 +7,12 @@
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { ViewProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type NamescontainerOverridesProps = {
+    Namescontainer?: PrimitiveOverrideProps<ViewProps>;
+    "Rectangle 44"?: PrimitiveOverrideProps<ViewProps>;
+} & EscapeHatchProps;
 export declare type NamescontainerProps = React.PropsWithChildren<Partial<ViewProps> & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: NamescontainerOverridesProps | undefined | null;
 }>;
 export default function Namescontainer(props: NamescontainerProps): React.ReactElement;

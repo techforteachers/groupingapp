@@ -1,8 +1,9 @@
+import { Text } from "@aws-amplify/ui-react";
 import React from "react";
 export function Greeting(props) {
     const isLoggedIn = props.isLoggedIn;
     if (isLoggedIn) {
-        return <h3>Welcome back, {props.username}!</h3>;
+        return <p>Welcome back, {props.username}!</p>;
     }
-    return <h3>Please log in or sign up.</h3>;
+    return <p>Please log in or sign up.</p>;
 }

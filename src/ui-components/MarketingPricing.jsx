@@ -22,8 +22,8 @@ export default function MarketingPricing(props) {
       position="relative"
       padding="24px 24px 24px 24px"
       backgroundColor="rgba(239,240,240,1)"
-      {...rest}
       {...getOverrideProps(overrides, "MarketingPricing")}
+      {...rest}
     >
       <Flex
         gap="24px"

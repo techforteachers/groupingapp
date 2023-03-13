@@ -20,8 +20,8 @@ export default function Question(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "Question")}
+      {...rest}
     >
       <View
         width="66px"

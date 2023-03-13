@@ -20,8 +20,8 @@ export default function Logo(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "Logo")}
+      {...rest}
     >
       <Text
         fontFamily="Encode Sans"

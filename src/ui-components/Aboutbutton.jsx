@@ -20,8 +20,8 @@ export default function Aboutbutton(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "Aboutbutton")}
+      {...rest}
     >
       <Text
         fontFamily="Inter"

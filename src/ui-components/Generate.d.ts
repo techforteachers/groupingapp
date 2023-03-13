@@ -6,8 +6,14 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ViewProps } from "@aws-amplify/ui-react";
+import { TextProps, ViewProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type GenerateOverridesProps = {
+    Generate?: PrimitiveOverrideProps<ViewProps>;
+    "Rectangle 35"?: PrimitiveOverrideProps<ViewProps>;
+    Generate36523017?: PrimitiveOverrideProps<TextProps>;
+} & EscapeHatchProps;
 export declare type GenerateProps = React.PropsWithChildren<Partial<ViewProps> & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: GenerateOverridesProps | undefined | null;
 }>;
 export default function Generate(props: GenerateProps): React.ReactElement;

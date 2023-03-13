@@ -6,8 +6,13 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ViewProps } from "@aws-amplify/ui-react";
+import { TextProps, ViewProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type NewhereSignupOverridesProps = {
+    NewhereSignup?: PrimitiveOverrideProps<ViewProps>;
+    "New here, Sign up"?: PrimitiveOverrideProps<TextProps>;
+} & EscapeHatchProps;
 export declare type NewhereSignupProps = React.PropsWithChildren<Partial<ViewProps> & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: NewhereSignupOverridesProps | undefined | null;
 }>;
 export default function NewhereSignup(props: NewhereSignupProps): React.ReactElement;

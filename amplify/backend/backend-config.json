@@ -1,6 +1,6 @@
 {
   "api": {
-    "tftGenerateGroupAPI": {
+    "tftGenerateGroupsAPI": {
       "dependsOn": [
         {
           "attributes": [
@@ -8,14 +8,36 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "tftGenerateGroupLambda"
+          "resourceName": "tftGenerateGroupsFunction"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "tftGenerateStationGroupsAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "tftGenerateStationGroupsFunction"
         }
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
     },
     "tftgroupingapp": {
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "tftgroupingapp3553f84b"
+        }
+      ],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [
@@ -24,11 +46,10 @@
             }
           ],
           "defaultAuthentication": {
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
-            },
-            "authenticationType": "API_KEY"
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authtftgroupingapp3553f84b"
+            }
           }
         }
       },
@@ -63,35 +84,47 @@
     }
   },
   "function": {
-    "tftGenerateGroupLambda": {
+    "tftGenerateGroupsFunction": {
       "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ],
-          "category": "api",
-          "resourceName": "tftgroupingapp"
-        }
-      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "tftGenerateStationGroupsFunction": {
+      "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_tftGenerateGroupLambda_deploymentBucketName": {
+    "AMPLIFY_function_tftGenerateGroupsFunction_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "tftGenerateGroupLambda"
+          "resourceName": "tftGenerateGroupsFunction"
         }
       ]
     },
-    "AMPLIFY_function_tftGenerateGroupLambda_s3Key": {
+    "AMPLIFY_function_tftGenerateGroupsFunction_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "tftGenerateGroupLambda"
+          "resourceName": "tftGenerateGroupsFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_tftGenerateStationGroupsFunction_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tftGenerateStationGroupsFunction"
+        }
+      ]
+    },
+    "AMPLIFY_function_tftGenerateStationGroupsFunction_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "tftGenerateStationGroupsFunction"
         }
       ]
     }

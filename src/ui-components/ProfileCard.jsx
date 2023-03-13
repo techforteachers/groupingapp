@@ -22,8 +22,8 @@ export default function ProfileCard(props) {
       position="relative"
       padding="24px 24px 24px 24px"
       backgroundColor="rgba(255,255,255,1)"
-      {...rest}
       {...getOverrideProps(overrides, "ProfileCard")}
+      {...rest}
     >
       <Image
         width="160px"

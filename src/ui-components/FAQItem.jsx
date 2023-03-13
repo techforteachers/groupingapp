@@ -20,8 +20,8 @@ export default function FAQItem(props) {
       alignItems="flex-start"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "FAQItem")}
+      {...rest}
     >
       <Flex
         gap="0"
