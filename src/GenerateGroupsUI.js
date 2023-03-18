@@ -7,7 +7,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { API } from "aws-amplify";
 import { Auth } from "aws-amplify";
 import { useEffect, useState } from "react";
-import { listClassStudents, listStudents } from "./graphql/queries";
+import { classStudentsByClassId, listClassStudents, listStudents } from "./graphql/queries";
 import { Loader } from "@aws-amplify/ui-react";
 import "./button.css"
 export function GenerateGroupsUI (props){
@@ -26,21 +26,26 @@ export function GenerateGroupsUI (props){
         { field: 'grade', headerName: 'Grade', width: 70 }
     ];
 
-    const rows = students;
-
     async function fetchStudents(){
         let response = await API.graphql({
-            query: listClassStudents,
+            query: classStudentsByClassId,
+            variables: {classId: props.selectedClass },
             authMode: 'AMAZON_COGNITO_USER_POOLS'
         });
-        let totalStudents = response.data.listClassStudents.items
+        /*let totalStudents = response.data.listClassStudents.items
         let students = []; 
         for(let i=0; i<totalStudents.length; i++){
             let currentStudent = totalStudents[i];
             if(currentStudent.classId == props.selectedClass){
                 students.push(currentStudent.student);
             }
+        }*/
+        let classStudents = response.data.classStudentsByClassId.items; 
+        let students = [];
+        for(let i=0; i<classStudents.length; i++){
+            students.push(classStudents[i].student);
         }
+        
         setStudents(students);
         setGenerateConfig(
             <StepperField
@@ -152,6 +157,8 @@ export function GenerateGroupsUI (props){
             document.getElementById("errorText").innerText = "*Please select at least one student*";
         }
     }
+
+    const rows = students;
 
     return(
         <Grid
