@@ -102,7 +102,7 @@ export function CreateClassUI(props){
                     first_name: cont["First Name"],
                     last_name: cont["Last Name"],
                     grade: cont["Grade"],
-                    id: id
+                    id: id  
                 };
                 console.log(data.first_name);
                 console.log(data.last_name);

@@ -12,6 +12,7 @@ import { Loader } from "@aws-amplify/ui-react";
 import "./button.css"
 export function GenerateGroupsUI (props){
     const [students, setStudents] = useState([]);
+    const [selectionModel, setSelectionModel] = useState([]);
     const [selectedStudents, setSelectedStudents] = useState([]);
     const [generateMethod, setGenerateMethod] = useState("groups");
     const [generateConfig, setGenerateConfig] = useState([]);
@@ -42,11 +43,15 @@ export function GenerateGroupsUI (props){
         }*/
         let classStudents = response.data.classStudentsByClassId.items; 
         let students = [];
+        let studentIds = [];
         for(let i=0; i<classStudents.length; i++){
             students.push(classStudents[i].student);
+            studentIds.push(classStudents[i].student.id);
         }
         
         setStudents(students);
+        setSelectionModel(studentIds)
+        setSelectedStudents(students);
         setGenerateConfig(
             <StepperField
                 max={students.length}
@@ -159,6 +164,7 @@ export function GenerateGroupsUI (props){
     }
 
     const rows = students;
+    
 
     return(
         <Grid
@@ -176,9 +182,11 @@ export function GenerateGroupsUI (props){
                         rows={rows}
                         columns={columns}
                         rowsPerPageOptions={[100]}
+                        selectionModel={selectionModel}
                         checkboxSelection
                         onSelectionModelChange={(ids) => {
                             const selectedIds = new Set(ids);
+                            setSelectionModel(ids);
                             const selectedRowData = rows.filter((row) => 
                                 selectedIds.has(row.id.toString())
                             );
