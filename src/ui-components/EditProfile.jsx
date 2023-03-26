@@ -30,8 +30,8 @@ export default function EditProfile(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "EditProfile")}
       {...rest}
+      {...getOverrideProps(overrides, "EditProfile")}
     >
       <Flex
         gap="24px"

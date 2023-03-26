@@ -22,8 +22,8 @@ export default function Ampligram(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "Ampligram")}
       {...rest}
+      {...getOverrideProps(overrides, "Ampligram")}
     >
       <Flex
         gap="16px"
