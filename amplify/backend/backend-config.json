@@ -127,22 +127,6 @@
           "resourceName": "tftGenerateStationGroupsFunction"
         }
       ]
-    },
-    "AMPLIFY_function_tftGenerateStationGroups_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "tftGenerateStationGroups"
-        }
-      ]
-    },
-    "AMPLIFY_function_tftGenerateStationGroups_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "tftGenerateStationGroups"
-        }
-      ]
     }
   },
   "storage": {

@@ -6,30 +6,50 @@ import { SideBar } from "./SideBar";
 import { useEffect, useState } from "react";
 import { Card, useTheme, View, Grid, Divider, Text} from "@aws-amplify/ui-react";
 import { createClass, deleteClassStudent, deleteStudent } from "./graphql/mutations";
-import { API } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 import { updateClass } from "./graphql/mutations";
 import { createStudent } from "./graphql/mutations";
 import { createClassStudent } from "./graphql/mutations";
-
+import useIdle from "./customHooks/useIdle";
 export function GroupingApp (props)  {
     const { tokens } = useTheme();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [user, setUser] = useState("Guest");
+    const [isLoggedIn, setIsLoggedIn] = useState();
+    const [user, setUser] = useState();
     const[ currentView, setCurrentView ] = useState("");
     const[ updateTree, setUpdateTree ] = useState(false);
     //alertStatus: false displays "successfully signed out" and true displays "successfully signed in"
     const offWhite = "#F6F8FF"; 
     const dividerColor = "#021F3C";
-    const background = "#EFF7FF"
+    const background = "#EFF7FF";
+
+    const {isIdle} = useIdle({onIdle: handleLogoutClick})
+    console.log(isIdle);
+    useEffect(() => {
+        Auth.currentAuthenticatedUser().then((session) => {
+            setUser(session.username);
+            setIsLoggedIn(true);
+            setCurrentView("classPreviewUI");
+            console.log(session);
+        }).catch((error) => {
+            setUser("Guest");
+            setIsLoggedIn(false);
+            console.log(error);
+        });
+    }, []);
 
     function handleLoginClick(){
         setCurrentView("loginUI");
     }
 
-    function handleLogoutClick(){
-        setIsLoggedIn(false); 
-        setUser("Guest");
-        setCurrentView("loginUI")
+    async function handleLogoutClick(){
+        try {
+            await Auth.signOut();
+            setIsLoggedIn(false); 
+            setUser("Guest");
+            setCurrentView("loginUI")
+        } catch (error) {
+            console.log('error signing out: ', error);
+        }
     }
 
     function handleSignupClick(){
@@ -128,64 +148,67 @@ export function GroupingApp (props)  {
     }
  
     return(
-        <Grid
-            templateColumns="0.1rem 1fr 3fr 1fr 2fr 0.1rem"
-            templateRows="0.1fr 3fr 0.1fr"
-            columnGap="1rem"
-            rowGap="0.5rem"
-            backgroundColor={background}
-        >
-            <Card
-                columnStart="1"
-                columnEnd="-1"
-                height={90}
-                backgroundColor={offWhite}
-                border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
+        <div>
+            
+            <Grid
+                templateColumns="0.1rem 1fr 3fr 1fr 2fr 0.1rem"
+                templateRows="0.1fr 3fr 0.1fr"
+                columnGap="1rem"
+                rowGap="0.5rem"
+                backgroundColor={background}
             >
-                <Header 
-                    user={user} 
-                    isLoggedIn={isLoggedIn} 
-                    handleLoginClick={handleLoginClick} 
-                    handleLogoutClick={handleLogoutClick} 
-                    handleSignupClick={handleSignupClick}
-                />
-            </Card>
-            <Card
-                columnStart="2"
-                columnEnd="3" 
-                backgroundColor={offWhite}
-                border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
-                borderRadius="10px"
-            >
-                <SideBar updateTree={updateTree} user={user}/>
-            </Card>
-            <Card
-                columnStart="3"
-                columnEnd="6"
-                backgroundColor={offWhite}
-                border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
-                borderRadius="10px"
-            >
-                <Main 
-                    currentView={currentView} 
-                    setCurrentView={handleChangeView}
-                    isLoggedIn={isLoggedIn} 
-                    handleChangeUser={handleChangeUser}
-                    createClass={handleCreateClass}
-                    editClass={handleEditClass}
-                    setUpdateTree={setUpdateTree}
-                    updateTree={updateTree}
-                />
-            </Card>
-            <Card
-                columnStart="1"
-                columnEnd="-1"
-                backgroundColor={offWhite}
-                height={90}
-                border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
-            >
-                <Footer backgroundColor={offWhite}/>
-            </Card>
-        </Grid>
+                <Card
+                    columnStart="1"
+                    columnEnd="-1"
+                    height={90}
+                    backgroundColor={offWhite}
+                    border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
+                >
+                    <Header 
+                        user={user} 
+                        isLoggedIn={isLoggedIn} 
+                        handleLoginClick={handleLoginClick} 
+                        handleLogoutClick={handleLogoutClick} 
+                        handleSignupClick={handleSignupClick}
+                    />
+                </Card>
+                <Card
+                    columnStart="2"
+                    columnEnd="3" 
+                    backgroundColor={offWhite}
+                    border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
+                    borderRadius="10px"
+                >
+                    <SideBar updateTree={updateTree} user={user}/>
+                </Card>
+                <Card
+                    columnStart="3"
+                    columnEnd="6"
+                    backgroundColor={offWhite}
+                    border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
+                    borderRadius="10px"
+                >
+                    <Main 
+                        currentView={currentView} 
+                        setCurrentView={handleChangeView}
+                        isLoggedIn={isLoggedIn} 
+                        handleChangeUser={handleChangeUser}
+                        createClass={handleCreateClass}
+                        editClass={handleEditClass}
+                        setUpdateTree={setUpdateTree}
+                        updateTree={updateTree}
+                    />
+                </Card>
+                <Card
+                    columnStart="1"
+                    columnEnd="-1"
+                    backgroundColor={offWhite}
+                    height={90}
+                    border={`${tokens.borderWidths.medium} solid ${dividerColor}`}
+                >
+                    <Footer backgroundColor={offWhite}/>
+                </Card>
+            </Grid>
+        </div>
     );
 }

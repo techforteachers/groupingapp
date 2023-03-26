@@ -19,19 +19,10 @@
       "storage": {
         "UserFiles": {}
       },
-      "api": {
-        "tftgroupingapp": {},
-        "tftGenerateGroupsAPI": {},
-        "tftGenerateStationGroupsAPI": {}
-      },
       "function": {
         "tftGenerateGroupsFunction": {
           "deploymentBucketName": "amplify-tftgroupingapp-newdev-161604-deployment",
           "s3Key": "amplify-builds/tftGenerateGroupsFunction-5a3179506375786a7370-build.zip"
-        },
-        "tftGenerateStationGroups": {
-          "deploymentBucketName": "amplify-tftgroupingapp-newdev-161604-deployment",
-          "s3Key": "amplify-builds/tftGenerateStationGroups-6e78654f74525264694e-build.zip"
         },
         "tftGenerateStationGroupsFunction": {
           "deploymentBucketName": "amplify-tftgroupingapp-newdev-161604-deployment",

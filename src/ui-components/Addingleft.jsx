@@ -29,8 +29,8 @@ export default function Addingleft(props) {
           style: { transform: "translate(0%, 100%)" },
         },
       ]}
-      {...rest}
       {...getOverrideProps(overrides, "Addingleft")}
+      {...rest}
     ></Icon>
   );
 }

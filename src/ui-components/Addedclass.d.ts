@@ -6,8 +6,14 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ViewProps } from "@aws-amplify/ui-react";
+import { TextProps, ViewProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type AddedclassOverridesProps = {
+    Addedclass?: PrimitiveOverrideProps<ViewProps>;
+    "Rectangle 24"?: PrimitiveOverrideProps<ViewProps>;
+    "Class #1"?: PrimitiveOverrideProps<TextProps>;
+} & EscapeHatchProps;
 export declare type AddedclassProps = React.PropsWithChildren<Partial<ViewProps> & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: AddedclassOverridesProps | undefined | null;
 }>;
 export default function Addedclass(props: AddedclassProps): React.ReactElement;

@@ -6,12 +6,16 @@ export function LoginUI (props) {
     async function onSignIn(){
         console.log(document.getElementById("usernameInput").value)
         try {
-            const user = Auth.signIn(document.getElementById("usernameInput").value, document.getElementById("passwordInput").value)
-            .then((user) => {
+            const user = await Auth.signIn(document.getElementById("usernameInput").value, document.getElementById("passwordInput").value);
+            if(user != null){
                 props.handleChangeUser(true, user.username);
                 props.setCurrentView("classPreviewUI");
-            });
-            
+                Auth.currentAuthenticatedUser().then((session) => {
+                    console.log(session);
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }
         } catch (error) {
             document.getElementById("errorText").innerText = error;
             console.log('error signing in', error);
@@ -70,9 +74,6 @@ export function SignUpUI (props) {
                 password,
                 attributes: {
                     email,
-                },
-                autoSignIn: { // optional - enables auto sign in after user is confirmed
-                    enabled: true,
                 }
             });
             console.log(user);
@@ -134,9 +135,9 @@ export function VerificationUI (props) {
         try {
             await Auth.confirmSignUp(Username, document.getElementById("verificationCodeInput").value)
             .then(() => {
-                props.handleChangeUser(true, Username);
+                props.setCurrentView("loginUI");
             });
-            props.setCurrentView("classPreviewUI");
+            
           } catch (error) {
               console.log('error confirming sign up', error);
           }
