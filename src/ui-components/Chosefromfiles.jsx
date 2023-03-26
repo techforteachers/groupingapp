@@ -20,8 +20,8 @@ export default function Chosefromfiles(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "Chosefromfiles")}
       {...rest}
+      {...getOverrideProps(overrides, "Chosefromfiles")}
     >
       <View
         width="369px"

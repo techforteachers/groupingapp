@@ -20,8 +20,8 @@ export default function Checkon(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "Checkon")}
       {...rest}
+      {...getOverrideProps(overrides, "Checkon")}
     >
       <View
         width="29px"

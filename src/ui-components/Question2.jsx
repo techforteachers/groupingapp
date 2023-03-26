@@ -29,8 +29,8 @@ export default function Question2(props) {
           style: { transform: "translate(0%, 0%)" },
         },
       ]}
-      {...getOverrideProps(overrides, "Question2")}
       {...rest}
+      {...getOverrideProps(overrides, "Question2")}
     ></Icon>
   );
 }

@@ -30,8 +30,8 @@ export default function ProductCard(props) {
       alignItems="flex-start"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "ProductCard")}
       {...rest}
+      {...getOverrideProps(overrides, "ProductCard")}
     >
       <Image
         width="320px"
