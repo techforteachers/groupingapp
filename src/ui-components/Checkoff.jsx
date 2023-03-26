@@ -20,8 +20,8 @@ export default function Checkoff(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "Checkoff")}
+      {...rest}
     >
       <View
         width="31px"

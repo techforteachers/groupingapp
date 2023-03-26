@@ -20,8 +20,8 @@ export default function Inputfileds(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "Inputfileds")}
+      {...rest}
     >
       <View
         width="520px"

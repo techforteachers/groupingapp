@@ -7,7 +7,12 @@
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { ViewProps } from "@aws-amplify/ui-react";
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type QuestionpopupOverridesProps = {
+    Questionpopup?: PrimitiveOverrideProps<ViewProps>;
+    "Rectangle 30"?: PrimitiveOverrideProps<ViewProps>;
+} & EscapeHatchProps;
 export declare type QuestionpopupProps = React.PropsWithChildren<Partial<ViewProps> & {
-    overrides?: EscapeHatchProps | undefined | null;
+    overrides?: QuestionpopupOverridesProps | undefined | null;
 }>;
 export default function Questionpopup(props: QuestionpopupProps): React.ReactElement;

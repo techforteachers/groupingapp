@@ -20,8 +20,8 @@ export default function Questionpopup(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...rest}
       {...getOverrideProps(overrides, "Questionpopup")}
+      {...rest}
     >
       <View
         width="206px"

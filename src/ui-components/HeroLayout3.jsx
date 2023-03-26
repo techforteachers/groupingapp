@@ -22,8 +22,8 @@ export default function HeroLayout3(props) {
       position="relative"
       padding="160px 240px 160px 240px"
       backgroundColor="rgba(0,0,0,1)"
-      {...rest}
       {...getOverrideProps(overrides, "HeroLayout3")}
+      {...rest}
     >
       <Flex
         gap="24px"
