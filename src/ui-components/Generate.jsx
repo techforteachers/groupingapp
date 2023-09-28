@@ -20,8 +20,8 @@ export default function Generate(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "Generate")}
       {...rest}
+      {...getOverrideProps(overrides, "Generate")}
     >
       <View
         width="319px"

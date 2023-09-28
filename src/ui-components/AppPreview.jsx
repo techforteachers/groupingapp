@@ -20,8 +20,8 @@ export default function AppPreview(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "AppPreview")}
       {...rest}
+      {...getOverrideProps(overrides, "AppPreview")}
     >
       <View
         width="450px"

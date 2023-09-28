@@ -27,7 +27,8 @@
         "tftGenerateStationGroupsFunction": {
           "deploymentBucketName": "amplify-tftgroupingapp-newdev-161604-deployment",
           "s3Key": "amplify-builds/tftGenerateStationGroupsFunction-556a7a666c4849613156-build.zip"
-        }
+        },
+        "tftGenerateStationGroupsPythonFunction": {}
       }
     }
   }

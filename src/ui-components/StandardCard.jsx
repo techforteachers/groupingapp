@@ -21,8 +21,8 @@ export default function StandardCard(props) {
       position="relative"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      {...getOverrideProps(overrides, "StandardCard")}
       {...rest}
+      {...getOverrideProps(overrides, "StandardCard")}
     >
       <Image
         width="unset"

@@ -7,7 +7,7 @@ export function Footer(props) {
         <Card
         backgroundColor={props.backgroundColor}
         >
-            Footer
+            ©2023 TechForTeachers
         </Card>
     );
 }

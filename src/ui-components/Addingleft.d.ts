@@ -7,11 +7,7 @@
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { IconProps } from "@aws-amplify/ui-react";
-export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type AddingleftOverridesProps = {
-    Addingleft?: PrimitiveOverrideProps<IconProps>;
-} & EscapeHatchProps;
 export declare type AddingleftProps = React.PropsWithChildren<Partial<IconProps> & {
-    overrides?: AddingleftOverridesProps | undefined | null;
+    overrides?: EscapeHatchProps | undefined | null;
 }>;
 export default function Addingleft(props: AddingleftProps): React.ReactElement;

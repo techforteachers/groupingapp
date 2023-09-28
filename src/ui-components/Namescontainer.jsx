@@ -20,8 +20,8 @@ export default function Namescontainer(props) {
       justifyContent="unset"
       position="relative"
       padding="0px 0px 0px 0px"
-      {...getOverrideProps(overrides, "Namescontainer")}
       {...rest}
+      {...getOverrideProps(overrides, "Namescontainer")}
     >
       <View
         width="503px"

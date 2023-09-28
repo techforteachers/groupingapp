@@ -6,13 +6,8 @@
 
 import * as React from "react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { TextProps, ViewProps } from "@aws-amplify/ui-react";
-export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type OtherbtnOverridesProps = {
-    Otherbtn?: PrimitiveOverrideProps<ViewProps>;
-    Other_btn?: PrimitiveOverrideProps<TextProps>;
-} & EscapeHatchProps;
+import { ViewProps } from "@aws-amplify/ui-react";
 export declare type OtherbtnProps = React.PropsWithChildren<Partial<ViewProps> & {
-    overrides?: OtherbtnOverridesProps | undefined | null;
+    overrides?: EscapeHatchProps | undefined | null;
 }>;
 export default function Otherbtn(props: OtherbtnProps): React.ReactElement;
