@@ -48,7 +48,7 @@ export function StationsDisplayUI(props){
                             textDecoration="none"
                             width="30vw"
                         >
-                            Group {+ currentGroupNum}
+                            Station {+ currentGroupNum}
                         </Text>
                         <Divider/>
                         {tempStudents}
@@ -79,7 +79,7 @@ export function StationsDisplayUI(props){
         setStations(tempStations);
     }
 
-    async function regenerateGroups(){
+    async function regenerateStations(){
         props.setLoader(<Loader variation="linear" size="small" />);
         const user = await Auth.currentAuthenticatedUser()
         const token = user.signInUserSession.idToken.jwtToken
@@ -110,13 +110,13 @@ export function StationsDisplayUI(props){
                 size="medium"
                 border="2px SOLID rgba(2,31,60,1)"
                 borderRadius="7px"
-                onClick={regenerateGroups}
+                onClick={regenerateStations}
                 >
                 <Text
                 textAlign="center"
                 display="block"
                 direction="column"
-                children="Regenerate Groups"
+                children="Regenerate Stations"
                 ></Text>
             </Button>
         </div>
